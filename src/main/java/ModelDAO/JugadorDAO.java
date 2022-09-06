@@ -30,6 +30,7 @@ public class JugadorDAO implements IJugador {
 
     /**
      * Crear metodo para recibir los datos del JugadorVO
+     * @param jugadorVO
      */
     
     public JugadorDAO(JugadorVO jugadorVO){
