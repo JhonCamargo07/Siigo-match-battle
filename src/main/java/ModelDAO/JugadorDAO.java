@@ -40,36 +40,18 @@ public class JugadorDAO implements IJugador {
         Nombre=jugadorVO.getNombre();
         Imagen=jugadorVO.getIdjugador();
     }
-    
-    
-    
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String crearPartida() {
-
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<String> iniciarPartida() {
-
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     @Override
     public boolean ingresarPartida(String codigoMesa) {
-
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<String> escogerCaracteristica() {
-
-        throw new UnsupportedOperationException("Not supported yet.");
-
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    
+
 
 }

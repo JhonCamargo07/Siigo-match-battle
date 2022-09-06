@@ -41,4 +41,19 @@ public interface IPartidaDAO {
      * @return boolean, se pudo o no finalizar la partida
      */
     public boolean finalizarPartida();
+    
+    
+    /**
+     * Este metodo se encargara de crear la partida del juego
+     *
+     * @return String, retorna el codigo de la partida
+     */
+    public String crearPartida();
+
+    /**
+     * Este metodo se encargara de iniciar la partida del juego una vez ya este
+     * el numero minido de participantes o el maximo
+     * @return List<String>, retornara un String de los jugadores
+     */
+    public List<String> iniciarPartida();
 }

@@ -35,4 +35,6 @@ public interface ICartaDAO {
      * @return boolean, retorna si se pudo o agregar las cartas al jugador
      */
     public boolean agregarCartas(String idJugadorGanador, List<String> idCartas);
+    
+
 }
