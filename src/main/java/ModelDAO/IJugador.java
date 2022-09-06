@@ -25,8 +25,9 @@ public interface IJugador {
     /**
      * Este metodo se encargara de iniciar la partida del juego una vez ya este
      * el numero minido de participantes o el maximo
+     * @return List<String>, retornara un String de los jugadores
      */
-    public void iniciarPartida();
+    public List<String> iniciarPartida();
 
     /**
      * Este metodo validara el ingreso a la Partida
@@ -41,9 +42,9 @@ public interface IJugador {
 
     /**
      *Este metodo retornara una lista con la caracteristica seleccionada
-     * @return String, retornara un string con la caracteristica y valor seleccionada
+     * @return List<String>, retornara un string con la caracteristica y valor seleccionada
      */
     
     public List<String>escogerCaracteristica();
-
+    
 }
