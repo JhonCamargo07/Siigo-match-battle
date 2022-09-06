@@ -18,14 +18,22 @@ public class CartaDAO implements ICartaDAO {
     private static final char[] LETRAS_CARTAS = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
     private static final String[] TITULO_CARTAS = {"Lenovo 2022", "Azus 2015", "Samsung 2020", "Dell 2012", "Huawei 2015", "Acer 2017", "HP 2021", "Toshiba 2022", "Apple 2018", "Apple 2019", "Lenovo 2012", "Toshiba 2018", "Samsung 2021", "Huawei 2014", "Asus 2016", "HP 2020", "Acer ", "Apple 2018"};
 
+    private static final String[] PANTALLA_CARTAS = {"10", "15", "10", "12", "9", "23", "11", "14", "18", "20", "13", "17", "16", "13", "10", "15", "10", "12", "9", "23", "11", "14", "18", "20", "13", "17", "16", "13", "10", "15", "10", "12"};
+
+    private static final String[] PROCESADOR_INTEL_CARTAS = {"79700", "53500", "34300", "57500", "912900", "33300", "910900", "56500", "711700", "33300", "79700", "53500", "34300", "57500", "912900", "33300", "910900", "56500", "711700", "33300", "79700", "53500", "34300", "57500", "912900", "33300", "910900", "56500", "711700", "33300", "79700", "53500"};
+
+    
+    private static final String[] RAM_CARTAS = {"4", "16", "14", "24", "8", "20", "32", "34", "18", "30", "12", "64", "40", "100", "72", "128", "45", "68", "18", "110", "21", "120", "10", "47", "16","45", "68", "18", "110", "21", "120", "10"};
+    
+    
     @Override
     public List<List<CartaVO>> generarCartas(int cantidadJugadores) {
 
         // Obtener el numero de cartas que debe tener cada jugador
         int cantidadCartasPorJugador = (CANTIDAD_TOTAL_CARTAS / cantidadJugadores);
-        
+
         for (int i = 0; i <= cantidadCartasPorJugador; i++) {
-            
+
         }
 
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
