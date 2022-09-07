@@ -15,8 +15,15 @@ public class CartaDAO implements ICartaDAO {
     private static final int CANTIDAD_TOTAL_CARTAS = 32;
 //    private static final int MAX_CARTAS = 12;
     private static final int MIN_CARTAS = 4;
+    
+    //====================================
+    //======= Datos para las cartas ======
+    //====================================
+    
     private static final char[] NUMEROS_CARTAS = {'1', '2', '3', '4'};
+    
     private static final String[] LETRAS_CARTAS = {"A", "C", "D", "E", "F", "G", "H", "J"};
+    
     private static final String[] TITULO_CARTAS = {"Lenovo 2022", "Azus 2015", "Samsung 2020", "Dell 2012", "Huawei 2015", "Acer 2017", "HP 2021", "Toshiba 2022", "Apple 2018", "Apple 2019", "Lenovo 2012", "Toshiba 2018", "Samsung 2021", "Huawei 2014", "Asus 2016", "HP 2020", "Acer ", "Apple 2018"};
 
     private static final String[] BOARD_ASUS_CARTAS = {"560", "550", "540", "520", "570", "580", "590", "510", "530", "510", "560", "550", "540", "520", "570", "580", "590", "510", "530", "560", "550", "540", "520", "570", "580", "590", "510", "530", "560", "550", "540", "520"};
@@ -29,29 +36,23 @@ public class CartaDAO implements ICartaDAO {
 
     private static final String[] RAM_CARTAS = {"4", "16", "14", "24", "8", "20", "32", "34", "18", "30", "12", "64", "40", "100", "72", "128", "45", "68", "18", "110", "21", "120", "10", "47", "16", "45", "68", "18", "110", "21", "120", "10"};
 
+    
     @Override
     public List<List<CartaVO>> generarCartas(int cantidadJugadores) {
-
+        // Listas necesarias para armas las cartas para cada jugador
         List<List<CartaVO>> barajas = new ArrayList();
-
-        int cantidadDeJugadores = 7;
-
         List<CartaVO> cartas = new ArrayList();
-
         List<CartaVO> baraja = new ArrayList();
 
         // Obtener el numero de cartas que debe tener cada jugador
         int cantidadCartasPorJugador = (CANTIDAD_TOTAL_CARTAS / cantidadJugadores);
 
+        // Se generan las 32 cartas
         for (int i = 0; i < NUMEROS_CARTAS.length; i++) {
             for (int j = 0; j < LETRAS_CARTAS.length; j++) {
-
                 String titulo = NUMEROS_CARTAS[i] + "" + LETRAS_CARTAS[j];
-
-                CartaVO cartaVo = new CartaVO(NUMEROS_CARTAS[i] + "" + LETRAS_CARTAS[j], "15 pul", TITULO_CARTAS[j], "intel", "16", DISCO_DURO_CARTAS[j], BOARD_ASUS_CARTAS[j]);
-
+                CartaVO cartaVo = new CartaVO(NUMEROS_CARTAS[i] + "" + LETRAS_CARTAS[j], TITULO_CARTAS[j], PANTALLA_CARTAS[j], PROCESADOR_INTEL_CARTAS[j], RAM_CARTAS[j],  DISCO_DURO_CARTAS[j], BOARD_ASUS_CARTAS[j]);
                 cartas.add(cartaVo);
-
             }
         }
 
@@ -61,28 +62,18 @@ public class CartaDAO implements ICartaDAO {
                 contador++;
                 baraja.add(baraja1);
                 if (contador == cantidadCartasPorJugador) {
-
-//                    for (CartaVO cartaVO : baraja) {
-//                        System.out.println("cartaVO = " + cartaVO);
-//                        
-//                    } 
-                    if (barajas.size() < cantidadDeJugadores) {
+                    if (barajas.size() < cantidadJugadores) {
 
                         barajas.add(baraja);
                         System.out.println("barajas = " + barajas);
-//                        System.out.println("canIntro:" + baraja.size());
-//                        System.out.println("canGlobal:" + barajas.size());
-                    }
-
+              }
                     contador = 0;
                     baraja.clear();
-
-//                    System.out.println("baraja1 = " + baraja1);
                 }
             }
         }
 
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return barajas;
     }
 
     @Override
