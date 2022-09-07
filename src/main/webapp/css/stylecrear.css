@@ -65,7 +65,13 @@ body{
     
 }
 
+.parrafo2{
+    font-family: parrafo3;
+    color: aliceblue;
+    font-size: 15px;
+margin-left: -186px;    
 
+}
 
 .text-size-r {
     font-size: 0.9375rem;
@@ -95,7 +101,7 @@ body{
 /*!==============================================================*/
 
 .btn {
-    height: 100px;
+    height: 70px;
     min-width: 300px;
     padding-top: 30px;
     transition: all .3s ease-in-out;
@@ -161,3 +167,24 @@ body{
 
 }
 
+
+.img{
+    width:140px;
+    height:140px;
+    border-radius:150px;
+    margin-left: 100px;
+
+}
+
+
+.input{
+   
+        height: 46px;
+        display: block;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        font-family: parrafo3;
+        font-size: 12px;
+        color: #000;
+        margin-left: -68px;
+    }
