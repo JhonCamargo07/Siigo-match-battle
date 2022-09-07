@@ -42,7 +42,7 @@ public interface IPartidaDAO {
      * Este metodo se encarga de finalizar la partida
      * @return boolean, se pudo o no finalizar la partida
      */
-    public boolean finalizarPartida();
+    public boolean finalizarPartida(String codigoPartida);
     
     
     /**

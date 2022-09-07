@@ -28,9 +28,9 @@ public class PartidaController extends HttpServlet {
     List<JugadorVO> jugadores = new ArrayList();
     PartidaVO partidaVo = null;
     CartaVO cartaVo = null;
-    
+
     List<List<CartaVO>> barajas = new ArrayList<>();
-    
+
     ServletContext aplicacion = null;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,7 +45,8 @@ public class PartidaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.accionPorDefault(request, response);
+        String codigoPartida = request.getParameter("cod");
+        this.ingresarAPartidad(request, response, codigoPartida);
     }
 
     /**
@@ -74,16 +75,18 @@ public class PartidaController extends HttpServlet {
 //        String nombreJugador5 = request.getParameter("nombreJugador5");
 //        String nombreJugador6 = request.getParameter("nombreJugador6");
 //        String nombreJugador7 = request.getParameter("nombreJugador7");
-
-        int cantidadJugadores = Integer.parseInt(request.getParameter("cantidadJugadores"));
+        String codigoPartida = request.getParameter("codigoPartida");
 
         int opcion = Integer.parseInt(request.getParameter("opcion"));
 
         switch (opcion) {
             case 1: // Iniciar partida
-
+                int cantidadJugadores = Integer.parseInt(request.getParameter("cantidadJugadores"));
                 this.iniciarPartida(request, response, cantidadJugadores);
 
+                break;
+            case 2: // Eliminar a una partida
+                this.terminarPartida(request, response, codigoPartida);
                 break;
             default:
                 this.accionPorDefault(request, response);
@@ -91,7 +94,6 @@ public class PartidaController extends HttpServlet {
 
     }
 
-    
     private void accionPorDefault(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try ( PrintWriter out = response.getWriter()) {
             out.print("De vuelta al juego");
@@ -113,42 +115,92 @@ public class PartidaController extends HttpServlet {
     private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores) throws IOException {
 
         aplicacion = request.getServletContext();
-        
+
         List<CartaVO> baraja = new ArrayList();
-        
+
         String codigoPartida = this.generarCodigoPartida();
-        
+
         // Se guarda el codigo de la partida
         partidaVo = new PartidaVO(codigoPartida, "1:00:00");
 
-        aplicacion.setAttribute("partida", partidaVo);
-        
+        List<PartidaVO> partidas = new ArrayList<>();
+
+        partidas.add(partidaVo);
+
+        aplicacion.setAttribute("partida", codigoPartida);
+        aplicacion.setAttribute("partidas", partidas);
+
         barajas = cartaDao.generarCartas(cantidadJugadores);
-        
-        System.out.println("barajas = " + barajas);
-        
+
+//        System.out.println("barajas = " + barajas);
         aplicacion.setAttribute("barajas", barajas);
         aplicacion.setAttribute("Stirng", "DFFSDGNDF");
-                
+
         String nombreJugador = "";
         // Generar la lista de los jugadores que van a la partida
         for (int i = 0; i < cantidadJugadores; i++) {
-            for (int j = 1; j <= 7; j++) {
-                nombreJugador = "nombreJugador" + j;
-                jugadorVo = new JugadorVO(request.getParameter(nombreJugador), request.getParameter("nombreJugador" + i), obtenerNumRamdom(IMG_AVATAR.length), codigoPartida, baraja);
-                jugadores.add(jugadorVo);
-                
-            }
+//            for (int j = 1; j <= cantidadJugadores; j++) {
+            nombreJugador = "nombreJugador" + i;
+            jugadorVo = new JugadorVO(request.getParameter(nombreJugador), request.getParameter("nombreJugador" + i), obtenerNumRamdom(IMG_AVATAR.length), codigoPartida, barajas.get(0));
+            jugadores.add(jugadorVo);
+
+//            }
         }
-        
-        for (List<CartaVO> baraja1 : barajas) {
-            
-        }
-        
+
+//        for (List<CartaVO> baraja1 : barajas) {
+//            System.out.println("baraja1 = " + baraja1);
+//        }
 //        aplicacion.setAttribute("baraja", baraja);
         aplicacion.setAttribute("jugadores", jugadores);
-        
+
         response.sendRedirect("index.jsp");
     }
 
+    private void ingresarAPartidad(HttpServletRequest request, HttpServletResponse response, String codigoPartida) throws ServletException, IOException {
+        aplicacion = request.getServletContext();
+
+        if (aplicacion.getAttribute("partidas") != null) {
+            List<PartidaVO> partidas = (List<PartidaVO>) aplicacion.getAttribute("partidas");
+            for (PartidaVO partida : partidas) {
+                System.out.println("partida = " + partida);
+                if (partida.getCodigo().equals(codigoPartida)) {
+                    request.getRequestDispatcher("partida.jsp").forward(request, response);
+                } else {
+                    this.generarMensaje(request, response, "Partida no existe", "La partida no existe o ya culmin&#243;", "index.jsp");
+                }
+            }
+        } else {
+            this.generarMensaje(request, response, "Partida no existe", "La partida no existe o ya culmin&#243;", "index.jsp");
+        }
+
+    }
+
+    private void generarMensaje(HttpServletRequest request, HttpServletResponse response, String titulo, String descripcion, String redirigir) throws ServletException, IOException {
+        HttpSession sesion = request.getSession();
+        sesion.setAttribute("titulo", titulo);
+        sesion.setAttribute("descripcion", descripcion);
+        request.getRequestDispatcher(redirigir).forward(request, response);
+    }
+
+    private void terminarPartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida) throws ServletException, IOException {
+        aplicacion = request.getServletContext();
+        int posicion = 0;
+        if (aplicacion.getAttribute("partidas") != null) {
+            List<PartidaVO> partidas = (List<PartidaVO>) aplicacion.getAttribute("partidas");
+            for (int i = 0; i < partidas.size(); i++) {
+                System.out.println("posicion = " + posicion);
+                if (partidas.get(i).getCodigo().equals(codigoPartida)) {
+                    posicion = i;
+                }
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                partidas.remove(posicion);
+                System.out.println("partidas = " + partidas);
+                aplicacion.setAttribute("partidas", partidas);
+                
+            }
+
+        } else {
+            this.generarMensaje(request, response, "Partida no existe", "La partida no existe o ya culmin&#243;", "index.jsp");
+        }
+    }
 }

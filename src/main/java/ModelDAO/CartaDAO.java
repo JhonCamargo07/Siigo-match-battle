@@ -56,16 +56,23 @@ public class CartaDAO implements ICartaDAO {
 
         int contador = 0;
 //        for (int i = 0; i < cantidadCartasPorJugador; i++) {
-        for (CartaVO baraja1 : cartas) {
+        for (CartaVO carta : cartas) {
             contador++;
-            baraja.add(baraja1);
-            System.out.println("baraja1 = " + baraja1);
+            baraja.add(carta);
+            System.out.println("carta = " + carta);
             if (contador == cantidadCartasPorJugador) {
                 if (barajas.size() < cantidadJugadores) {
 
+                    System.out.println("lenght baraja ==== " + baraja.size());
+
                     System.out.println("baraja = " + baraja);
                     barajas.add(baraja);
-                    baraja.clear();
+
+                    if (cantidadJugadores == 2) {
+
+                    }
+
+//                    baraja.clear();
                 }
                 contador = 0;
             }
@@ -92,6 +99,7 @@ public class CartaDAO implements ICartaDAO {
     @Override
     public boolean agregarCartas(String idJugadorGanador, List<String> idCartas
     ) {
+        
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
