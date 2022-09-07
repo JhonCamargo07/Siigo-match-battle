@@ -60,8 +60,8 @@ body{
 .titulo2 {
     font-family: Titulos2;
     color: rgb(0, 0, 0);
-    font-size: 24px;
-    border-color: #000000;
+    font-size: 14px;
+
     
 }
 
@@ -101,9 +101,9 @@ margin-left: -186px;
 /*!==============================================================*/
 
 .btn {
-    height: 70px;
-    min-width: 300px;
-    padding-top: 30px;
+    height: 60px;
+    min-width: 200px;
+    padding-top: 70px;
     transition: all .3s ease-in-out;
 }
 
@@ -127,7 +127,10 @@ margin-left: -186px;
 
 }
 
-
+.atras{
+    height: 10px;
+    min-width: 50px;
+}
 .btn-login:active {
     -webkit-transform: scale(0.9);
     transform: scale(0.9);
@@ -185,6 +188,11 @@ margin-left: -186px;
         border: 2px solid rgba(255, 255, 255, 0.7);
         font-family: parrafo3;
         font-size: 12px;
-        color: #000;
+        color: rgb(255, 255, 255);
         margin-left: -68px;
+    }
+
+    .fa-undo{
+        color: #b3b3b3;
+        
     }
