@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ModelDAO;
 
+import ModelVO.CartaVO;
 import ModelVO.JugadorVO;
 import java.util.List;
 
@@ -14,32 +11,30 @@ import java.util.List;
  * @version 1.0
  */
 public class JugadorDAO implements IJugador {
-    
-    /**
-     *  Declarar variables e inicializarlas
-     */
-    
-    private String idJugador="", Nombre="", Imagen="";
 
     /**
-     * Crear constructor vacio 
+     * Declarar variables e inicializarlas
      */
-    
-        public JugadorDAO() {
+    private String idJugador = "", Nombre = "", Imagen = "";
+    private List<CartaVO> cartas;
+
+    /**
+     * Crear constructor vacio
+     */
+    public JugadorDAO() {
     }
 
     /**
      * Crear metodo para recibir los datos del JugadorVO
      * @param jugadorVO
      */
-    
-    public JugadorDAO(JugadorVO jugadorVO){
-       
+    public JugadorDAO(JugadorVO jugadorVO) {
+
         //Asignar valor a variable  con variables del VO
-        
-        idJugador= jugadorVO.getIdjugador();
-        Nombre=jugadorVO.getNombre();
-        Imagen=jugadorVO.getIdjugador();
+        idJugador = jugadorVO.getIdjugador();
+        Nombre = jugadorVO.getNombre();
+        List<String> listaNumeros = null;
+        Imagen = jugadorVO.getIdjugador();
     }
 
     @Override
@@ -51,8 +46,5 @@ public class JugadorDAO implements IJugador {
     public List<String> escogerCaracteristica() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
-
 
 }

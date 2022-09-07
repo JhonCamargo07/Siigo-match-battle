@@ -36,12 +36,15 @@ public interface ICartaDAO {
      * @return boolean, retorna si se pudo o agregar las cartas al jugador
      */
     public boolean agregarCartas(String idJugadorGanador, List<String> idCartas);
-    
 
     /**
-     * Este metodo se encarga de generar las 32 cartas y ponerlas en diferentes paquetes
-     * @param cantidadJugadores, los numeros de jugadores que van a jugar la partida
+     * Este metodo se encarga de generar las 32 cartas y ponerlas en diferentes
+     * paquetes
+     *
+     * @param cantidadJugadores, los numeros de jugadores que van a jugar la
+     * partida
      * @return List<List<CartaVO>>, retorna una lista con la lista de las cartas
      */
-    public List<List<CartaVO>> generarCartas(int cantidadJugadores);
+    public List<List<CartaVO>> generarCartas2(int cantidadJugadores);
+
 }

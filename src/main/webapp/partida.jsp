@@ -3,8 +3,7 @@
 
 <%@page import="ModelVO.PartidaVO"%>
 <%@page import="java.util.List"%>
-<%
-    ServletContext aplicacion = request.getServletContext();
+<%    ServletContext aplicacion = request.getServletContext();
     if (aplicacion.getAttribute("partidas") != null) {
         List<PartidaVO> partidas = (List<PartidaVO>) aplicacion.getAttribute("partidas");
         String partida = (String) aplicacion.getAttribute("partida");
@@ -34,3 +33,4 @@
         </form>
     </body>
 </html>
+

@@ -1,5 +1,7 @@
 package ModelDAO;
 
+import ModelVO.CartaVO;
+import ModelVO.JugadorVO;
 import ModelVO.PartidaVO;
 import java.util.List;
 
@@ -37,13 +39,6 @@ public interface IPartidaDAO {
     public int seleccionarGanador();
     
     /**
-     * Este metodo se encarga de finalizar la partida
-     * @return boolean, se pudo o no finalizar la partida
-     */
-    public boolean finalizarPartida();
-    
-    
-    /**
      * Este metodo se encargara de crear la partida del juego
      *
      * @return String, retorna el codigo de la partida
@@ -55,5 +50,5 @@ public interface IPartidaDAO {
      * el numero minido de participantes o el maximo
      * @return List<String>, retornara un String de los jugadores
      */
-    public List<String> iniciarPartida();
+    public List<String> iniciarPartida(List<List<CartaVO>> barajas, List<JugadorVO> jugadores);
 }

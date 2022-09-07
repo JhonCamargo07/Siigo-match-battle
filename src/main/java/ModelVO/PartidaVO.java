@@ -11,7 +11,7 @@ import java.util.Date;
 public class PartidaVO {
 
     private String codigo;
-    private Date tiempo;
+    private String tiempo;
 
     public PartidaVO() {
     }
@@ -20,11 +20,7 @@ public class PartidaVO {
         this.codigo = codigo;
     }
 
-    public PartidaVO(Date tiempo) {
-        this.tiempo = tiempo;
-    }
-
-    public PartidaVO(String codigo, Date tiempo) {
+    public PartidaVO(String codigo, String tiempo) {
         this.codigo = codigo;
         this.tiempo = tiempo;
     }
@@ -37,11 +33,11 @@ public class PartidaVO {
         this.codigo = codigo;
     }
 
-    public Date getTiempo() {
+    public String getTiempo() {
         return tiempo;
     }
 
-    public void setTiempo(Date tiempo) {
+    public void setTiempo(String tiempo) {
         this.tiempo = tiempo;
     }
 
