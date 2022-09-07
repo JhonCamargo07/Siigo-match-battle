@@ -1,2 +1,13 @@
-com\mycompany\siigo_match_battle\JAXRSConfiguration.class
-com\mycompany\siigo_match_battle\resources\JavaEE8Resource.class
+Controllers\JugadorController.class
+ModelDAO\IPartidaDAO.class
+Controllers\PartidaController.class
+ModelDAO\JugadorDAO.class
+ModelVO\JugadorVO.class
+ModelDAO\CartaDAO.class
+ModelDAO\ICartaDAO.class
+ModelDAO\IJugador.class
+ModelDAO\PartidaDAO.class
+util\Password.class
+ModelVO\CartaVO.class
+ModelVO\PartidaVO.class
+Controllers\MesaController.class

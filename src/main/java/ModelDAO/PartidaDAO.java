@@ -1,10 +1,13 @@
 package ModelDAO;
 
+import ModelVO.CartaVO;
+import ModelVO.JugadorVO;
 import ModelVO.PartidaVO;
 import java.util.List;
 
 /**
  * Esta clase tendra los metodos de accion de la clase mesa del juego
+ *
  * @author Jhon Camargo
  * @version 1.0.0
  */
@@ -41,11 +44,11 @@ public class PartidaDAO implements IPartidaDAO {
     }
 
     @Override
-    public List<String> iniciarPartida() {
+    public List<String> iniciarPartida(List<List<CartaVO>> barajas, List<JugadorVO> jugadores) {
+
+        
+
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    
-
 
 }

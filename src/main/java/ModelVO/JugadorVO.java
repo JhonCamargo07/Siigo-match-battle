@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ModelVO;
+
+import java.util.List;
 
 /**
  * Esta clase se utiliza para definir los parametros que se van a necesitar en
@@ -17,7 +15,8 @@ public class JugadorVO {
     /**
      * Defininir variables
      */
-    private String idjugador, nombre, imagen;
+    private String idjugador, nombre, imagen, codigoPartida;
+    private List<CartaVO> bajara;
 
     /**
      * Generamos constructores
@@ -29,6 +28,21 @@ public class JugadorVO {
         this.idjugador = idjugador;
         this.nombre = nombre;
         this.imagen = imagen;
+    }
+
+    public JugadorVO(String idjugador, String nombre, String imagen, String codigoPartida) {
+        this.idjugador = idjugador;
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.codigoPartida = codigoPartida;
+    }
+
+    public JugadorVO(String idjugador, String nombre, String imagen, String codigoPartida, List<CartaVO> bajara) {
+        this.idjugador = idjugador;
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.codigoPartida = codigoPartida;
+        this.bajara = bajara;
     }
 
     /**
@@ -60,12 +74,28 @@ public class JugadorVO {
         this.imagen = imagen;
     }
 
+    public String getCodigoPartida() {
+        return codigoPartida;
+    }
+
+    public void setCodigoPartida(String codigoPartida) {
+        this.codigoPartida = codigoPartida;
+    }
+
+    public List<CartaVO> getBajara() {
+        return bajara;
+    }
+
+    public void setBajara(List<CartaVO> bajara) {
+        this.bajara = bajara;
+    }
+
     /**
      * Generamos to String
      */
     @Override
     public String toString() {
-        return "JugadorVO{" + "idjugador=" + idjugador + ", nombre=" + nombre + ", imagen=" + imagen + '}';
+        return "JugadorVO{" + "idjugador=" + idjugador + ", nombre=" + nombre + ", imagen=" + imagen + ", codigoPartida=" + codigoPartida + ", bajara=" + bajara + '}';
     }
 
 }

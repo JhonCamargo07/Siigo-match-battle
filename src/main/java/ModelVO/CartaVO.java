@@ -15,6 +15,7 @@ public class CartaVO {
     private String ram;
     private String discoDuro;
     private String discoMotherBoard;
+    private String codigoPartida;
 
     public CartaVO() {
     }
@@ -42,6 +43,17 @@ public class CartaVO {
         this.discoMotherBoard = discoMotherBoard;
     }
 
+    public CartaVO(String identificador, String titulo, String pantalla, String procesador, String ram, String discoDuro, String discoMotherBoard, String codigoPartida) {
+        this.identificador = identificador;
+        this.titulo = titulo;
+        this.pantalla = pantalla;
+        this.procesador = procesador;
+        this.ram = ram;
+        this.discoDuro = discoDuro;
+        this.discoMotherBoard = discoMotherBoard;
+        this.codigoPartida = codigoPartida;
+    }
+    
     public String getIdentificador() {
         return identificador;
     }
@@ -98,9 +110,17 @@ public class CartaVO {
         this.discoMotherBoard = discoMotherBoard;
     }
 
+    public String getCodigoPartida() {
+        return codigoPartida;
+    }
+
+    public void setCodigoPartida(String codigoPartida) {
+        this.codigoPartida = codigoPartida;
+    }
+
     @Override
     public String toString() {
-        return "CartaVO{" + "identificador=" + identificador + ", titulo=" + titulo + ", pantalla=" + pantalla + ", procesador=" + procesador + ", ram=" + ram + ", discoDuro=" + discoDuro + ", discoMotherBoard=" + discoMotherBoard + '}';
+        return "CartaVO{" + "identificador=" + identificador + ", titulo=" + titulo + ", pantalla=" + pantalla + ", procesador=" + procesador + ", ram=" + ram + ", discoDuro=" + discoDuro + ", discoMotherBoard=" + discoMotherBoard + ", codigoPartida=" + codigoPartida + '}';
     }
 
 }

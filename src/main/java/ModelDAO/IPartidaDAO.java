@@ -1,5 +1,7 @@
 package ModelDAO;
 
+import ModelVO.CartaVO;
+import ModelVO.JugadorVO;
 import ModelVO.PartidaVO;
 import java.util.List;
 
@@ -55,5 +57,5 @@ public interface IPartidaDAO {
      * el numero minido de participantes o el maximo
      * @return List<String>, retornara un String de los jugadores
      */
-    public List<String> iniciarPartida();
+    public List<String> iniciarPartida(List<List<CartaVO>> barajas, List<JugadorVO> jugadores);
 }

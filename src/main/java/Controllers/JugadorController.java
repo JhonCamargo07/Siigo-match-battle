@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controllers;
 
 import java.io.IOException;
@@ -20,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "JugadorController", urlPatterns = {"/JugadorController"})
 public class JugadorController extends HttpServlet {
 
+   
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -73,5 +71,12 @@ public class JugadorController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    public String obtenerNumRamdom(int max) {
+        double num = ((Math.random() * (max - 0)) + 1);
+        return "";
+    }
+    
+    
 
 }
