@@ -1,0 +1,219 @@
+/*!==============================================================*/
+/*!================= Estilos para textos =================*/
+/*!==============================================================*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Fira+Code:300,regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:regular,italic,700);
+
+
+body{
+    background: rgb(83, 42, 81);
+    background: linear-gradient(90deg, rgba(83,42,81,1)32%, rgba(177,47,65,1) 100%);
+}
+
+.text-roboto {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.text-montserrat {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.text-raleway {
+    font-family: 'Raleway', sans-serif !important;
+}
+
+.text-fire-code {
+    font-family: 'Fira Code', monospace !important;
+}
+
+.text-baskerville {
+    font-family: 'Libre Baskerville', serif;
+}
+
+@font-face {
+    font-family: Titulos;
+    src: url(../fuentes/gobold/Gobold\ Bold.otf);
+}
+
+@font-face {
+    font-family: Titulos1;
+    src: url(../fuentes/soria/Soria-Bold.otf);
+}
+
+@font-face {
+    font-family: Titulos2;
+    src: url(../fuentes/chicago_police/Chicago\ Police\ Font.otf);
+}
+
+@font-face {
+    font-family: Titulos3;
+    src: url(../fuentes/cremona/Cremona\ Regular\ OTF.otf);
+}
+
+/* Fuentes para parrafos */
+@font-face {
+    font-family: parrafo;
+    src: url(../fuentes/timeburner/timeburnernormal.ttf);
+}
+
+@font-face {
+    font-family: parrafo1;
+    src: url(../fuentes/kiye_sans/Kiye-Sans.ttf);
+}
+
+@font-face {
+    font-family: parrafo2;
+    src: url(../fuentes/coamei/COAMEI_L.ttf);
+}
+
+@font-face {
+    font-family: parrafo3;
+    src: url(../fuentes/hasta_grotesk/hasta\ grotesk.ttf);
+}
+
+.titulo1 {
+    font-family: Titulos1;
+}
+
+.tituloprincipal{
+    font-family: Titulos2;
+    color: aliceblue;
+    font-size: 80px;
+    border-color: #000000;
+    text-shadow: -4px -4px 1px #000;
+}
+
+.titulo2 {
+    font-family: Titulos2;
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    border-color: #000000;
+    
+}
+
+.titulo3 {
+    font-family: Titulos3;
+    color: aliceblue;
+}
+
+.parrafo {
+    font-family: parrafo3;
+}
+
+.parrafo2 {
+    font-family: parrafo2;
+}
+
+.parrafo1 {
+    font-family: parrafo1;
+    text-decoration: solid;
+}
+
+.text-size-r {
+    font-size: 0.9375rem;
+    /* 15px */
+    /* transform: scale(0.9); */
+}
+
+.text-size-18 {
+    font-size: 1.125rem;
+    /* 18px */
+}
+
+.text-size {
+    /* font-size: 1.25rem; */
+    /* 20px */
+}
+
+.shadow {
+    -webkit-box-shadow: 5px 5px 14px -4px #000000;
+    box-shadow: 5px 5px 14px -4px #000000;
+}
+
+/*!==============================================================*/
+/*!================= /Estilos para textos =================*/
+/*!==============================================================*/
+
+
+/*!==============================================================*/
+/*!================= Estilos para botones =================*/
+/*!==============================================================*/
+
+.btn {
+    height: 120px;
+    min-width: 300px;
+    transition: all .3s ease-in-out;
+}
+
+
+.btn-login {
+    
+    -webkit-box-shadow: 5px 5px 50px 4px #000000;
+    box-shadow: 5px 5px 14px -4px #000000;
+}
+
+.boton1{
+    float: left;
+    /* margin-left: -80px; */
+
+}
+
+.boton2{
+    float: right;
+    /* margin-right: -80px; */
+
+
+}
+
+
+.btn-login:active {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+
+
+/*!==============================================================*/
+/*!================= /Estilos para botones =================*/
+/*!==============================================================*/
+
+/*!==============================================================*/
+/*!================= /Estilos para tablas =================*/
+/*!==============================================================*/
+
+thead {
+    background-color: rgb(223, 223, 223);
+}
+
+.table:hover {
+    background-color: rgb(243, 243, 243);
+}
+
+/*!==============================================================*/
+/*!================= Otros estilos=================*/
+/*!==============================================================*/
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.right-10 {
+    right: 0.3125rem;
+}
+
+.top-10 {
+    margin-top: -120px;
+    right: -6.25rem !important;
+}
+
+.cuadro{
+    margin-top: 170px;
+}
+
+.box{
+    box-shadow: 8px 8px 10px 0px #301a6b;
+
+}
