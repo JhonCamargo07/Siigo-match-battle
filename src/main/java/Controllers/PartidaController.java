@@ -20,6 +20,13 @@ import javax.servlet.http.*;
 public class PartidaController extends HttpServlet {
 
     private static final String[] IMG_AVATAR = {"avartar1.png", "avavar2.png", "avatar3.png", "avatar4.png", "avatar5.png", "avatar6.png", "avatar7.png", "avatar8.png", "avatar9.png", "avatar10.png", "avatar11.png"};
+    private static final int CANTIDAD_TOTAL_CARTAS = 32;
+//    private static final int MAX_CARTAS = 12;
+    private static final int MIN_CARTAS = 4;
+
+    List<PartidaVO> partidas = new ArrayList<>();
+
+    List<CartaVO> cartas = null;
 
     PartidaDAO partidaDao = new PartidaDAO();
     CartaDAO cartaDao = new CartaDAO();
@@ -112,40 +119,57 @@ public class PartidaController extends HttpServlet {
         return String.valueOf(num);
     }
 
-    private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores) throws IOException {
-
+    private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores) throws IOException, ServletException {
         aplicacion = request.getServletContext();
-
         List<CartaVO> baraja = new ArrayList();
+
+        int cantidadDeCartasPorJugador = CANTIDAD_TOTAL_CARTAS / cantidadJugadores;
 
         String codigoPartida = this.generarCodigoPartida();
 
         // Se guarda el codigo de la partida
         partidaVo = new PartidaVO(codigoPartida, "1:00:00");
 
-        List<PartidaVO> partidas = new ArrayList<>();
-
+        // Se agrega la partida a la lista
         partidas.add(partidaVo);
 
+        // Se guardan las cartas
+        cartas = cartaDao.generarCartas(cantidadJugadores);
+
+        String nombreJugador = "";
+        int contador = 0;
+
+        for (int i = 0; i < cantidadJugadores; i++) {
+//            for (int j = 0; j < cantidadDeCartasPorJugador; j++) {
+//            contador++;
+            nombreJugador = "nombreJugador" + i;
+            jugadorVo = new JugadorVO(request.getParameter(nombreJugador), request.getParameter("nombreJugador" + i), obtenerNumRamdom(IMG_AVATAR.length), codigoPartida);
+            for (CartaVO carta : cartas) {
+                contador++;
+                if (contador <= cantidadDeCartasPorJugador) {
+                    carta.setCodigoPartida(codigoPartida);
+                    jugadorVo.agregarCartas(carta);
+                } else {
+                    contador = 0;
+                    break;
+                }
+
+//                }
+            }
+            jugadores.add(jugadorVo);
+        }
+
+//        // Generar la lista de los jugadores que van a la partida
+//        for (int i = 0; i < cantidadJugadores; i++) {
+//            for (int j = 1; j <= cantidadJugadores; j++) {
+//            }
+//        }
         aplicacion.setAttribute("partida", codigoPartida);
         aplicacion.setAttribute("partidas", partidas);
-
-        barajas = cartaDao.generarCartas(cantidadJugadores);
 
 //        System.out.println("barajas = " + barajas);
         aplicacion.setAttribute("barajas", barajas);
         aplicacion.setAttribute("Stirng", "DFFSDGNDF");
-
-        String nombreJugador = "";
-        // Generar la lista de los jugadores que van a la partida
-        for (int i = 0; i < cantidadJugadores; i++) {
-//            for (int j = 1; j <= cantidadJugadores; j++) {
-            nombreJugador = "nombreJugador" + i;
-            jugadorVo = new JugadorVO(request.getParameter(nombreJugador), request.getParameter("nombreJugador" + i), obtenerNumRamdom(IMG_AVATAR.length), codigoPartida, barajas.get(0));
-            jugadores.add(jugadorVo);
-
-//            }
-        }
 
 //        for (List<CartaVO> baraja1 : barajas) {
 //            System.out.println("baraja1 = " + baraja1);
@@ -153,7 +177,9 @@ public class PartidaController extends HttpServlet {
 //        aplicacion.setAttribute("baraja", baraja);
         aplicacion.setAttribute("jugadores", jugadores);
 
-        response.sendRedirect("index.jsp");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+//            response.sendRedirect("index.jsp");
+//        }
     }
 
     private void ingresarAPartidad(HttpServletRequest request, HttpServletResponse response, String codigoPartida) throws ServletException, IOException {
@@ -196,7 +222,7 @@ public class PartidaController extends HttpServlet {
                 partidas.remove(posicion);
                 System.out.println("partidas = " + partidas);
                 aplicacion.setAttribute("partidas", partidas);
-                
+
             }
 
         } else {

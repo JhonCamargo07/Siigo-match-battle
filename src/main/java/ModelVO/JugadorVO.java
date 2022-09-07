@@ -1,5 +1,6 @@
 package ModelVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class JugadorVO {
      * Defininir variables
      */
     private String idjugador, nombre, imagen, codigoPartida;
-    private List<CartaVO> bajara;
+    private List<CartaVO> bajara = new ArrayList<>();
 
     /**
      * Generamos constructores
@@ -42,7 +43,7 @@ public class JugadorVO {
         this.nombre = nombre;
         this.imagen = imagen;
         this.codigoPartida = codigoPartida;
-        this.bajara = bajara;
+        this.bajara = new ArrayList();
     }
 
     /**
@@ -86,9 +87,9 @@ public class JugadorVO {
         return bajara;
     }
 
-    public void setBajara(List<CartaVO> bajara) {
-        this.bajara = bajara;
-    }
+//    public void setBajara(List<CartaVO> bajara) {
+//        this.bajara = bajara;
+//    }
 
     /**
      * Generamos to String
@@ -96,6 +97,10 @@ public class JugadorVO {
     @Override
     public String toString() {
         return "JugadorVO{" + "idjugador=" + idjugador + ", nombre=" + nombre + ", imagen=" + imagen + ", codigoPartida=" + codigoPartida + ", bajara=" + bajara + '}';
+    }
+
+    public void agregarCartas(CartaVO cartaVo) {
+        this.bajara.add(cartaVo);
     }
 
 }

@@ -1,9 +1,8 @@
 package ModelDAO;
 
+import ModelVO.CartaVO;
 import ModelVO.JugadorVO;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * * Esta clase tendra los metodos necesarios para la clase Jugador
@@ -17,6 +16,7 @@ public class JugadorDAO implements IJugador {
      * Declarar variables e inicializarlas
      */
     private String idJugador = "", Nombre = "", Imagen = "";
+    private List<CartaVO> cartas;
 
     /**
      * Crear constructor vacio

@@ -34,11 +34,6 @@ public class PartidaDAO implements IPartidaDAO {
     }
 
     @Override
-    public boolean finalizarPartida(String codigoPartida) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public String crearPartida() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

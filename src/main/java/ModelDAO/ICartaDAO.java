@@ -42,6 +42,6 @@ public interface ICartaDAO {
      * @param cantidadJugadores, los numeros de jugadores que van a jugar la partida
      * @return List<List<CartaVO>>, retorna una lista con la lista de las cartas
      */
-    public List<List<CartaVO>> generarCartas(int cantidadJugadores);
+    public List<List<CartaVO>> generarCartas2(int cantidadJugadores);
 
 }

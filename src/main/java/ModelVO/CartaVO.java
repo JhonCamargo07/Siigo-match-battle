@@ -1,5 +1,7 @@
 package ModelVO;
 
+import java.util.List;
+
 /**
  * Esta clase es de dominiio, se encarga de manejar los atributos de la carta
  *
@@ -53,7 +55,7 @@ public class CartaVO {
         this.discoMotherBoard = discoMotherBoard;
         this.codigoPartida = codigoPartida;
     }
-    
+
     public String getIdentificador() {
         return identificador;
     }
@@ -114,13 +116,13 @@ public class CartaVO {
         return codigoPartida;
     }
 
-    public void setCodigoPartida(String codigoPartida) {
-        this.codigoPartida = codigoPartida;
-    }
-
     @Override
     public String toString() {
         return "CartaVO{" + "identificador=" + identificador + ", titulo=" + titulo + ", pantalla=" + pantalla + ", procesador=" + procesador + ", ram=" + ram + ", discoDuro=" + discoDuro + ", discoMotherBoard=" + discoMotherBoard + ", codigoPartida=" + codigoPartida + '}';
+    }
+
+    public void setCodigoPartida(String codigoPartida) {
+        this.codigoPartida = codigoPartida;
     }
 
 }

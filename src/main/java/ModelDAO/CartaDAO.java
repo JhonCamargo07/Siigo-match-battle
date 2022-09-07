@@ -35,12 +35,9 @@ public class CartaDAO implements ICartaDAO {
 
     private static final String[] RAM_CARTAS = {"4", "16", "14", "24", "8", "20", "32", "34", "18", "30", "12", "64", "40", "100", "72", "128", "45", "68", "18", "110", "21", "120", "10", "47", "16", "45", "68", "18", "110", "21", "120", "10"};
 
-    @Override
-    public List<List<CartaVO>> generarCartas(int cantidadJugadores) {
-        // Listas necesarias para armas las cartas para cada jugador
-        List<List<CartaVO>> barajas = new ArrayList();
+    
+    public List<CartaVO> generarCartas(int cantidadJugadores) {
         List<CartaVO> cartas = new ArrayList();
-        List<CartaVO> baraja = new ArrayList();
 
         // Obtener el numero de cartas que debe tener cada jugador
         int cantidadCartasPorJugador = (CANTIDAD_TOTAL_CARTAS / cantidadJugadores);
@@ -50,39 +47,12 @@ public class CartaDAO implements ICartaDAO {
             for (int j = 0; j < LETRAS_CARTAS.length; j++) {
                 String titulo = NUMEROS_CARTAS[i] + "" + LETRAS_CARTAS[j];
                 CartaVO cartaVo = new CartaVO(NUMEROS_CARTAS[i] + "" + LETRAS_CARTAS[j], TITULO_CARTAS[j], PANTALLA_CARTAS[j], PROCESADOR_INTEL_CARTAS[j], RAM_CARTAS[j], DISCO_DURO_CARTAS[j], BOARD_ASUS_CARTAS[j]);
+                System.out.println("cartaVo = " + cartaVo);
                 cartas.add(cartaVo);
             }
         }
 
-        int contador = 0;
-//        for (int i = 0; i < cantidadCartasPorJugador; i++) {
-        for (CartaVO carta : cartas) {
-            contador++;
-            baraja.add(carta);
-            System.out.println("carta = " + carta);
-            if (contador == cantidadCartasPorJugador) {
-                if (barajas.size() < cantidadJugadores) {
-
-                    System.out.println("lenght baraja ==== " + baraja.size());
-
-                    System.out.println("baraja = " + baraja);
-                    barajas.add(baraja);
-
-                    if (cantidadJugadores == 2) {
-
-                    }
-
-//                    baraja.clear();
-                }
-                contador = 0;
-            }
-            System.out.println("barajas = " + barajas);
-        }
-//        }
-
-        System.out.println("barajas = " + barajas);
-        System.out.println("barajas lengh:" + barajas.size());
-        return barajas;
+        return cartas;
     }
 
     @Override
@@ -100,6 +70,11 @@ public class CartaDAO implements ICartaDAO {
     public boolean agregarCartas(String idJugadorGanador, List<String> idCartas
     ) {
         
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<List<CartaVO>> generarCartas2(int cantidadJugadores) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

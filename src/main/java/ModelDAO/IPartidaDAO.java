@@ -39,13 +39,6 @@ public interface IPartidaDAO {
     public int seleccionarGanador();
     
     /**
-     * Este metodo se encarga de finalizar la partida
-     * @return boolean, se pudo o no finalizar la partida
-     */
-    public boolean finalizarPartida(String codigoPartida);
-    
-    
-    /**
      * Este metodo se encargara de crear la partida del juego
      *
      * @return String, retorna el codigo de la partida
