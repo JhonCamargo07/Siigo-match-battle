@@ -31,12 +31,9 @@
             <div class="container cuadro w-50  bg  overflow-hidden shadow-lg p-3  rounded">
                 <div class="row">
 
-                    <a href="index.html">
+                    <a href="index.jsp">
 
-                        <button
-                            class="btn btn-light titulo2 p-2 fw-bold  btn-form  box atras">
-                        </button>
-
+                
                         <i class="fas fa-undo"></i>
 
                     </a>
