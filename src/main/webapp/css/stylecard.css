@@ -64,6 +64,12 @@ body{
 
 }
 
+.bnts{
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+}
+
 .text-size-r {
     font-size: 0.9375rem;
     /* 15px */
@@ -92,8 +98,8 @@ body{
 /*!==============================================================*/
 
 .btn {
-    height: 60px;
-    min-width: 200px;
+    height: 35px;
+    min-width: 100px;
     padding-top: 70px;
     transition: all .3s ease-in-out;
 }
@@ -105,18 +111,7 @@ body{
     box-shadow: 5px 5px 14px -4px #000000;
 }
 
-.boton1{
-    float: left;
-    /* margin-left: -80px; */
 
-}
-
-.boton2{
-    float: right;
-    /* margin-right: -80px; */
-
-
-}
 
 .atras{
     height: 10px;
@@ -168,4 +163,14 @@ body{
 .img1{
     width: 150px;
     float: right;
+ }
+
+ .img2{
+    width: 150px;
+    float: left;
+ }
+
+ .bnts{
+    position: absolute;
+    margin-left: 20px;
  }
