@@ -157,7 +157,7 @@ body{
 }
 
 .img{
-   width: 150px;
+    width: 20px;
 }
 
 .img1{
@@ -174,3 +174,4 @@ body{
     position: absolute;
     margin-left: 20px;
  }
+
