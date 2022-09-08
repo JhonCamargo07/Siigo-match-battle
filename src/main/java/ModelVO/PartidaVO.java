@@ -1,6 +1,7 @@
 package ModelVO;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Esta clase es de domio, se encarga de tener los atributos de la mesa
@@ -44,6 +45,13 @@ public class PartidaVO {
     @Override
     public String toString() {
         return "MesaVO{" + "codigo=" + codigo + ", tiempo=" + tiempo + '}';
+    }
+    
+    public static String generarCodigoPartida() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(9999999);
+        String hex = Integer.toHexString(randomNumber);
+        return hex;
     }
 
 }

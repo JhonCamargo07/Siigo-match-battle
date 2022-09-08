@@ -31,24 +31,18 @@
 
                     <div class="text-center d-flex justify-content-around align-items-center pt-3">
                         <div class="boton1">
-                            <a href="crearPartida.jsp"><button
-                                    class="btn btn-light btn-login text-black titulo2 p-3  w-80 fw-bold  btn-form text-size box">
-                                    <i class="fas fa-play-circle"></i>Crear Partida</button></a>
-                        </div>
-                        <div class="boton2">
                             <form action="${pageContext.request.contextPath}/Partida" method="POST">
-                                <input type="text" name="nombreJugador1" value="Jacc">
-                                <input type="text" name="nombreJugador2" value="Martha">
-                                <input type="hidden" name="cantidadJugadores" value="7">
-                                <input type="hidden" name="opcion" value="1">
-                                <a href="ingresarPartida.jsp"><button type="submit"
-                                                                      class="btn btn-light btn-login text-black titulo2 p-3  w-0 fw-bold  btn-form  box">
-                                        <i class="fas fa-gamepad"></i>Ingresar a Partida</button></a>
+                                <input type="hidden" name="opcion" value="5">
+                                <button type="submit" class="btn btn-light btn-login text-black titulo2 p-3  w-80 fw-bold  btn-form text-size box">
+                                    <i class="fas fa-play-circle"></i>Crear Partida</button>
                             </form>
                         </div>
-                        <a href="${pageContext.request.contextPath}/Partida?cod=1234567">Ingresar</a>
-                        <p>${titulo}</p>
-                        <p>${descripcion}</p>
+                        <div class="boton2">
+                            <a href="ingresarPartida.jsp"><button type="submit" class="btn btn-light btn-login text-black titulo2 p-3  w-0 fw-bold  btn-form  box">
+                                    <i class="fas fa-gamepad"></i>Ingresar a Partida</button></a>
+                        </div>
+                        <!--<a href="${pageContext.request.contextPath}/Partida?cod=1234567">Ingresar</a>-->
+
                         <%                ServletContext aplicacion = request.getServletContext();
 
                             if (aplicacion.getAttribute("partidas") != null) {
@@ -63,6 +57,10 @@
                                 }
                             }
                         %>
+                    </div>
+                    <div class="mt-3">
+                        <h4>${titulo}</h4>
+                        <p>${descripcion}</p>
                     </div>
                 </div>
             </div>

@@ -31,6 +31,10 @@
             <input type="hidden" name="opcion" value="2">
             <input type="submit" value="Finalizar partida">
         </form>
+        <div class="">
+            <h4>${titulo}</h4>
+            <p>${descripcion}</p>
+        </div>
     </body>
 </html>
 

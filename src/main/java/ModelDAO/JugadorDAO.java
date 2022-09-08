@@ -26,6 +26,7 @@ public class JugadorDAO implements IJugador {
 
     /**
      * Crear metodo para recibir los datos del JugadorVO
+     *
      * @param jugadorVO
      */
     public JugadorDAO(JugadorVO jugadorVO) {
@@ -45,6 +46,11 @@ public class JugadorDAO implements IJugador {
     @Override
     public List<String> escogerCaracteristica() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static String generarCodigoJugador() {
+        int num = (int) ((Math.random() * (999999998 - 0)) + 1);
+        return String.valueOf(num);
     }
 
 }

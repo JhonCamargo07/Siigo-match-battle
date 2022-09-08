@@ -1,3 +1,12 @@
+<%
+    String codigoPartida = "";
+    if(request.getAttribute("codigoPartida") != null){
+        codigoPartida = (String) request.getAttribute("codigoPartida");
+    }
+%>
+
+
+<%@page import="ModelDAO.JugadorDAO"%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -37,26 +46,27 @@
                             <img src="img/avatar1.png" class="img d-flex">
                         </div>
                         <div class="form-group text-center col-4">
-                            <form class="">
-                                <label class="parrafo2">Escriba un nombre o apodo</label>
-                                <input type="email" class="form-control input">
+                            <form action="${pageContext.request.contextPath}/Partida" method="POST">
+                                <label class="parrafo2">nombre o apodo</label>
+                                <input type="text" name="nombreJugador" class="form-control input" placeholder="Adriana2580">
+                                <input type="hidden" name="idJugador" value="<%= JugadorDAO.generarCodigoJugador() %>">
+                                <input type="hidden" name="codigoPartida" value="<%= codigoPartida %>">
+                                <!--<input type="hidden" name="nombreJugador">-->
+                                <input type="hidden" name="opcion" value="3">
+                                <button type="submit"
+                                        class="btn d-flex justify-content-start btn-light btn-login text-black titulo2 p-3  w-80 fw-bold  btn-form text-size box">
+                                    <i class="fas fa-play-circle"></i>Crear Partida</button>
                             </form>
                         </div>
                     </div>
                     <div class="text-center d-flex justify-content-around align-items-center pt-3">
                         <div class="boton1">
-                            <form action="${pageContext.request.contextPath}/Partida" method="POST">
-                                <input type="hidden" name="nombreJugador1" value="Jacc">
-                                <input type="hidden" name="nombreJugador2" value="Martha">
-                                <input type="hidden" name="cantidadJugadores" value="7">
-                                <input type="hidden" name="opcion" value="1">
-                                <!--<input type="submit" value="Enviar">-->
-                                <button type="submit"
-                                        class="btn btn-light btn-login text-black titulo2 p-3  w-80 fw-bold  btn-form text-size box">
-                                    <i class="fas fa-play-circle"></i>Crear Partida</button>
-                            </form>
                         </div>
 
+                    </div>
+                    <div class="">
+                        <h4>${titulo}</h4>
+                        <p>${descripcion}</p>
                     </div>
                 </div>
             </div>
