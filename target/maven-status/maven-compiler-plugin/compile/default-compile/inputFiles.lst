@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\Controllers\PartidaController.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\ICartaDAO.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\JugadorDAO.java
@@ -7,20 +5,9 @@ C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\Co
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelVO\PartidaVO.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelVO\CartaVO.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\CartaDAO.java
->>>>>>> partida
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\util\Password.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\Controllers\MesaController.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\PartidaDAO.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelVO\JugadorVO.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\IPartidaDAO.java
-<<<<<<< HEAD
-C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\ICartaDAO.java
-C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\JugadorDAO.java
 C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\IJugador.java
-C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\Controllers\JugadorController.java
-C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelVO\PartidaVO.java
-C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelVO\CartaVO.java
-C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\CartaDAO.java
-=======
-C:\Users\Aprendiz\Documents\NetBeansProjects\Siigo-match-battle\src\main\java\ModelDAO\IJugador.java
->>>>>>> partida

@@ -1,9 +1,6 @@
 Controllers\JugadorController.class
 ModelDAO\IPartidaDAO.class
-<<<<<<< HEAD
-=======
 Controllers\PartidaController.class
->>>>>>> partida
 ModelDAO\JugadorDAO.class
 ModelVO\JugadorVO.class
 ModelDAO\CartaDAO.class
