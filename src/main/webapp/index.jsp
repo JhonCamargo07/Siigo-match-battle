@@ -45,6 +45,8 @@
 
                                 </div>
 
+                                <a href="card.jsp">Card</a>
+
                             </div>
                         </div>
                     </div>
