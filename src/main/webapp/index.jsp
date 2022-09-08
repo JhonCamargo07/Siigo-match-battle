@@ -28,7 +28,6 @@
                     <div class="text-center">
                         <img src="img/cartas.gif" class="volver">
                     </div>
-
                     <div class="text-center d-flex justify-content-around align-items-center pt-3">
                         <div class="boton1">
                             <form action="${pageContext.request.contextPath}/Partida" method="POST">
