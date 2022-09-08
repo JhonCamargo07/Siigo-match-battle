@@ -102,5 +102,9 @@ public class JugadorVO {
     public void agregarCartas(CartaVO cartaVo) {
         this.bajara.add(cartaVo);
     }
+    
+    public void agregarBaraja(CartaVO cartaVo) {
+        this.bajara.add(cartaVo);
+    }
 
 }

@@ -126,6 +126,27 @@ public class PartidaController extends HttpServlet {
         return String.valueOf(num);
     }
 
+    private List<CartaVO> repartirBaraja(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores) {
+
+        aplicacion = request.getServletContext();
+        List<CartaVO> baraja = new ArrayList();
+
+        int cantidadDeCartasPorJugador = CANTIDAD_TOTAL_CARTAS / cantidadJugadores;
+
+        int contador = 0;
+        for (CartaVO carta : cartas) {
+            contador++;
+            if (contador <= cantidadJugadores) {
+                baraja.add(carta);
+            }
+        }
+
+        jugadores.add(jugadorVo);
+
+        return baraja;
+
+    }
+
     private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores, String codigoPartida) throws IOException, ServletException {
         aplicacion = request.getServletContext();
         List<CartaVO> baraja = new ArrayList();
@@ -190,6 +211,8 @@ public class PartidaController extends HttpServlet {
 
     private void ingresarAPartidad(HttpServletRequest request, HttpServletResponse response, String codigoPartida) throws ServletException, IOException {
         aplicacion = request.getServletContext();
+        
+//        List<CartaVO> baraja = this.repartirBaraja(request, response, CANTIDAD_TOTAL_CARTAS);
 
         if (aplicacion.getAttribute("partidas") != null) {
 
@@ -203,13 +226,15 @@ public class PartidaController extends HttpServlet {
                         List<JugadorVO> jugadoresEnPartifa = (List<JugadorVO>) aplicacion.getAttribute("jugadores");
 
                         for (JugadorVO jugadorVO : jugadoresEnPartifa) {
+//                            jugadorVo.agregarCartas(baraja);
                             System.out.println("jugadorVO = " + jugadorVO);
                             if (jugadorVo.getCodigoPartida().equals(codigoPartida)) {
                                 jugadoresEnLaMismaPartida++;
                             }
                         }
                         if (jugadoresEnLaMismaPartida == 1) {
-                            request.getRequestDispatcher("saladeespera.jsp").forward(request, response);
+//                            request.getRequestDispatcher("saladeespera.jsp").forward(request, response);
+                            this.generarMensaje(request, response, "Listo para jugar", "Comparte el codigo para que se conecten más jugadores\nCodigo: " + codigoPartida, "saladeespera.jsp");
                         } else if (jugadoresEnLaMismaPartida > 1 && jugadoresEnLaMismaPartida < 7) {
                             request.getRequestDispatcher("partida.jsp").forward(request, response);
                         } else {
@@ -316,11 +341,11 @@ public class PartidaController extends HttpServlet {
     }
 
     private void generarPartida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
+
         String codigoPartida = PartidaVO.generarCodigoPartida();
-        
+
         request.setAttribute("codigoPartida", codigoPartida);
-        
+
         request.getRequestDispatcher("crearPartida.jsp").forward(request, response);
     }
 

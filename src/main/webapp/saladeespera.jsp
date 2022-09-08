@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World! </h1>
-        <div class="">
+        <h1>Sala de espera</h1>
+        <div class="mt-3">
             <h4>${titulo}</h4>
             <p>${descripcion}</p>
         </div>

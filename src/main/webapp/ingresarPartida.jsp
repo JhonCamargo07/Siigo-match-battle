@@ -24,7 +24,7 @@
 
                 <a href="index.jsp">
 
-               
+
 
                     <i class="fas fa-undo"></i>
 
@@ -35,28 +35,39 @@
                         <img src="img/avatar2.png" class="img d-flex">
                     </div>
                     <div class="form-group text-center col-4">
-                        <form class="">
-                            <label class="parrafo2">Ingrese el identificador de la partida</label>
-                            <input type="email" class="form-control input">
-                        </form>
+                        <!--<form caction="${pageContext.request.contextPath}/Partida" method="POST">-->
+                            <label class="parrafo2">Codigo partida</label>
+                            <input type="text" name="codigoPartida" class="form-control input">
+                            <input type="hidden" name="opcion" value="1">
                     </div>
                 </div>
                 <div class="text-center d-flex justify-content-around align-items-center pt-3">
                     <div class="boton1">
-                        <button
+                        
+                        <a href="partida.jsp"><button type="submit" id="btn-redi"
                             class="btn btn-light btn-login text-black titulo2 p-3  w-80 fw-bold  btn-form text-size box">
-                            <i class="fas fa-play-circle"></i>Ingresar a Partida</button>
+                                <i class="fas fa-play-circle"></i>Ingresar a Partida</button></a>
+                        <!--</form>-->
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        let btn = document.getElementById('btn-redi');
+        
+        btn.addEventListener('click', () => {
+            location.href = "partida.jsp";
+        });
+    </script>
+    
     <!-- Archivos js -->
-     <script src="libs/bootstrap/dist/js/sweetalert.js"></script>
-        <script src="libs/bootstrap/dist/js/popper.min.js"></script>
-        <script src="libs/bootstrap/dist/js/jquery.min.js"></script>
-        <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script> 
+<!--    <script src="libs/bootstrap/dist/js/sweetalert.js"></script>
+    <script src="libs/bootstrap/dist/js/popper.min.js"></script>
+    <script src="libs/bootstrap/dist/js/jquery.min.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>-->
+
 
 
 </body>
