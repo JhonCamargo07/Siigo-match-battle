@@ -25,12 +25,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <form action="${pageContext.request.contextPath}/Partida" method="POST">
-            <input type="hidden" name="codigoPartida" value="${partida}">
-            <input type="hidden" name="opcion" value="2">
-            <input type="submit" value="Finalizar partida">
-        </form>
+        
     </body>
 </html>
 
