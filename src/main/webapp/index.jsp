@@ -18,13 +18,17 @@
 							</div>
 							<div class="d-flex justify-content-around align-items-center pt-3">
 								<a href="crearPartida.jsp">
-									<button type="submit" class="btn btn-light btn-lg p-4 px-5 shadow text-black p-3 fw-bold">
+									<button
+										type="submit"
+										class="btn btn-light shadow-lg btn-lg p-4 px-5 shadow text-black p-3 fw-bold">
 										<i class="fas fa-play-circle"></i>Crear Partida
 									</button>
 								</a>
 								<div class="">
 									<a href="ingresarPartida.jsp">
-										<button type="submit" class="btn btn-light btn-lg p-4 shadow text-black p-3 fw-bold">
+										<button
+											type="submit"
+											class="btn btn-light shadow-lg btn-lg p-4 shadow text-black p-3 fw-bold">
 											<i class="fas fa-gamepad"></i>Ingresar a Partida
 										</button>
 									</a>
