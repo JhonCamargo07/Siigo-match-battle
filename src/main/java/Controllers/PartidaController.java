@@ -342,11 +342,11 @@ public class PartidaController extends HttpServlet {
 
     private void generarPartida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String codigoPartida = PartidaVO.generarCodigoPartida();
-
-        request.setAttribute("codigoPartida", codigoPartida);
-
-        request.getRequestDispatcher("crearPartida.jsp").forward(request, response);
+//        String codigoPartida = PartidaVO.generarCodigoPartida();
+//
+//        request.setAttribute("codigoPartida", codigoPartida);
+//
+//        request.getRequestDispatcher("crearPartida.jsp").forward(request, response);
     }
 
 }

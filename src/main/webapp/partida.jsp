@@ -16,6 +16,14 @@
 
 <body>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10"></div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
     <div class="text-roboto d-flex justify-content-center align-items-center">
         <div class="container cuadro w-75  bg  overflow-hidden shadow-lg p-2  rounded">
             <div class="row">
@@ -23,7 +31,7 @@
                     <div class="d-flex align-items-center  justify-content-around mt-5">
 
 
-                        <img src="img/avatar1.png" class="img">
+                        <img src="img/avatar1.png" class="img img1">
                         <div class="col-md-6">
                             <div class="card bg-light col-12 " style="width: 10rem; height: 22rem;">
                                 <h5 class="card-title text-center titulo3">1B</h5>
@@ -46,18 +54,11 @@
                                             <p>540</p>
                                         </div>
                                     </div>
-
-
                                 </div>
-
-
                                 <div class="col-md-3"></div>
-
                             </div>
                         </div>
-
-                        <div class="bnts ">
-
+                        <div class="bnts">
                             <div class="text-center col-12 mt-5">
                                 <button
                                     class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">Pantalla
@@ -65,37 +66,28 @@
                             </div>
             
                             <div class="text-center col-12 mt-5">
-            
                                 <button
                                     class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">Procesador
                                 </button>
-            
                             </div>
             
             
                             <div class="text-center col-12 mt-5">
-            
                                 <button
                                     class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">RAM
                                 </button>
-            
                             </div>
             
-            
                             <div class="text-center col-12 mt-5">
-            
                                 <button
                                     class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">Disco
                                     Duro
                                 </button>
-            
                             </div>
                             <div class="text-center col-12 mt-5">
-            
                                 <button
                                     class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">MotherBoard
                                 </button>
-            
                             </div>
                         </div>
 
@@ -121,21 +113,15 @@
                                     </div>
                                 </div>
 
-
                             </div>
                         </div>
                         <img src="img/avatar2.png" class="img img1">
 
-
                     </div>
-
-                    
-
 
                     <div class="d-flex align-items-center  justify-content-around mt-5">
 
-
-                        <img src="img/avatar3.png" class="img">
+                        <img src="img/avatar3.png" class="img img1">
                         <div class="col-md-6">
                             <div class="card bg-light col-12 " style="width: 10rem; height: 22rem;">
                                 <h5 class="card-title text-center titulo3">2C</h5>
@@ -218,7 +204,7 @@
                 <div class="d-flex align-items-center  justify-content-around mt-5">
 
 
-                    <img src="img/avatar5.png" class="img">
+                    <img src="img/avatar5.png" class="img img1">
                     <div class="col-md-6">
                         <div class="card bg-light col-12 " style="width: 10rem; height: 22rem;">
                             <h5 class="card-title text-center titulo3">3D</h5>
