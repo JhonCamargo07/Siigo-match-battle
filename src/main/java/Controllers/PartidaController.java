@@ -2,11 +2,9 @@ package Controllers;
 
 import ModelDAO.*;
 import ModelVO.*;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -19,7 +17,7 @@ import javax.servlet.http.*;
 @WebServlet(name = "PartidaController", urlPatterns = {"/Partida"})
 public class PartidaController extends HttpServlet {
 
-    private static final String[] IMG_AVATAR = {"avartar1.png", "avavar2.png", "avatar3.png", "avatar4.png", "avatar5.png", "avatar6.png", "avatar7.png", "avatar8.png", "avatar9.png", "avatar10.png", "avatar11.png"};
+    private static final String[] IMG_AVATAR = {"avartar1.png", "avatar2.png", "avatar3.png", "avatar4.png", "avatar5.png", "avatar6.png", "avatar7.png", "avatar8.png", "avatar9.png", "avatar10.png", "avatar11.png"};
     private static final int CANTIDAD_TOTAL_CARTAS = 32;
 //    private static final int MAX_CARTAS = 12;
     private static final int MIN_CARTAS = 4;

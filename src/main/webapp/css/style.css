@@ -1,7 +1,8 @@
 /* Estilos Body */
 
 body {
-	background: linear-gradient(to right top, #532a51, #6b2a54, #832953, #99294c, #ac2e41) no-repeat center center fixed;
+	background: linear-gradient(to right top, rgba(83, 42, 81, 1), #6b2a54, #832953, #99294c, rgba(177, 47, 65, 1)) no-repeat
+		center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -75,13 +76,12 @@ body {
 }
 
 .text-size {
-	/* font-size: 1.25rem; */
-	/* 20px */
+	font-size: 1.25rem; /* 20px */
 }
 
 .shadow {
-	-webkit-box-shadow: 5px 5px 14px -4px #000000;
-	box-shadow: 5px 5px 14px -4px #000000;
+	-webkit-box-shadow: 8px 8px 15px 0px #342e44 !important;
+	box-shadow: 8px 8px 15px 0px #342e44 !important;
 }
 
 /*!==============================================================*/
@@ -134,7 +134,7 @@ body {
 }
 
 .box {
-	box-shadow: 8px 8px 10px 0px #4919ce;
+	box-shadow: 8px 8px 10px 0px #342e44 !important;
 }
 
 .fa-play-circle {
