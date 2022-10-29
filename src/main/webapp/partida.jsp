@@ -93,8 +93,8 @@
 
                         <div class="card bg-light p-3" style="width: 10rem; height: 22rem;">
                             <h5 class="card-title text-center titulo3">2A</h5>
-                            <img src="img/computador-1.png" class="card-img-top" alt="">
-                            <div class="card-body">
+                            <img src="img/computador-2.png" class="card-img-top" alt="">
+                            <div class=" px-0 card-body">
                                 <h6 class="card-title titulo3 text-center">Computador 2</h6>
                                 <div class="d-flex">
                                     <div class="parrafo2">
@@ -121,11 +121,11 @@
 
                     <div class="d-flex align-items-center  justify-content-around mt-5">
 
-                        <img src="img/avatar3.png" class="img img1">
+                        <img src="img/avatar4.png" class="img img1">
                         <div class="col-md-6">
-                            <div class="card bg-light col-12 " style="width: 10rem; height: 22rem;">
+                            <div class="card bg-light col-12 " style="width: 10rem; height: 23rem;">
                                 <h5 class="card-title text-center titulo3">2C</h5>
-                                <img src="img/computador-1.png" class="card-img-top" alt="">
+                                <img src="img/computador-7.png" class="card-img-top" alt="">
                                 <div class="card-body">
                                     <h6 class="card-title titulo3 text-center">Computador 3</h6>
                                     <div class="d-flex">
@@ -148,19 +148,14 @@
 
                                 </div>
 
-
-
-
                                 <div class="col-md-3"></div>
 
                             </div>
-
-
                         </div>
 
                         <div class="card bg-light p-1" style="width: 10rem; height: 22rem;">
                             <h5 class="card-title text-center titulo3">1D</h5>
-                            <img src="img/computador-1.png" class="card-img-top" alt="">
+                            <img src="img/computador-4.png" class="card-img-top" alt="">
                             <div class="card-body">
                                 <h6 class="card-title titulo3 text-center">Computador 4</h6>
                                 <div class="d-flex">
@@ -180,35 +175,26 @@
                                     </div>
                                 </div>
 
-
                             </div>
                         </div>
 
-
                         <img src="img/avatar4.png" class="img img1">
-
-
 
                     </div>
 
 
                 </div>
 
-
-
             </div>
-
-          
 
             <div class="col-12 ">
                 <div class="d-flex align-items-center  justify-content-around mt-5">
 
-
                     <img src="img/avatar5.png" class="img img1">
                     <div class="col-md-6">
-                        <div class="card bg-light col-12 " style="width: 10rem; height: 22rem;">
+                        <div class="card bg-light col-12 " style="width: 10rem; height: 23rem;">
                             <h5 class="card-title text-center titulo3">3D</h5>
-                            <img src="img/computador-1.png" class="card-img-top" alt="">
+                            <img src="img/computador-10.png" class="card-img-top" alt="">
                             <div class="card-body">
                                 <h6 class="card-title titulo3 text-center">Computador 5</h6>
                                 <div class="d-flex">
@@ -242,7 +228,7 @@
 
                     <div class="card bg-light p-1" style="width: 10rem; height: 22rem;">
                         <h5 class="card-title text-center titulo3">5F</h5>
-                        <img src="img/computador-1.png" class="card-img-top" alt="">
+                        <img src="img/computador-6.png" class="card-img-top" alt="">
                         <div class="card-body">
                             <h6 class="card-title titulo3 text-center">Computador 6</h6>
                             <div class="d-flex">
@@ -271,9 +257,7 @@
                 </div>
                 <div class="col-md-3"></div>
 
-
             </div>
-
 
         </div>
     </div>

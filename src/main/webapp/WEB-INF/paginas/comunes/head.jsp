@@ -8,3 +8,4 @@
 <link rel="stylesheet" href="css/sass.css" />
 <!-- Iconos -->
 <script src="https://kit.fontawesome.com/dca352768f.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>

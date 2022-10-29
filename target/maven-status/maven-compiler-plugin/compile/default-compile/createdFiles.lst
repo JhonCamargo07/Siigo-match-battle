@@ -7,6 +7,7 @@ ModelDAO\CartaDAO.class
 ModelDAO\ICartaDAO.class
 ModelDAO\IJugador.class
 ModelDAO\PartidaDAO.class
+Controllers\PartidaControler.class
 util\Password.class
 ModelVO\CartaVO.class
 ModelVO\PartidaVO.class
