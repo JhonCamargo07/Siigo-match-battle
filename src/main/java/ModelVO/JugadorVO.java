@@ -87,9 +87,9 @@ public class JugadorVO {
         return bajara;
     }
 
-//    public void setBajara(List<CartaVO> bajara) {
-//        this.bajara = bajara;
-//    }
+    public void setBajara(List<CartaVO> bajara) {
+        this.bajara = bajara;
+    }
 
     /**
      * Generamos to String

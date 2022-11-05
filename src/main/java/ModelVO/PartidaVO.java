@@ -13,6 +13,7 @@ public class PartidaVO {
 
     private String codigo;
     private String tiempo;
+    private String estado;
 
     public PartidaVO() {
     }
@@ -24,6 +25,12 @@ public class PartidaVO {
     public PartidaVO(String codigo, String tiempo) {
         this.codigo = codigo;
         this.tiempo = tiempo;
+    }
+    
+    public PartidaVO(String codigo, String tiempo, String estado) {
+        this.codigo = codigo;
+        this.tiempo = tiempo;
+        this.estado = estado;
     }
 
     public String getCodigo() {
@@ -42,11 +49,19 @@ public class PartidaVO {
         this.tiempo = tiempo;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "MesaVO{" + "codigo=" + codigo + ", tiempo=" + tiempo + '}';
+        return "PartidaVO{" + "codigo=" + codigo + ", tiempo=" + tiempo + ", estado=" + estado + '}';
     }
-    
+
     public static String generarCodigoPartida() {
         Random random = new Random();
         int randomNumber = random.nextInt(9999999);

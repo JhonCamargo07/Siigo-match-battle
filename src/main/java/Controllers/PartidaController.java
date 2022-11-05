@@ -1,12 +1,13 @@
 package Controllers;
 
+import ModelDAO.CartaDAO;
+import ModelVO.CartaVO;
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
 import ModelVO.JugadorVO;
 import ModelVO.PartidaVO;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
 /**
@@ -27,17 +28,20 @@ public class PartidaController extends HttpServlet {
 
     JugadorVO jugadorVo = null;
 
+    HttpSession sesion = null;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String codigoPartida = request.getParameter("codigoPartida");
         int opcion = Integer.parseInt(request.getParameter("opcion"));
-        
+
         System.out.println("opcion = " + opcion);
-        
+
         switch (opcion) {
             case 1: //Iniciar partida
-                response.sendRedirect("partida.jsp");;
+                int cantidadJugadores = 7;
+                this.iniciarPartida(request, response, cantidadJugadores);
                 break;
             case 2: //Eliminar partida
 
@@ -52,7 +56,8 @@ public class PartidaController extends HttpServlet {
                 this.ingresarAPartida(request, response);
                 break;
             case 6: //Ver usuarios en partida
-                this.usuariosEnPartida(request, response);
+                System.out.println("Codigo partida: " + codigoPartida);
+                this.usuariosEnPartida(request, response, codigoPartida);
                 break;
             default:
                 throw new AssertionError();
@@ -63,6 +68,7 @@ public class PartidaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        doPost(request, response);
     }
 
     private void crearPartida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,6 +91,9 @@ public class PartidaController extends HttpServlet {
             partidasActuales.addAll(partidas);
             aplicacion.setAttribute("partidas", partidasActuales);
         }
+
+        sesion = request.getSession();
+        sesion.setAttribute("codigoPartida", codigoPartida);
 
         this.irASalaDeEspera(request, response, jugadorVo, codigoPartida);
 
@@ -110,7 +119,6 @@ public class PartidaController extends HttpServlet {
         this.generarMensage(request, response, "Todo listo para jugar", "Solo comparte el codigo de la partida (" + codigoPartida + ") para que se conecten mas jugadores", "saladeespera.jsp");
     }
 
-    
     private void generarMensage(HttpServletRequest request, HttpServletResponse response, String titulo, String mensaje, String paginaRedirigir) throws ServletException, IOException {
         HttpSession sesion = request.getSession();
         sesion.setAttribute("titulo", titulo);
@@ -123,34 +131,96 @@ public class PartidaController extends HttpServlet {
         String idJugador = request.getParameter("idJugador");
         String codigoPartida = request.getParameter("codigoPartida");
         String nombreJugador = request.getParameter("nombreJugador") == null ? "JaneDoe" : request.getParameter("nombreJugador");
-        
+
+        sesion = request.getSession();
+        sesion.setAttribute("codigoPartida", codigoPartida);
+
         List<JugadorVO> jugadores = new ArrayList();
-        
 
         jugadorVo = new JugadorVO(idJugador, nombreJugador, "avatar2.png", codigoPartida);
-        
+
         jugadores.add(jugadorVo);
 
         if (aplicacion.getAttribute("jugadoresEnLaMismaPartida") != null) {
             List<JugadorVO> jugadoresEnLaMismaPartida = (List<JugadorVO>) aplicacion.getAttribute("jugadoresEnLaMismaPartida");
-            jugadores.addAll(jugadoresEnLaMismaPartida);
-            aplicacion.setAttribute("jugadoresEnLaMismaPartida", jugadores);
-        }else{
+
+            boolean isPartidaExiste = false;
+
+            for (int i = 0; i < jugadoresEnLaMismaPartida.size(); i++) {
+                JugadorVO jugador = jugadoresEnLaMismaPartida.get(i);
+                if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida)) {
+                    isPartidaExiste = true;
+                }
+                if (isPartidaExiste) {
+                    break;
+                }
+            }
+
+            if (isPartidaExiste) {
+                jugadores.addAll(jugadoresEnLaMismaPartida);
+                request.setAttribute("codigoPartida", codigoPartida);
+                aplicacion.setAttribute("jugadoresEnLaMismaPartida", jugadores);
+                this.generarMensage(request, response, "Todo listo para jugar", "Solo comparte el codigo de la partida (" + codigoPartida + ") para que se conecten mas jugadores", "saladeespera.jsp");
+            } else {
+                request.setAttribute("codigoPartida", codigoPartida);
+                this.generarMensage(request, response, "No se encontro ninguna partida con ese codigo", "No hay un paritda que coincida con ese coodigo, por favor intentaloNuevamente", "ingresarPartida.jsp");
+                return;
+            }
+
+        } else {
             System.out.println("Jugadores en la misma partida son 0");
+            request.setAttribute("codigoPartida", codigoPartida);
+            this.generarMensage(request, response, "No se encontro ninguna partida con ese codigo", "No hay un paritda que coincida con ese coodigo, por favor intentaloNuevamente", "ingresarPartida.jsp");
+            return;
         }
-        
-        System.out.println("jugadores = " + jugadores);
-        
-        this.generarMensage(request, response, "Todo listo para jugar", "Solo comparte el codigo de la partida (" + codigoPartida + ") para que se conecten mas jugadores", "saladeespera.jsp");
+
     }
 
-    private void usuariosEnPartida(HttpServletRequest request, HttpServletResponse response) {
+    private void usuariosEnPartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida) throws IOException, ServletException {
         aplicacion = request.getServletContext();
-        
+
+        request.setAttribute("codigoPartida", codigoPartida);
+
         List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresEnLaMismaPartida");
-        
-        System.out.println("jugadores = " + jugadores);
-        
+
+//        System.out.println("jugadores = " + jugadores);
+    }
+
+    private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores) throws IOException {
+        CartaDAO cartasDao = new CartaDAO();
+        JugadorVO jugadorVo1 = new JugadorVO();
+        JugadorVO jugadorVo2 = new JugadorVO();
+        JugadorVO jugadorVo3 = new JugadorVO();
+        JugadorVO jugadorVo4 = new JugadorVO();
+        JugadorVO jugadorVo5 = new JugadorVO();
+        JugadorVO jugadorVo6 = new JugadorVO();
+        JugadorVO jugadorVo7 = new JugadorVO();
+
+        List<JugadorVO> jugadores = new ArrayList();
+        jugadores.add(jugadorVo1);
+        jugadores.add(jugadorVo2);
+        jugadores.add(jugadorVo3);
+        jugadores.add(jugadorVo4);
+        jugadores.add(jugadorVo5);
+        jugadores.add(jugadorVo6);
+        jugadores.add(jugadorVo7);
+
+        List<CartaVO> cartas = cartasDao.generarCartas(cantidadJugadores);
+
+        List<List<CartaVO>> masos = cartasDao.generarMasoPorJugador(cartas, cantidadJugadores);
+
+        for (int j = 0, i = 0; j < masos.size() && i < jugadores.size(); j++, i++) {
+            jugadores.get(i).setBajara(masos.get(j));
+        }
+
+        try ( PrintWriter out = response.getWriter()) {
+            for (JugadorVO jugadore : jugadores) {
+                out.print(jugadore);
+                out.print("\n\n\n");
+                out.print(jugadore.getBajara().size());
+                out.print("\n\n\n");
+            }
+        }
     }
 
 }

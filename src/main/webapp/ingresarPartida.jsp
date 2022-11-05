@@ -29,13 +29,10 @@
                                                 type="text"
                                                 name="codigoPartida"
                                                 id="codigo"
+                                                value="${codigoPartida}"
                                                 class="form-control w-100"
                                                 style="min-height: 55px" />
                                             <input type="hidden" name="idJugador" value="<%= JugadorDAO.generarCodigoJugador()%>" />
-                                            <input
-                                                type="hidden"
-                                                name="codigoPartida"
-                                                value="<%= PartidaVO.generarCodigoPartida()%>" />
                                             <input type="hidden" name="opcion" value="5" />
                                         </div>
                                         <div class="">

@@ -2,6 +2,7 @@ package ModelDAO;
 
 import ModelVO.CartaVO;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,24 +36,43 @@ public class CartaDAO implements ICartaDAO {
 
     private static final String[] RAM_CARTAS = {"4", "16", "14", "24", "8", "20", "32", "34", "18", "30", "12", "64", "40", "100", "72", "128", "45", "68", "18", "110", "21", "120", "10", "47", "16", "45", "68", "18", "110", "21", "120", "10"};
 
-    
     public List<CartaVO> generarCartas(int cantidadJugadores) {
         List<CartaVO> cartas = new ArrayList();
-
-        // Obtener el numero de cartas que debe tener cada jugador
-        int cantidadCartasPorJugador = (CANTIDAD_TOTAL_CARTAS / cantidadJugadores);
 
         // Se generan las 32 cartas
         for (int i = 0; i < NUMEROS_CARTAS.length; i++) {
             for (int j = 0; j < LETRAS_CARTAS.length; j++) {
-                String titulo = NUMEROS_CARTAS[i] + "" + LETRAS_CARTAS[j];
                 CartaVO cartaVo = new CartaVO(NUMEROS_CARTAS[i] + "" + LETRAS_CARTAS[j], TITULO_CARTAS[j], PANTALLA_CARTAS[j], PROCESADOR_INTEL_CARTAS[j], RAM_CARTAS[j], DISCO_DURO_CARTAS[j], BOARD_ASUS_CARTAS[j]);
-                System.out.println("cartaVo = " + cartaVo);
                 cartas.add(cartaVo);
             }
         }
-
+        Collections.shuffle(cartas);
         return cartas;
+    }
+
+    public List<List<CartaVO>> generarMasoPorJugador(List<CartaVO> cartas, int cantidadJugadores) {
+        List<List<CartaVO>> masos = new ArrayList();
+
+        List<CartaVO> masoJugador = new ArrayList();
+
+        int cantidadCartasPorJugador = (CANTIDAD_TOTAL_CARTAS / cantidadJugadores);
+
+        for (int i = 0; i < cartas.size(); i++) {
+            if (masoJugador.size() < cantidadCartasPorJugador) {
+                CartaVO carta = cartas.get(i);
+                masoJugador.add(carta);
+
+            } else {
+                masos.add(masoJugador);
+                masoJugador = new ArrayList();
+                i -= 1;
+            }
+        }
+        if (masoJugador.size() > 0) {
+            masos.add(masoJugador);
+        }
+
+        return masos;
     }
 
     @Override
@@ -69,7 +89,7 @@ public class CartaDAO implements ICartaDAO {
     @Override
     public boolean agregarCartas(String idJugadorGanador, List<String> idCartas
     ) {
-        
+
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

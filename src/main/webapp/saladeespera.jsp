@@ -3,7 +3,8 @@
 <%@page import="java.util.List"%>
 
 <%
-    String codigo = "1C5FDF";
+    HttpSession sesion = request.getSession();
+    String codigoPartida = (String) sesion.getAttribute("codigoPartida");
 %>
 
 <!DOCTYPE html>
@@ -24,12 +25,14 @@
                                 <div class="text-center">
                                     <img src="img/reloj1.png" width="350px" class="img-fluid" />
                                 </div>
+                                <input type="hidden" id="codigoPartida" value="<%= codigoPartida%>" />
                             </div>
                             <div class="mt-3 text-white">
                                 <h4>${titulo}</h4>
                                 <p>${descripcion}</p>
                             </div>
                             <div id="msg">
+                            </div>
                                 <%
                                     ServletContext aplicacion = request.getServletContext();
 
@@ -39,12 +42,11 @@
 
                                     for (int i = 0; i < jugadores.size(); i++) {
                                         JugadorVO jugadorVo = jugadores.get(i);
-                                        if (jugadorVo.getCodigoPartida().equalsIgnoreCase(codigo)) {
+                                        if (jugadorVo.getCodigoPartida().equalsIgnoreCase(codigoPartida)) {
                                             jugadoresEnLaMismaPartida.add(jugadorVo);
                                         }
                                     }
                                 %>
-                            </div>
 
                             <%
                                 if (jugadoresEnLaMismaPartida.size() > 1) {
@@ -68,26 +70,34 @@
     <!-- Archivos js -->
     <jsp:include page="WEB-INF/paginas/comunes/files-js.jsp" />
 
+
+    <%
+        if (jugadoresEnLaMismaPartida.size() < 7) {
+    %> 
     <script>
         $(document).ready(function () {
             setInterval(() => {
-                $('#msg').load(saludar());
-            }, 3000);
-        })
+                saludar();
+            }, 5000);
+        });
         function saludar() {
             var parametro = {
+                "codigoPartida": document.getElementById('codigoPartida').value,
                 "opcion": 6
-            }
+            };
 
             $.ajax({
                 data: parametro,
                 url: 'Partida',
                 type: 'POST',
-                success: function (saludo) {
-                    $('#msg').html(saludo);
+                success: function (retur) {
+                    location.href = "saladeespera.jsp"
                 }
             });
         }
         ;
     </script>
+    <%
+        }
+    %>
 </html>
