@@ -40,8 +40,8 @@ public class PartidaController extends HttpServlet {
 
         switch (opcion) {
             case 1: //Iniciar partida
-                int cantidadJugadores = 7;
-                this.iniciarPartida(request, response, cantidadJugadores);
+                int cantidadJugadores = Integer.parseInt(request.getParameter("numPlayers"));
+                this.iniciarPartida(request, response, cantidadJugadores, codigoPartida);
                 break;
             case 2: //Eliminar partida
 
@@ -186,35 +186,34 @@ public class PartidaController extends HttpServlet {
 //        System.out.println("jugadores = " + jugadores);
     }
 
-    private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores) throws IOException {
-        CartaDAO cartasDao = new CartaDAO();
-        JugadorVO jugadorVo1 = new JugadorVO();
-        JugadorVO jugadorVo2 = new JugadorVO();
-        JugadorVO jugadorVo3 = new JugadorVO();
-        JugadorVO jugadorVo4 = new JugadorVO();
-        JugadorVO jugadorVo5 = new JugadorVO();
-        JugadorVO jugadorVo6 = new JugadorVO();
-        JugadorVO jugadorVo7 = new JugadorVO();
+    private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores, String codigoPartida) throws IOException {
 
-        List<JugadorVO> jugadores = new ArrayList();
-        jugadores.add(jugadorVo1);
-        jugadores.add(jugadorVo2);
-        jugadores.add(jugadorVo3);
-        jugadores.add(jugadorVo4);
-        jugadores.add(jugadorVo5);
-        jugadores.add(jugadorVo6);
-        jugadores.add(jugadorVo7);
+        aplicacion = request.getServletContext();
+        
+        List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresEnLaMismaPartida");
+        
+        List<JugadorVO> jugadoresEnLaMismaPartida = new ArrayList();
+
+        for (int i = 0; i < jugadores.size(); i++) {
+            JugadorVO jugadorVo = jugadores.get(i);
+            if (jugadorVo.getCodigoPartida().equalsIgnoreCase(codigoPartida)) {
+                jugadoresEnLaMismaPartida.add(jugadorVo);
+            }
+        }
+
+        CartaDAO cartasDao = new CartaDAO();
+
 
         List<CartaVO> cartas = cartasDao.generarCartas(cantidadJugadores);
 
         List<List<CartaVO>> masos = cartasDao.generarMasoPorJugador(cartas, cantidadJugadores);
 
-        for (int j = 0, i = 0; j < masos.size() && i < jugadores.size(); j++, i++) {
+        for (int j = 0, i = 0; j < masos.size() && i < jugadoresEnLaMismaPartida.size(); j++, i++) {
             jugadores.get(i).setBajara(masos.get(j));
         }
 
         try ( PrintWriter out = response.getWriter()) {
-            for (JugadorVO jugadore : jugadores) {
+            for (JugadorVO jugadore : jugadoresEnLaMismaPartida) {
                 out.print(jugadore);
                 out.print("\n\n\n");
                 out.print(jugadore.getBajara().size());

@@ -10,7 +10,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+					<div class="d-flex justify-content-center align-items-center">
 						<main class="p-5 my-5">
 							<h1 class="text-center display-1 py-3 text-white title">Siigo Match Battle</h1>
 							<div class="text-center">
