@@ -19,7 +19,8 @@ import javax.servlet.http.*;
 @WebServlet(name = "PartidaController", urlPatterns = {"/Partida"})
 public class PartidaController extends HttpServlet {
 
-    private static final String[] IMG_AVATAR = {"avartar1.png", "avatar2.png", "avatar3.png", "avatar4.png", "avatar5.png", "avatar6.png", "avatar7.png", "avatar8.png", "avatar9.png", "avatar10.png", "avatar11.png"};
+    private static final List<String> IMG_AVATAR = Arrays.asList("avatar1.png", "avatar2.png", "avatar3.png", "avatar4.png", "avatar5.png", "avatar6.png", "avatar7.png", "avatar8.png", "avatar9.png", "avatar10.png", "avatar11.png");
+
     private static final int CANTIDAD_TOTAL_CARTAS = 32;
 
     List<PartidaVO> partidas = new ArrayList<>();
@@ -77,7 +78,7 @@ public class PartidaController extends HttpServlet {
         String codigoPartida = request.getParameter("codigoPartida");
         String nombreJugador = request.getParameter("nombreJugador");
 
-        jugadorVo = new JugadorVO(idJugador, nombreJugador, "avatar1.png", codigoPartida);
+        jugadorVo = new JugadorVO(idJugador, nombreJugador, IMG_AVATAR.get(10), codigoPartida);
 
         PartidaVO partidaVo = new PartidaVO(codigoPartida, "1:00:00");
 
@@ -137,7 +138,9 @@ public class PartidaController extends HttpServlet {
 
         List<JugadorVO> jugadores = new ArrayList();
 
-        jugadorVo = new JugadorVO(idJugador, nombreJugador, "avatar2.png", codigoPartida);
+        Collections.shuffle(IMG_AVATAR);
+
+        jugadorVo = new JugadorVO(idJugador, nombreJugador, IMG_AVATAR.get(0), codigoPartida);
 
         jugadores.add(jugadorVo);
 
@@ -189,9 +192,9 @@ public class PartidaController extends HttpServlet {
     private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores, String codigoPartida) throws IOException {
 
         aplicacion = request.getServletContext();
-        
+
         List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresEnLaMismaPartida");
-        
+
         List<JugadorVO> jugadoresEnLaMismaPartida = new ArrayList();
 
         for (int i = 0; i < jugadores.size(); i++) {
@@ -202,7 +205,6 @@ public class PartidaController extends HttpServlet {
         }
 
         CartaDAO cartasDao = new CartaDAO();
-
 
         List<CartaVO> cartas = cartasDao.generarCartas(cantidadJugadores);
 

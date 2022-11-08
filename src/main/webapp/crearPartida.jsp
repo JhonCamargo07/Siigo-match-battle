@@ -30,6 +30,7 @@
 												name="nombreJugador"
 												class="form-control w-100"
 												placeholder="Adriana_Velez"
+                                                                                                autofocus
 												style="min-height: 55px" />
 											<input
 												type="hidden"

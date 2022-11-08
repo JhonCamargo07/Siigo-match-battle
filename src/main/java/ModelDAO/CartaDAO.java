@@ -46,7 +46,7 @@ public class CartaDAO implements ICartaDAO {
                 cartas.add(cartaVo);
             }
         }
-        Collections.shuffle(cartas);
+//        Collections.shuffle(cartas);
         return cartas;
     }
 

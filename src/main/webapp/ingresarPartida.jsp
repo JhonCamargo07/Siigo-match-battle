@@ -29,6 +29,7 @@
 												name="codigoPartida"
 												id="codigo"
 												value="${codigoPartida}"
+                                                                                                autofocus
 												class="form-control w-100"
 												style="min-height: 55px" />
 											<input

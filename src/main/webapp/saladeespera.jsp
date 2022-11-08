@@ -51,19 +51,19 @@
                             <form action="${pageContext.request.contextPath}/Partida" method="POST">
                                 <input type="hidden" name="opcion" value="1" />
                                 <input type="hidden" name="codigoPartida" id="codigoPartida" value="<%= codigoPartida%>" />
-                                <input type="hidden" name="numPlayers" value="<%= jugadoresEnLaMismaPartida.size()%>" />
+                                <input type="hidden" name="numPlayers" id="numPlayers" value="<%= jugadoresEnLaMismaPartida.size()%>" />
                                 <button type="submit" class="btn btn-success">Iniciar partida</button><br><br>
                             </form>
                             <div class="players mt-3">
                                 <%
                                     }
-                                    // out.print(jugadoresEnLaMismaPartida.size());
+
 //                                    out.print(jugadoresEnLaMismaPartida);
                                     for (int i = 0; i < jugadoresEnLaMismaPartida.size(); i++) {
                                         JugadorVO player = jugadoresEnLaMismaPartida.get(i);
                                 %>
                                 <!--<div class="bg-warning border-1 p-3">-->
-                                <div class="bg-warning d-flex justify-content-center align-items-center border border-danger rounded">
+                                <div class="bg-warning shadow d-flex justify-content-center align-items-center border border-danger rounded">
                                     <img src="img/<%= player.getImagen()%>" width="50px" alt="alt"/>
                                     <div class="d-flex justify-content-center align-items-center flex-column p-2">
                                         <p class="mb-1"><%= player.getIdjugador()%></p>
@@ -89,14 +89,29 @@
         if (jugadoresEnLaMismaPartida.size() < 7) {
     %> 
     <script>
-        $(document).ready(function () {
-            setInterval(() => {
-                saludar();
-            }, 5000);
-        });
-        function saludar() {
+//        $(document).ready(function () {
+        setInterval(() => {
+            recargar();
+        }, 5000);
+//        });
+        function recargar() {
             location.href = "saladeespera.jsp";
-        };
+        }
+        ;
+    </script>
+    <%
+    } else {
+    %>
+    <script>
+        let numPlayers = document.getElementById('numPlayers').value;
+        let codigoPartida = document.getElementById('codigoPartida').value;
+        setInterval(() => {
+            redirecionar(numPlayers, codigoPartida);
+        }, 5000);
+
+        function redirecionar(numPlayers, codigoPartida) {
+            location.href = "Partida?opcion=1&numPlayers=" + numPlayers + "&codigoPartida=" + codigoPartida;
+        }
     </script>
     <%
         }
