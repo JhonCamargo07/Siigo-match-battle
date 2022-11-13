@@ -1,10 +1,20 @@
+<%@page import="ModelVO.PartidaVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ModelVO.JugadorVO"%>
 <%@page import="java.util.List"%>
 
 <%
     HttpSession sesion = request.getSession();
-    String codigoPartida = (String) sesion.getAttribute("codigoPartida");
+
+    JugadorVO jugadorVoSession = new JugadorVO();
+    PartidaVO partidaVoSesion = new PartidaVO();
+
+    if (sesion.getAttribute("jugadorVoSesion") != null) {
+        jugadorVoSession = (JugadorVO) sesion.getAttribute("jugadorVoSesion");
+    }
+    if (sesion.getAttribute("partidaVoSesion") != null) {
+        partidaVoSesion = (PartidaVO) sesion.getAttribute("partidaVoSesion");
+    }
 %>
 
 <!DOCTYPE html>
@@ -25,46 +35,45 @@
                                 <div class="text-center">
                                     <!-- <img src="img/reloj1.png" width="350px" class="img-fluid" /> -->
                                 </div>
+                                <input type="hidden" name="codigoPartida" id="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                             </div>
                             <div class="mt-3 text-white">
                                 <h4>${titulo}</h4>
                                 <p>${descripcion}</p>
                             </div>
-                            <div id="msg">
-                            </div>
                             <%
                                 ServletContext aplicacion = request.getServletContext();
                                 List<JugadorVO> jugadores = new ArrayList();
-                                if (aplicacion.getAttribute("jugadoresEnLaMismaPartida") != null) {
-                                    jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresEnLaMismaPartida");
+                                if (aplicacion.getAttribute("jugadoresOnline") != null) {
+                                    jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
                                 }
                                 List<JugadorVO> jugadoresEnLaMismaPartida = new ArrayList();
 
                                 for (int i = 0; i < jugadores.size(); i++) {
                                     JugadorVO jugadorVo = jugadores.get(i);
-                                    if (jugadorVo.getCodigoPartida().equalsIgnoreCase(codigoPartida)) {
+                                    if (jugadorVo.getCodigoPartida().equalsIgnoreCase(partidaVoSesion.getCodigo())) {
                                         jugadoresEnLaMismaPartida.add(jugadorVo);
                                     }
                                 }
-                                if (jugadoresEnLaMismaPartida.size() > 1) {
-                            %>
-                            <form action="${pageContext.request.contextPath}/Partida" method="POST">
-                                <input type="hidden" name="opcion" value="1" />
-                                <input type="hidden" name="codigoPartida" id="codigoPartida" value="<%= codigoPartida%>" />
-                                <input type="hidden" name="numPlayers" id="numPlayers" value="<%= jugadoresEnLaMismaPartida.size()%>" />
-                                <button type="submit" class="btn btn-success">Iniciar partida</button><br><br>
-                            </form>
-                            <div class="players mt-3">
-                                <%
-                                    }
 
-//                                    out.print(jugadoresEnLaMismaPartida);
+                                if (jugadoresEnLaMismaPartida.size() > 1 && jugadorVoSession.isCreadorDeLaPartida()) {
+                            %>
+                            <form action="${pageContext.request.contextPath}/Partida" method="POST" class="my-3">
+                                <input type="hidden" name="opcion" value="1" />
+                                <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
+                                <input type="hidden" name="numPlayers" id="numPlayers" value="<%= jugadoresEnLaMismaPartida.size() %>" />
+                                <button type="submit" class="btn btn-success">Iniciar partida</button>
+                            </form>
+                            <%
+                                }
+                            %>
+                            <div class="players mt-3" id="msg">
+                                <%
                                     for (int i = 0; i < jugadoresEnLaMismaPartida.size(); i++) {
                                         JugadorVO player = jugadoresEnLaMismaPartida.get(i);
                                 %>
-                                <!--<div class="bg-warning border-1 p-3">-->
                                 <div class="bg-warning shadow d-flex justify-content-center align-items-center border border-danger rounded">
-                                    <img src="img/<%= player.getImagen()%>" width="50px" alt="alt"/>
+                                    <img src="img/avatars/<%= player.getImagen()%>" width="50px" alt="alt"/>
                                     <div class="d-flex justify-content-center align-items-center flex-column p-2">
                                         <p class="mb-1"><%= player.getIdjugador()%></p>
                                         <p class="mb-1"><%= player.getNombre()%></p>
@@ -74,7 +83,6 @@
                                     }
                                 %>
                             </div>
-
                         </main>
                     </div>
                 </div>
@@ -85,35 +93,83 @@
     <jsp:include page="WEB-INF/paginas/comunes/files-js.jsp" />
 
 
+    <script>
+        setInterval(() => {
+            location.href = "saladeespera.jsp";
+        }, 15000);
+    </script>
+
     <%
         if (jugadoresEnLaMismaPartida.size() < 7) {
     %> 
     <script>
-//        $(document).ready(function () {
+
         setInterval(() => {
             recargar();
         }, 5000);
-//        });
+
         function recargar() {
-            location.href = "saladeespera.jsp";
+            var parametro = {
+                "opcion": 6,
+                "codigoPartida": document.getElementById('codigoPartida').value
+            }
+
+            $.ajax({
+                data: parametro,
+                url: 'Partida',
+                type: 'POST',
+                success: function (response) {
+                    $('#msg').html(response);
+                }
+            });
         }
-        ;
     </script>
     <%
-    } else {
+    } else if (jugadoresEnLaMismaPartida.size() >= 7) {
     %>
     <script>
-        let numPlayers = document.getElementById('numPlayers').value;
-        let codigoPartida = document.getElementById('codigoPartida').value;
         setInterval(() => {
-            redirecionar(numPlayers, codigoPartida);
+            ingresarAPartida()
         }, 5000);
 
-        function redirecionar(numPlayers, codigoPartida) {
-            location.href = "Partida?opcion=1&numPlayers=" + numPlayers + "&codigoPartida=" + codigoPartida;
+        function ingresarAPartida() {
+            var parametro = {
+                "opcion": 1,
+                "numPlayers": document.getElementById('numPlayers').value,
+                "codigoPartida": document.getElementById('codigoPartida').value
+            }
+
+            $.ajax({
+                data: parametro,
+                url: 'Partida',
+                type: 'POST',
+                success: function (response) {
+                    $('#msg').html(response);
+                }
+            });
         }
     </script>
     <%
         }
+    %>
+
+    <%
+        ServletContext app = request.getServletContext();
+
+        if (app.getAttribute("partidas") != null) {
+            List<PartidaVO> partidas = (List<PartidaVO>) app.getAttribute("partidas");
+
+            for (PartidaVO partidaVo : partidas) {
+                if ( partidaVo.getCodigo().equalsIgnoreCase(partidaVoSesion.getCodigo()) 
+                    && partidaVo.getEstado().equalsIgnoreCase("Jugando") ) {
+    %>
+    <script>
+        location.href = "partida.jsp";
+    </script>
+    <%
+                }
+            }
+        }
+
     %>
 </html>

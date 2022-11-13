@@ -1,11 +1,12 @@
 package ModelVO;
 
+import Controllers.PartidaController;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Esta clase se utiliza para definir los parametros que se van a necesitar en
- * el transcurso del proyecto
+ * Esta clase se utiliza para definir los parametros que se van a necesitar en el transcurso del proyecto
  *
  * @author Karen
  * @version 1.0
@@ -17,6 +18,7 @@ public class JugadorVO {
      * Defininir variables
      */
     private String idjugador, nombre, imagen, codigoPartida;
+    private boolean creadorDeLaPartida;
     private List<CartaVO> bajara = new ArrayList<>();
 
     /**
@@ -44,6 +46,23 @@ public class JugadorVO {
         this.imagen = imagen;
         this.codigoPartida = codigoPartida;
         this.bajara = new ArrayList();
+    }
+
+    public JugadorVO(String idjugador, String nombre, String imagen, String codigoPartida, boolean creadorDeLaPartida) {
+        this.idjugador = idjugador;
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.codigoPartida = codigoPartida;
+        this.creadorDeLaPartida = creadorDeLaPartida;
+    }
+
+    public JugadorVO(String idjugador, String nombre, String imagen, String codigoPartida, List<CartaVO> bajara, boolean creadorDeLaPartida) {
+        this.idjugador = idjugador;
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.codigoPartida = codigoPartida;
+        this.bajara = new ArrayList();
+        this.creadorDeLaPartida = creadorDeLaPartida;
     }
 
     /**
@@ -91,20 +110,25 @@ public class JugadorVO {
         this.bajara = bajara;
     }
 
-    /**
-     * Generamos to String
-     */
-    @Override
-    public String toString() {
-        return "JugadorVO{" + "idjugador=" + idjugador + ", nombre=" + nombre + ", imagen=" + imagen + ", codigoPartida=" + codigoPartida + ", bajara=" + bajara + '}';
-    }
-
     public void agregarCartas(CartaVO cartaVo) {
         this.bajara.add(cartaVo);
     }
-    
+
     public void agregarBaraja(CartaVO cartaVo) {
         this.bajara.add(cartaVo);
     }
 
+    public boolean isCreadorDeLaPartida() {
+        return creadorDeLaPartida;
+    }
+
+    public void setCreadorDeLaPartida(boolean creadorDeLaPartida) {
+        this.creadorDeLaPartida = creadorDeLaPartida;
+    }
+
+    @Override
+    public String toString() {
+        return "JugadorVO{" + "idjugador=" + idjugador + ", nombre=" + nombre + ", imagen=" + imagen + ", codigoPartida=" + codigoPartida + ", creadorDeLaPartida=" + creadorDeLaPartida + ", bajara=" + bajara + '}';
+    }
+    
 }

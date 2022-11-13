@@ -25,6 +25,7 @@ public class PartidaVO {
     public PartidaVO(String codigo, String tiempo) {
         this.codigo = codigo;
         this.tiempo = tiempo;
+//        this.estado = "Creada";
     }
     
     public PartidaVO(String codigo, String tiempo, String estado) {

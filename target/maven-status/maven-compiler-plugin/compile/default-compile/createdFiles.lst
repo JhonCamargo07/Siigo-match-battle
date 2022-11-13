@@ -11,4 +11,6 @@ Controllers\PartidaControler.class
 util\Password.class
 ModelVO\CartaVO.class
 ModelVO\PartidaVO.class
+util\Prueba.class
 Controllers\MesaController.class
+util\Files.class
