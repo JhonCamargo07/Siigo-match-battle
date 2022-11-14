@@ -1,3 +1,7 @@
+$border-color: #ff0000;
+$border-color: #00ff00;
+// $border-color: transparent;
+
 @mixin grid($cols, $gap) {
 	display: grid;
 	grid-template-columns: repeat($cols, 1fr);
@@ -191,5 +195,31 @@ mt-5 {
 	}
 	@include responsive(575px) {
 		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+/*AVATARS*/
+.container__jugador {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	& .container__jugador-card {
+		& .card-parrafos {
+			display: flex;
+		}
+	}
+	& .avatar {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		& .avatar__img {
+			max-width: 150px;
+			background: rgba(0, 0, 0, 0.2);
+			border: 3px solid $border-color;
+			margin: 0 10px;
+			border-radius: 100%;
+			padding: 15px;
+		}
 	}
 }
