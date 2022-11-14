@@ -18,7 +18,7 @@ public class JugadorVO {
      * Defininir variables
      */
     private String idjugador, nombre, imagen, codigoPartida;
-    private boolean creadorDeLaPartida;
+    private boolean creadorDeLaPartida, suTurno;
     private List<CartaVO> bajara = new ArrayList<>();
 
     /**
@@ -56,15 +56,25 @@ public class JugadorVO {
         this.creadorDeLaPartida = creadorDeLaPartida;
     }
 
-    public JugadorVO(String idjugador, String nombre, String imagen, String codigoPartida, List<CartaVO> bajara, boolean creadorDeLaPartida) {
+    public JugadorVO(String idjugador, String nombre, String imagen, String codigoPartida, List<CartaVO> baraja, boolean creadorDeLaPartida) {
         this.idjugador = idjugador;
         this.nombre = nombre;
         this.imagen = imagen;
         this.codigoPartida = codigoPartida;
-        this.bajara = new ArrayList();
+        this.bajara = baraja;
         this.creadorDeLaPartida = creadorDeLaPartida;
     }
 
+    public JugadorVO(String idjugador, String nombre, String imagen, String codigoPartida, List<CartaVO> baraja, boolean creadorDeLaPartida, boolean suTurno) {
+        this.idjugador = idjugador;
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.codigoPartida = codigoPartida;
+        this.creadorDeLaPartida = creadorDeLaPartida;
+        this.bajara = baraja;
+        this.suTurno = suTurno;
+    }
+    
     /**
      * Generamos getter and setter de los parametros
      *
@@ -126,9 +136,17 @@ public class JugadorVO {
         this.creadorDeLaPartida = creadorDeLaPartida;
     }
 
+    public boolean isSuTurno() {
+        return suTurno;
+    }
+
+    public void setSuTurno(boolean suTurno) {
+        this.suTurno = suTurno;
+    }
+
     @Override
     public String toString() {
-        return "JugadorVO{" + "idjugador=" + idjugador + ", nombre=" + nombre + ", imagen=" + imagen + ", codigoPartida=" + codigoPartida + ", creadorDeLaPartida=" + creadorDeLaPartida + ", bajara=" + bajara + '}';
+        return "JugadorVO{" + "idjugador=" + idjugador + ", nombre=" + nombre + ", imagen=" + imagen + ", codigoPartida=" + codigoPartida + ", creadorDeLaPartida=" + creadorDeLaPartida + ", suTurno=" + suTurno + ", bajara=" + bajara + '}';
     }
-    
+
 }

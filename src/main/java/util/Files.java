@@ -1,18 +1,22 @@
 package util;
 
-import Controllers.PartidaController;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Esta clase se encargará de manejar los archivos
+ *
  * @author Jhon Camargo
  * @version 1.0
  */
 public class Files {
+
     public static final String URL_FILES = "C:\\cursos\\java\\Siigo-match-battle\\src\\main\\webapp\\img\\";
-    
+
     public static int getNumFileImg() {
-        File carpeta = new File(PartidaController.URL_IMGS);
+        File carpeta = new File(Files.URL_FILES + "avatars\\");
         File[] lista = carpeta.listFiles();
         int cuenta = 0;
 
@@ -32,7 +36,6 @@ public class Files {
         int numRandom = getNumRandom(getNumFileImg());
         File carpeta = new File(Files.URL_FILES + "avatars\\");
         File[] lista = carpeta.listFiles();
-        int cuenta = 0;
 
         for (int i = 0; i < lista.length; i++) {
             if (lista[i].isFile() && i == numRandom) {
@@ -40,5 +43,19 @@ public class Files {
             }
         }
         return "avatar1.png";
+    }
+
+    public static List<String> getListImgComputers() {
+        List<String> nameImgs = new ArrayList();
+        File carpeta = new File(Files.URL_FILES + "computers\\");
+        File[] lista = carpeta.listFiles();
+
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i].isFile()) {
+                nameImgs.add(lista[i].getName());
+            }
+        }
+        Collections.shuffle(nameImgs);
+        return nameImgs;
     }
 }

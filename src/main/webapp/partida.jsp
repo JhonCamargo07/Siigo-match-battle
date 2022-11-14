@@ -72,7 +72,7 @@
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="card bg-light p-3">
                                 <h5 class="card-title text-center titulo3"><%= primeraCarta.getIdentificador()%></h5>
-                                <img src="img/computers/computador-2.png" class="card-img-top" alt="">
+                                <img src="img/computers/<%= primeraCarta.getImgComputador() %>" class="card-img-top" alt="">
                                 <div class=" px-0 card-body">
                                     <h6 class="card-title titulo3 text-center"><%= primeraCarta.getTitulo() %></h6>
                                     <div class="d-flex">
@@ -88,7 +88,7 @@
                                             <p><%= primeraCarta.getProcesador() %></p>
                                             <p><%= primeraCarta.getRam()%></p>
                                             <p><%= primeraCarta.getDiscoDuro()%></p>
-                                            <p><%= primeraCarta.getDiscoMotherBoard()%></p>
+                                            <p><%= primeraCarta.getMotherBoard()%></p>
                                         </div>
                                     </div>
 

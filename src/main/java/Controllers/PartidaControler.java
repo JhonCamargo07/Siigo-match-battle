@@ -170,7 +170,7 @@ public class PartidaControler extends HttpServlet {
             for (CartaVO carta : cartas) {
                 contador++;
                 if (contador <= cantidadDeCartasPorJugador) {
-                    carta.setCodigoPartida(codigoPartida);
+//                    carta.setCodigoPartida(codigoPartida);
                     jugadorVo.agregarCartas(carta);
                 } else {
                     contador = 0;

@@ -11,13 +11,13 @@ import java.util.List;
 public class CartaVO {
 
     private String identificador;
+    private String imgComputador;
     private String titulo;
     private String pantalla;
     private String procesador;
     private String ram;
     private String discoDuro;
-    private String discoMotherBoard;
-    private String codigoPartida;
+    private String motherBoard;
 
     public CartaVO() {
     }
@@ -32,7 +32,7 @@ public class CartaVO {
         this.procesador = procesador;
         this.ram = ram;
         this.discoDuro = discoDuro;
-        this.discoMotherBoard = discoMotherBoard;
+        this.motherBoard = discoMotherBoard;
     }
 
     public CartaVO(String identificador, String titulo, String pantalla, String procesador, String ram, String discoDuro, String discoMotherBoard) {
@@ -42,18 +42,18 @@ public class CartaVO {
         this.procesador = procesador;
         this.ram = ram;
         this.discoDuro = discoDuro;
-        this.discoMotherBoard = discoMotherBoard;
+        this.motherBoard = discoMotherBoard;
     }
 
-    public CartaVO(String identificador, String titulo, String pantalla, String procesador, String ram, String discoDuro, String discoMotherBoard, String codigoPartida) {
+    public CartaVO(String identificador, String imgComputador, String titulo, String pantalla, String procesador, String ram, String discoDuro, String motherBoard) {
         this.identificador = identificador;
+        this.imgComputador = imgComputador;
         this.titulo = titulo;
         this.pantalla = pantalla;
         this.procesador = procesador;
         this.ram = ram;
         this.discoDuro = discoDuro;
-        this.discoMotherBoard = discoMotherBoard;
-        this.codigoPartida = codigoPartida;
+        this.motherBoard = motherBoard;
     }
 
     public String getIdentificador() {
@@ -104,25 +104,25 @@ public class CartaVO {
         this.discoDuro = discoDuro;
     }
 
-    public String getDiscoMotherBoard() {
-        return discoMotherBoard;
+    public String getMotherBoard() {
+        return motherBoard;
     }
 
-    public void setDiscoMotherBoard(String discoMotherBoard) {
-        this.discoMotherBoard = discoMotherBoard;
+    public void setMotherBoard(String motherBoard) {
+        this.motherBoard = motherBoard;
     }
 
-    public String getCodigoPartida() {
-        return codigoPartida;
+    public String getImgComputador() {
+        return imgComputador;
+    }
+
+    public void setImgComputador(String imgComputador) {
+        this.imgComputador = imgComputador;
     }
 
     @Override
     public String toString() {
-        return "CartaVO{" + "identificador=" + identificador + ", titulo=" + titulo + ", pantalla=" + pantalla + ", procesador=" + procesador + ", ram=" + ram + ", discoDuro=" + discoDuro + ", discoMotherBoard=" + discoMotherBoard + ", codigoPartida=" + codigoPartida + '}';
-    }
-
-    public void setCodigoPartida(String codigoPartida) {
-        this.codigoPartida = codigoPartida;
+        return "CartaVO{" + "identificador=" + identificador + ", imgComputador=" + imgComputador + ", titulo=" + titulo + ", pantalla=" + pantalla + ", procesador=" + procesador + ", ram=" + ram + ", discoDuro=" + discoDuro + ", motherBoard=" + motherBoard + '}';
     }
 
 }
