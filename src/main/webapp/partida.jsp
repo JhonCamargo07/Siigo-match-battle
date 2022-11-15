@@ -38,16 +38,77 @@
     <head>
         <title>Partida</title>
         <jsp:include page="WEB-INF/paginas/comunes/head.jsp" />
-        <link rel="stylesheet" href="css/stylecard.css" />
+        <!--<link rel="stylesheet" href="css/stylecard.css" />-->
         <link rel="stylesheet" href="css/sass.css" />
     </head>
 
-    <body>
+    <body class="carta-activa">
+
+        <div class="carta">
+            <div class="carta-div">
+                <div class="container__jugador-card bg-light p-3">
+                    <%
+                        for (int i = 0; i < jugadoresEnLaMismaPartida.size(); i++) {
+                            JugadorVO player = jugadoresEnLaMismaPartida.get(i);
+                            List<CartaVO> baraja = player.getBajara();
+                            CartaVO primeraCarta = baraja.get(0);
+                            if (i == 0) {
+
+
+                    %>
+                    <h5 class="card-title text-center titulo3"><%= primeraCarta.getIdentificador()%></h5>
+                    <img src="img/computers/<%= primeraCarta.getImgComputador()%>" width="150px" class="" alt="" />
+                    <div class="px-0 card-body">
+                        <h5 class="card-title titulo3 text-center"><%= primeraCarta.getTitulo()%></h5>
+                        <div class="card-parrafos">
+                            <div class="">
+                                <p>Pantalla: <%= primeraCarta.getPantalla()%> pul</p>
+                                <p>Procesador: <%= primeraCarta.getProcesador().charAt(0) %> <%= primeraCarta.getProcesador().substring(1, primeraCarta.getProcesador().length()) %></p>
+                                <p>RAM: <%= primeraCarta.getRam()%> GB</p>
+                                <p>Disco duro: <%= primeraCarta.getDiscoDuro()%> GB</p>
+                                <p>MotherBoard: <%= primeraCarta.getMotherBoard()%></p>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                            }
+                        }
+                    %>
+                </div>
+                <div class="carta-buttoms">
+                    <div><h3>&#191;Cu&#225;l crees que es el atributo ganador?</h3></div>
+                    <form action="Partida" method="POST">
+                        <input type="hidden" name="atributo" value="1" />
+                        <input type="hidden" name="opcion" value="1" />
+                        <button class="btn btn-danger btn-atribute px-3 py-2">RAM</button>
+                    </form>
+                    <form action="Partida" method="POST">
+                        <input type="hidden" name="atributo" value="2" />
+                        <input type="hidden" name="opcion" value="1" />
+                        <button class="btn btn-danger btn-atribute px-3 py-2">Pantalla</button>
+                    </form>
+                    <form action="Partida" method="POST">
+                        <input type="hidden" name="atributo" value="3" />
+                        <input type="hidden" name="opcion" value="1" />
+                        <button class="btn btn-danger btn-atribute px-3 py-2">Disco Duro</button>
+                    </form>
+                    <form action="Partida" method="POST">
+                        <input type="hidden" name="atributo" value="4" />
+                        <input type="hidden" name="opcion" value="1" />
+                        <button class="btn btn-danger btn-atribute px-3 py-2">Procesador</button>
+                    </form>
+                    <form action="Partida" method="POST">
+                        <input type="hidden" name="atributo" value="5" />
+                        <input type="hidden" name="opcion" value="1" />
+                        <button class="btn btn-danger btn-atribute px-3 py-2">Mother Board</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
+                <div class="col-md-12 cuadro shadow-lg p-3 rounded">
                     <div class="players">
                         <%
                             for (int i = 0; i < jugadoresEnLaMismaPartida.size(); i++) {
@@ -56,33 +117,10 @@
                                 CartaVO primeraCarta = baraja.get(0);
                         %>
                         <div class="container__jugador">
-                            <div class="container__jugador-card bg-light p-3">
-                                <h5 class="card-title text-center titulo3"><%= primeraCarta.getIdentificador()%></h5>
-                                <img src="img/computers/<%= primeraCarta.getImgComputador()%>" class="card-img-top" alt="">
-                                <div class=" px-0 card-body">
-                                    <h6 class="card-title titulo3 text-center"><%= primeraCarta.getTitulo()%></h6>
-                                    <div class="card-parrafos">
-                                        <div class="">
-                                            <p>Pantalla:</p>
-                                            <p>Procesador:</p>
-                                            <p>RAM:</p>
-                                            <p>Disco duro:</p>
-                                            <p>MotherBoard:</p>
-                                        </div>
-                                        <div class="">
-                                            <p><%= primeraCarta.getPantalla()%> pul</p>
-                                            <p><%= primeraCarta.getProcesador()%></p>
-                                            <p><%= primeraCarta.getRam()%> GB</p>
-                                            <p><%= primeraCarta.getDiscoDuro()%> GB</p>
-                                            <p><%= primeraCarta.getMotherBoard()%></p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
                             <div class="avatar">
                                 <img src="img/avatars/<%= player.getImagen()%>" width="250px" class="img-fluid avatar__img" />
                                 <p class="text-center text-white mt-1"><%= player.getNombre()%></p>
+                                <div class="num_elements"><%= player.getBajara().size()%></div>
                             </div>
                         </div>
                         <%
@@ -90,54 +128,8 @@
                         %>
                     </div>
                 </div>
-                <div class="col-md-1"></div>
             </div>
         </div>
-
-        <div class="text-roboto d-flex justify-content-center align-items-center">
-            <div class="container cuadro w-75  bg  overflow-hidden shadow-lg p-2  rounded">
-                <div class="row">
-                    <div class="col-12 ">
-                        <div class="d-flex align-items-center  justify-content-around mt-5">
-                            <div class="bnts">
-                                <div class="text-center col-12 mt-5">
-                                    <button
-                                        class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">Pantalla
-                                    </button>
-                                </div>
-
-                                <div class="text-center col-12 mt-5">
-                                    <button
-                                        class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">Procesador
-                                    </button>
-                                </div>
-
-
-                                <div class="text-center col-12 mt-5">
-                                    <button
-                                        class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">RAM
-                                    </button>
-                                </div>
-
-                                <div class="text-center col-12 mt-5">
-                                    <button
-                                        class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">Disco
-                                        Duro
-                                    </button>
-                                </div>
-                                <div class="text-center col-12 mt-5">
-                                    <button
-                                        class="btn btn-white btn-login text-black p-1 parrafo2  w-10 fw-bold rounded-pill bg-light box">MotherBoard
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</body>
+    </body>
 
 </html>

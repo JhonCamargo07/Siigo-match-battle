@@ -213,6 +213,7 @@ mt-5 {
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
+		position: relative;
 		& .avatar__img {
 			max-width: 150px;
 			background: rgba(0, 0, 0, 0.2);
@@ -220,6 +221,82 @@ mt-5 {
 			margin: 0 10px;
 			border-radius: 100%;
 			padding: 15px;
+		}
+		& .num_elements {
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 100%;
+			width: 2.1875rem;
+			top: 0;
+			right: 0;
+			height: 2.1875rem;
+			color: #fff;
+			background-color: rgba(0, 0, 0, 0.2);
+			z-index: 2;
+			font-weight: bold;
+			font-size: 1.125rem;
+		}
+	}
+}
+
+body {
+	.carta {
+		display: none;
+	}
+}
+
+.btn-atribute {
+	min-height: 2.5rem;
+}
+
+body.carta-activa {
+	.carta {
+		padding-top: 50px;
+		padding-bottom: 50px;
+		z-index: 10;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		position: absolute;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba(0, 0, 0, 0.6);
+		& .carta-div {
+			width: 50%;
+			@include responsive(100rem) {
+				width: 65%;
+			}
+			@include responsive(62.5rem) {
+				width: 70%;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+			@include responsive() {
+				width: 90%;
+			}
+			padding: 10px;
+			display: flex;
+			background: #fff;
+			border-radius: 0.1875rem;
+			justify-content: space-evenly;
+			& .carta-buttoms {
+				@include responsive(62.5rem) {
+					display: flex;
+					justify-content: center;
+				}
+				display: flex;
+				max-width: 18.75rem;
+				align-items: center;
+				flex-direction: column;
+				justify-content: center;
+				& form,
+				div {
+					text-align: center;
+					margin: 10px;
+				}
+			}
 		}
 	}
 }
