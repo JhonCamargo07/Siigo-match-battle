@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  */
 @WebServlet(name = "JugadorController", urlPatterns = {"/JugadorController"})
-public class JugadorController extends HttpServlet {
+public class JugadorC extends HttpServlet {
 
     ServletContext aplicacion = null;
     

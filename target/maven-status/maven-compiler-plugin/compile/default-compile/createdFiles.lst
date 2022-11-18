@@ -1,4 +1,3 @@
-Controllers\JugadorController.class
 ModelDAO\IPartidaDAO.class
 Controllers\PartidaController.class
 ModelDAO\JugadorDAO.class
@@ -7,10 +6,10 @@ ModelDAO\CartaDAO.class
 ModelDAO\ICartaDAO.class
 ModelDAO\IJugador.class
 ModelDAO\PartidaDAO.class
-Controllers\PartidaControler.class
+Controllers\JugadorC.class
 util\Password.class
 ModelVO\CartaVO.class
 ModelVO\PartidaVO.class
+Controllers\JugadorOnlineController.class
 util\Prueba.class
-Controllers\MesaController.class
 util\Files.class

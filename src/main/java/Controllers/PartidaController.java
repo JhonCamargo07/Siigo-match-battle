@@ -35,13 +35,11 @@ public class PartidaController extends HttpServlet {
         Collections.shuffle(img_avatars);
     }
 
-    private static final int CANTIDAD_TOTAL_CARTAS = 32;
+    private ServletContext aplicacion = null;
 
-    ServletContext aplicacion = null;
+    private JugadorVO jugadorVo = null;
 
-    JugadorVO jugadorVo = null;
-
-    HttpSession sesion = null;
+    private HttpSession sesion = null;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

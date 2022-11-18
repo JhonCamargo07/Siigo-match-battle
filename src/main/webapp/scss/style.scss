@@ -1,6 +1,8 @@
 $border-color: #ff0000;
 $border-color: #00ff00;
 // $border-color: transparent;
+$red: #ff0000;
+$bg-02: rgba(0, 0, 0, 0.2);
 
 @mixin grid($cols, $gap) {
 	display: grid;
@@ -216,7 +218,7 @@ mt-5 {
 		position: relative;
 		& .avatar__img {
 			max-width: 150px;
-			background: rgba(0, 0, 0, 0.2);
+			background: $bg-02;
 			border: 3px solid $border-color;
 			margin: 0 10px;
 			border-radius: 100%;
@@ -233,7 +235,7 @@ mt-5 {
 			right: 0;
 			height: 2.1875rem;
 			color: #fff;
-			background-color: rgba(0, 0, 0, 0.2);
+			background-color: $bg-02;
 			z-index: 2;
 			font-weight: bold;
 			font-size: 1.125rem;
@@ -281,6 +283,7 @@ body.carta-activa {
 			background: #fff;
 			border-radius: 0.1875rem;
 			justify-content: space-evenly;
+                        border: 1px solid $red;
 			& .carta-buttoms {
 				@include responsive(62.5rem) {
 					display: flex;
@@ -299,4 +302,8 @@ body.carta-activa {
 			}
 		}
 	}
+}
+
+.cuadro{
+    min-height: 450px;
 }
