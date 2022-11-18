@@ -1,9 +1,9 @@
 package Controllers;
 
+import ModelVO.*;
 import java.io.*;
 import java.util.*;
 import javax.servlet.*;
-import ModelVO.JugadorVO;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 
@@ -60,21 +60,31 @@ public class JugadorOnlineController extends HttpServlet {
         }
     }
 
-    private void obtenerGanadorRonda(HttpServletRequest request, HttpServletResponse response) {
+    private void obtenerGanadorRonda(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String codigoPartida = request.getParameter("codigoPartida");
         String turno = request.getParameter("turno");
         String atributo = request.getParameter("atributo");
-        List<JugadorVO> jugadoresEnLaMismaPartida = this.obtenerLosJugadoresEnLaMismaPartida(request, response, codigoPartida);
+        List<JugadorVO> jugadoresEnLaMismaPartida = this.obtenerLosJugadoresEnLaMismaPartida(request, response);
+
+        List<JugadorVO> JugadoresEnMismaPartidaActualizada = this.obtenerGanadorRondaYActualizarListaJugadores(request, response, jugadoresEnLaMismaPartida);
         
-        List<JugadorVO> JugadoresEnMismaPartidaActualizada = this.obtenerGanadorRondaYActualizarListaJugadores(request, response, jugadoresEnLaMismaPartida, atributo);
+        List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
+        
+        jugadores.addAll(JugadoresEnMismaPartidaActualizada);
+        
+        aplicacion.setAttribute("jugadoresOnline", jugadores);
+        
+        request.getRequestDispatcher("partida.jsp").forward(request, response);
+        
     }
 
-    private List<JugadorVO> obtenerLosJugadoresEnLaMismaPartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida) {
+    private List<JugadorVO> obtenerLosJugadoresEnLaMismaPartida(HttpServletRequest request, HttpServletResponse response) {
+        String codigoPartida = request.getParameter("codigoPartida");
         aplicacion = request.getServletContext();
 
         List<JugadorVO> jugadoresEnLaMismaPartida = new ArrayList();
 
-        List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadores");
+        List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
 
         for (JugadorVO jugador : jugadores) {
             jugadoresEnLaMismaPartida.add(jugador);
@@ -83,29 +93,149 @@ public class JugadorOnlineController extends HttpServlet {
         return jugadoresEnLaMismaPartida;
     }
 
-    private List<JugadorVO> obtenerGanadorRondaYActualizarListaJugadores(HttpServletRequest request, HttpServletResponse response, List<JugadorVO> jugadoresEnLaMismaPartida, String atributo) {
-        List<JugadorVO> jugadoresEnLaMismaPartidaActualizada = new ArrayList();
-        switch (atributo) {
-            case "ram":
-                
-                break;
-            case "pantalla":
+    private List<List<CartaVO>> obtenerElMasoDeCartasDeLosJugadoresEnLaMismaPartida(HttpServletRequest request, HttpServletResponse response, List<JugadorVO> jugadoresEnMismaPartida) {
 
-                break;
-            case "board":
+        List<List<CartaVO>> masoCartas = new ArrayList();
 
-                break;
-            case "procesador":
-
-                break;
-            case "disco":
-
-                break;
-            default:
-                throw new AssertionError();
+        for (JugadorVO jugadorVO : jugadoresEnMismaPartida) {
+            masoCartas.add(jugadorVO.getBajara());
         }
+
+        return masoCartas;
+    }
+
+    private List<CartaVO> obtenerPrimeraCartadeCadaMasoDeLosJugadoresEnLaMismaPartida(HttpServletRequest request, HttpServletResponse response, List<List<CartaVO>> masoCartas) {
+
+        List<CartaVO> primeraCartaDeCadaJugador = new ArrayList();
+
+        for (List<CartaVO> masoCarta : masoCartas) {
+            primeraCartaDeCadaJugador.add(masoCarta.get(0));
+        }
+
+        return primeraCartaDeCadaJugador;
+    }
+
+    private List<JugadorVO> obtenerGanadorRondaYActualizarListaJugadores(HttpServletRequest request, HttpServletResponse response, List<JugadorVO> jugadoresEnLaMismaPartida) {
+        String atributo = request.getParameter("atributo");
+
+        List<List<CartaVO>> masoCartas = this.obtenerElMasoDeCartasDeLosJugadoresEnLaMismaPartida(request, response, jugadoresEnLaMismaPartida);
+
+        List<CartaVO> primeraCartaDeCadaJugador = this.obtenerPrimeraCartadeCadaMasoDeLosJugadoresEnLaMismaPartida(request, response, masoCartas);
+
+        String valorMaximoDelAtributo = String.valueOf(this.getValorMaximoAtributoDeUnaCarta(primeraCartaDeCadaJugador, atributo));
+
+        String codigoJugadorGanador = this.getIdJugadorQueTengaLaCartaConElAtributoMasAlto(jugadoresEnLaMismaPartida, atributo, valorMaximoDelAtributo);
+        
+        this.eliminarJugadoresConDatosAntiguos(request);
+        
+        List<JugadorVO> jugadoresEnLaMismaPartidaActualizada = this.agregarCartasDeLosJugadoresPerdedoresAlGanador(request, jugadoresEnLaMismaPartida, primeraCartaDeCadaJugador, codigoJugadorGanador);
+
         return jugadoresEnLaMismaPartidaActualizada;
     }
 
+    private int getValorMaximoAtributoDeUnaCarta(List<CartaVO> primeraCartaDeCadaJugador, String atributo) {
+
+        int valorMaximoDelAtributo = 0;
+        for (CartaVO cartaVO : primeraCartaDeCadaJugador) {
+            switch (atributo) {
+                case "ram":
+                    if (Integer.parseInt(cartaVO.getRam()) > valorMaximoDelAtributo) {
+                        valorMaximoDelAtributo = Integer.parseInt(cartaVO.getRam());
+                    }
+                    break;
+                case "pantalla":
+                    if (Integer.parseInt(cartaVO.getPantalla()) > valorMaximoDelAtributo) {
+                        valorMaximoDelAtributo = Integer.parseInt(cartaVO.getPantalla());
+                    }
+                    break;
+                case "board":
+                    if (Integer.parseInt(cartaVO.getMotherBoard()) > valorMaximoDelAtributo) {
+                        valorMaximoDelAtributo = Integer.parseInt(cartaVO.getMotherBoard());
+                    }
+                    break;
+                case "procesador":
+                    if (Integer.parseInt(cartaVO.getProcesador()) > valorMaximoDelAtributo) {
+                        valorMaximoDelAtributo = Integer.parseInt(cartaVO.getProcesador());
+                    }
+                    break;
+                case "disco":
+                    if (Integer.parseInt(cartaVO.getDiscoDuro()) > valorMaximoDelAtributo) {
+                        valorMaximoDelAtributo = Integer.parseInt(cartaVO.getDiscoDuro());
+                    }
+                    break;
+                default:
+                    valorMaximoDelAtributo = 0;
+            }
+        }
+        return valorMaximoDelAtributo;
+    }
+
+    private String getIdJugadorQueTengaLaCartaConElAtributoMasAlto(List<JugadorVO> jugadoresEnLaMismaPartida, String atributo, String valorMaximoDelAtributo) {
+
+        String idJugador = "0";
+        for (JugadorVO jugadorVO : jugadoresEnLaMismaPartida) {
+            switch (atributo) {
+                case "ram":
+                    if (jugadorVO.getBajara().get(0).getRam().equalsIgnoreCase(valorMaximoDelAtributo)) {
+                        idJugador = jugadorVO.getIdjugador();
+                    }
+                    break;
+                case "pantalla":
+                    if (jugadorVO.getBajara().get(0).getPantalla().equalsIgnoreCase(valorMaximoDelAtributo)) {
+                        idJugador = jugadorVO.getIdjugador();
+                    }
+                    break;
+                case "board":
+                    if (jugadorVO.getBajara().get(0).getMotherBoard().equalsIgnoreCase(valorMaximoDelAtributo)) {
+                        idJugador = jugadorVO.getIdjugador();
+                    }
+                    break;
+                case "procesador":
+                    if (jugadorVO.getBajara().get(0).getProcesador().equalsIgnoreCase(valorMaximoDelAtributo)) {
+                        idJugador = jugadorVO.getIdjugador();
+                    }
+                    break;
+                case "disco":
+                    if (jugadorVO.getBajara().get(0).getDiscoDuro().equalsIgnoreCase(valorMaximoDelAtributo)) {
+                        idJugador = jugadorVO.getIdjugador();
+                    }
+                    break;
+                default:
+                    System.out.println("Entro al break");
+                    break;
+            }
+        }
+        return idJugador;
+    }
+
+    private void eliminarJugadoresConDatosAntiguos(HttpServletRequest request) {
+        aplicacion = request.getServletContext();
+        
+        String codigoPartida = request.getParameter("codigoPartida");
+        
+        List<JugadorVO> jugadoresActualizados = new ArrayList<>();
+
+        List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
+        
+        for (JugadorVO jugador : jugadores) {
+            if(!jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida)){
+                jugadoresActualizados.add(jugador);
+            }
+        }
+        
+        aplicacion.setAttribute("jugadoresOnline", jugadoresActualizados);
+    }
+
+    private List<JugadorVO> agregarCartasDeLosJugadoresPerdedoresAlGanador(HttpServletRequest request, List<JugadorVO> jugadoresEnLaMismaPartida, List<CartaVO> primeraCartaDeCadaJugador, String codigoJugadorGanador) {
+        
+        for (JugadorVO jugadorVO : jugadoresEnLaMismaPartida) {
+            jugadorVO.getBajara().remove(0);
+            if(jugadorVO.getIdjugador().equalsIgnoreCase(codigoJugadorGanador)){
+                jugadorVO.getBajara().addAll(primeraCartaDeCadaJugador);
+            }
+        }
+        
+        return jugadoresEnLaMismaPartida;
+    }
 
 }

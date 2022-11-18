@@ -98,35 +98,35 @@
                         <input type="hidden" name="opcion" value="1" />
                         <input type="hidden" name="turno" value="<%= turno%>" />
                         <input type="hidden" name="atributo" value="procesador" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion%>" />
+                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                         <button class="btn btn-danger btn-atribute px-3 py-2">Procesador</button>
                     </form>
                     <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
                         <input type="hidden" name="opcion" value="1" />
                         <input type="hidden" name="atributo" value="pantalla" />
                         <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion%>" />
+                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                         <button class="btn btn-danger btn-atribute px-3 py-2">Pantalla</button>
                     </form>
                     <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
                         <input type="hidden" name="opcion" value="1" />
                         <input type="hidden" name="atributo" value="ram" />
                         <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion%>" />
+                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                         <button class="btn btn-danger btn-atribute px-3 py-2">RAM</button>
                     </form>
                     <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
                         <input type="hidden" name="opcion" value="1" />
                         <input type="hidden" name="atributo" value="disco" />
                         <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion%>" />
+                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                         <button class="btn btn-danger btn-atribute px-3 py-2">Disco Duro</button>
                     </form>
                     <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
                         <input type="hidden" name="opcion" value="1" />
                         <input type="hidden" name="atributo" value="board" />
                         <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion%>" />
+                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                         <button class="btn btn-danger btn-atribute px-3 py-2">Mother Board</button>
                     </form>
                 </div>
