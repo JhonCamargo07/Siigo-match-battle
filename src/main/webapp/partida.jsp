@@ -46,7 +46,6 @@
     </head>
 
     <body class="">
-
         <div class="carta">
             <div class="carta-div shadow-lg">
                 <div class="container__jugador-card bg-light p-3">
@@ -79,8 +78,8 @@
                         <h5 class="card-title titulo3 text-center"><%= primeraCarta.getTitulo()%></h5>
                         <div class="card-parrafos">
                             <div class="">
-                                <p>Pantalla: <%= primeraCarta.getPantalla()%> pul</p>
                                 <p>Procesador: <%= primeraCarta.getProcesador().charAt(0)%> <%= primeraCarta.getProcesador().substring(1, primeraCarta.getProcesador().length())%></p>
+                                <p>Pantalla: <%= primeraCarta.getPantalla()%> pul</p>
                                 <p>RAM: <%= primeraCarta.getRam()%> GB</p>
                                 <p>Disco duro: <%= primeraCarta.getDiscoDuro()%> GB</p>
                                 <p>MotherBoard: <%= primeraCarta.getMotherBoard()%></p>
@@ -130,6 +129,19 @@
                         <button class="btn btn-danger btn-atribute px-3 py-2">Mother Board</button>
                     </form>
                 </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row mx-1">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 marcador-tiempo shadow-lg">
+                    <div class="p-0 py-2">
+                        <h1 class="display-5 mt-1 fw-bold text-center text-white">0:50:35</h1>
+                        <h5 class="text-center pt-2 pb-3 text-white m-0">Turno de JhonCamargo</h5>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
             </div>
         </div>
 

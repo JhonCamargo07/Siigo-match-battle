@@ -136,12 +136,9 @@ public class PartidaController extends HttpServlet {
     }
 
     private void generarMensage(HttpServletRequest request, HttpServletResponse response, String titulo, String mensaje, String paginaRedirigir) throws ServletException, IOException {
-
-        HttpSession sesion = request.getSession();
-        sesion.setAttribute("titulo", titulo);
-        sesion.setAttribute("descripcion", mensaje);
+        request.setAttribute("titulo", titulo);
+        request.setAttribute("descripcion", mensaje);
         request.getRequestDispatcher(paginaRedirigir).forward(request, response);
-
     }
 
     private void ingresarAPartida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

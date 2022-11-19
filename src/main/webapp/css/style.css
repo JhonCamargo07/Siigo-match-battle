@@ -3,43 +3,8 @@ body {
   background: -webkit-gradient(linear, left bottom, right top, from(rgb(83, 42, 81)), color-stop(#6b2a54), color-stop(#832953), color-stop(#99294c), to(rgb(177, 47, 65))) no-repeat center center fixed;
   background: linear-gradient(to right top, rgb(83, 42, 81), #6b2a54, #832953, #99294c, rgb(177, 47, 65)) no-repeat center center fixed;
   background-size: cover;
-  /* background: linear-gradient(90deg, rgba(83, 42, 81, 1) 32%, rgba(177, 47, 65, 1) 100%); */
 }
 
-/* Importar fuentes para textos */
-@font-face {
-  font-family: Titulos;
-  src: url(../fuentes/gobold/Gobold\ Bold.otf);
-}
-@font-face {
-  font-family: Titulos1;
-  src: url(../fuentes/soria/Soria-Bold.otf);
-}
-@font-face {
-  font-family: Titulos2;
-  src: url(../fuentes/chicago_police/Chicago\ Police\ Font.otf);
-}
-@font-face {
-  font-family: Titulos3;
-  src: url(../fuentes/cremona/Cremona\ Regular\ OTF.otf);
-}
-/* Fuentes para parrafos */
-@font-face {
-  font-family: parrafo;
-  src: url(../fuentes/timeburner/timeburnernormal.ttf);
-}
-@font-face {
-  font-family: parrafo1;
-  src: url(../fuentes/kiye_sans/Kiye-Sans.ttf);
-}
-@font-face {
-  font-family: parrafo2;
-  src: url(../fuentes/coamei/COAMEI_L.ttf);
-}
-@font-face {
-  font-family: parrafo3;
-  src: url(../fuentes/hasta_grotesk/hasta\ grotesk.ttf);
-}
 /* Estilos de textos */
 .title {
   text-shadow: -4px -4px 1px #000;
@@ -53,14 +18,11 @@ body {
 }
 
 .text-size-r {
-  font-size: 0.9375rem;
-  /* 15px */
-  /* transform: scale(0.9); */
+  font-size: 0.9375rem; /* 15px */
 }
 
 .text-size-18 {
-  font-size: 1.125rem;
-  /* 18px */
+  font-size: 1.125rem; /* 18px */
 }
 
 .text-size {
@@ -84,16 +46,15 @@ body {
   box-shadow: 5px 5px 14px -4px #000000;
 }
 
+/* 
 .boton1 {
-  float: left;
-  /* margin-left: -80px; */
-}
-
-.boton2 {
-  float: right;
-  /* margin-right: -80px; */
-}
-
+	float: left;
+	margin-left: -80px;
+} */
+/* .boton2 {
+	float: right;
+	margin-right: -80px;
+} */
 .btn-login:active {
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
@@ -212,6 +173,7 @@ body {
   padding: 15px;
 }
 .container__jugador .avatar .num_elements {
+  color: #fff;
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -223,11 +185,10 @@ body {
       -ms-flex-align: center;
           align-items: center;
   border-radius: 100%;
-  width: 2.1875rem;
   top: 0;
   right: 0;
-  height: 2.1875rem;
-  color: #fff;
+  width: 2.5rem;
+  height: 2.5rem;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 2;
   font-weight: bold;
@@ -271,7 +232,6 @@ body.carta-activa .carta .carta-div {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  border: 1px solid #ff0000;
 }
 @media screen and (max-width: 100rem) {
   body.carta-activa .carta .carta-div {
@@ -283,9 +243,9 @@ body.carta-activa .carta .carta-div {
     width: 70%;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
   }
 }
 @media screen and (max-width: 480px) {
@@ -314,9 +274,13 @@ body.carta-activa .carta .carta-div .carta-buttoms {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
   }
 }
 body.carta-activa .carta .carta-div .carta-buttoms form,
@@ -325,6 +289,13 @@ body.carta-activa .carta .carta-div .carta-buttoms div {
   margin: 10px;
 }
 
-.cuadro {
-  min-height: 450px;
+.marcador-tiempo {
+  border-bottom-right-radius: 60px;
+  border-bottom-left-radius: 60px;
+}
+@media screen and (max-width: 480px) {
+  .marcador-tiempo {
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
 }

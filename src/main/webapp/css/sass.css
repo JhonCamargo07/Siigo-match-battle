@@ -1,22 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Bungee+Spice:regular);
-@import url(https://fonts.googleapis.com/css?family=Nabla:regular);
-@import url(https://fonts.googleapis.com/css?family=Bebas+Neue:regular);
-@font-face {
-	font-family: chicago;
-	src: url(../fuentes/chicago_police/Chicago\ Police\ Font.otf);
-}
-
+@import url(https://fonts.googleapis.com/css?family=Bowlby+One+SC:regular);
 :root {
-	--font: chicago;
-	--font1: 'Bungee Spice', cursive;
-	--font2: 'Nabla', cursive;
-	--font3: 'Bebas Neue', cursive;
+	--font: 'Bowlby One SC', cursive;
 }
 
 * {
 	margin: 0;
 	padding: 0;
 	font-family: var(--font);
+	font-size: 1rem;
 }
 
 .rounded-pill {
@@ -43,10 +34,6 @@
 		min-height: 25rem;
 	}
 }
-
-/* .btn-login {
-  min-width: 12.5rem;
-} */
 
 .btn-login:active {
 	-webkit-transform: scale(0.9);
