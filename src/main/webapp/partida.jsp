@@ -1,3 +1,4 @@
+<%@page import="Controllers.JugadorOnlineController"%>
 <%@page import="ModelVO.CartaVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -28,9 +29,29 @@
             jugadoresEnLaMismaPartida.add(jugadorVo);
         }
     }
-
     int turno = partidaVoSesion.getTurno();
+
+    List<JugadorVO> jugadoresEliminados = new ArrayList();
+
+    for (JugadorVO jugador : jugadoresEliminados) {
+        if (jugador.getIdjugador().equalsIgnoreCase(jugadorVoSession.getIdjugador())) {
+            String mensaje = "Cuidado, solo te queda una carta";
+            if (jugador.getBajara().size() <= 0) {
+                mensaje = "Lo siento, ya no tienes mas cartas";
+            }
+
+
 %>
+<script>
+    Toast.fire({
+        icon: 'error',
+        title: '<%= mensaje%>'
+    })
+</script>
+<%        }
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -44,18 +65,17 @@
         <div class="carta">
             <div class="carta-div shadow-lg">
                 <div class="container__jugador-card bg-light p-3">
-                    <%
-                        int contador = 0;
+                    <%                        int contador = 0;
                         for (JugadorVO player : jugadoresEnLaMismaPartida) {
                             List<CartaVO> baraja = player.getBajara();
                             if (baraja.size() <= 0) {
                                 player.setSuTurno(false);
                                 turno++;
                                 contador++;
-                                System.out.println("contador="+contador);
-                                System.out.println("baraja="+baraja.size());
-                                System.out.println("Player="+player.getNombre());
+                                jugadoresEliminados.add(player);
                                 continue;
+                            } else if (baraja.size() == 1) {
+                                jugadoresEliminados.add(player);
                             }
                             if (contador == turno) {
                                 player.setSuTurno(true);
@@ -69,7 +89,6 @@
                                 continue;
                             }
                             contador++;
-                            System.out.println("contador = " + contador);
                             CartaVO primeraCarta = baraja.get(0);
                     %>
 
@@ -184,6 +203,37 @@
         setInterval(() => {
             location.href = "partida.jsp";
         }, 10000);
+
+        const Toast = Swal.mixin({
+            toast: false,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
     </script>
 
+    <%
+        if (request.getAttribute("nombreJugador") != null) {
+            String jugadorGanador = (String) request.getAttribute("nombreJugador");
+            String icono = "success";
+            String frase = "El ganador eres t\u00fa";
+            if (!jugadorGanador.equalsIgnoreCase(jugadorVoSession.getNombre())) {
+                icono = "error";
+                frase = "Perdiste, el ganador es " + jugadorGanador;
+            }
+    %>
+    <script>
+        Toast.fire({
+            icon: '<%= icono%>',
+            title: '<%= frase%>'
+        })
+    </script>
+    <%
+        }
+    %>
 </html>

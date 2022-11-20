@@ -65,9 +65,9 @@ public class JugadorOnlineController extends HttpServlet {
         String codigoPartida = request.getParameter("codigoPartida");
         int turno = Integer.parseInt(request.getParameter("turno"));
         String atributo = request.getParameter("atributo");
-        List<JugadorVO> jugadoresEnLaMismaPartida = this.obtenerLosJugadoresEnLaMismaPartida(request, response);
+        List<JugadorVO> jugadoresEnLaMismaPartida = this.obtenerLosJugadoresEnLaMismaPartida(request);
 
-        List<JugadorVO> JugadoresEnMismaPartidaActualizada = this.obtenerGanadorRondaYActualizarListaJugadores(request, response, jugadoresEnLaMismaPartida);
+        List<JugadorVO> JugadoresEnMismaPartidaActualizada = this.getGanadorRondaYActualizarListaJugadores(request, response, jugadoresEnLaMismaPartida);
 
         List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
 
@@ -76,12 +76,11 @@ public class JugadorOnlineController extends HttpServlet {
         aplicacion.setAttribute("jugadoresOnline", jugadores);
 
         this.cambiarTurnoAlSiguienteJugador(request, codigoPartida);
-
         request.getRequestDispatcher("partida.jsp").forward(request, response);
 
     }
 
-    private List<JugadorVO> obtenerLosJugadoresEnLaMismaPartida(HttpServletRequest request, HttpServletResponse response) {
+    private List<JugadorVO> obtenerLosJugadoresEnLaMismaPartida(HttpServletRequest request) {
         String codigoPartida = request.getParameter("codigoPartida");
         aplicacion = request.getServletContext();
 
@@ -90,7 +89,7 @@ public class JugadorOnlineController extends HttpServlet {
         List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
 
         for (JugadorVO jugador : jugadores) {
-            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && jugador.getBajara().size() > 0) {
+            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && !jugador.getBajara().isEmpty()) {
                 jugadoresEnLaMismaPartida.add(jugador);
             }
         }
@@ -122,7 +121,7 @@ public class JugadorOnlineController extends HttpServlet {
         return primeraCartaDeCadaJugador;
     }
 
-    private List<JugadorVO> obtenerGanadorRondaYActualizarListaJugadores(HttpServletRequest request, HttpServletResponse response, List<JugadorVO> jugadoresEnLaMismaPartida) {
+    private List<JugadorVO> getGanadorRondaYActualizarListaJugadores(HttpServletRequest request, HttpServletResponse response, List<JugadorVO> jugadoresEnLaMismaPartida) {
         String atributo = request.getParameter("atributo");
 
         List<List<CartaVO>> masoCartas = this.obtenerElMasoDeCartasDeLosJugadoresEnLaMismaPartida(request, response, jugadoresEnLaMismaPartida);
@@ -136,6 +135,8 @@ public class JugadorOnlineController extends HttpServlet {
         this.eliminarJugadoresConDatosAntiguos(request);
 
         List<JugadorVO> jugadoresEnLaMismaPartidaActualizada = this.agregarCartasDeLosJugadoresPerdedoresAlGanador(request, jugadoresEnLaMismaPartida, primeraCartaDeCadaJugador, codigoJugadorGanador);
+
+        request.setAttribute("nombreJugador", this.getNombreJugadorGanadorPorId(request, jugadoresEnLaMismaPartidaActualizada, request.getParameter("codigoPartida"), codigoJugadorGanador));
 
         return jugadoresEnLaMismaPartidaActualizada;
     }
@@ -208,7 +209,6 @@ public class JugadorOnlineController extends HttpServlet {
                     }
                     break;
                 default:
-                    System.out.println("Entro al break");
                     break;
             }
         }
@@ -252,9 +252,6 @@ public class JugadorOnlineController extends HttpServlet {
 
         for (PartidaVO partida : partidas) {
             if (partida.getCodigo().equalsIgnoreCase(codigoPartida)) {
-                System.out.println("partida = " + partida);
-
-//                if (partida.getTurno() >= partida.getCanditadJugadores() - 1) {
                 if (partida.getTurno() >= this.contarCuantosJugadoresTienenCartasSegunPartida(request, codigoPartida) - 1) {
                     partida.setTurno(-1);
                 }
@@ -267,12 +264,22 @@ public class JugadorOnlineController extends HttpServlet {
     private int contarCuantosJugadoresTienenCartasSegunPartida(HttpServletRequest request, String codigoPartida) {
         int jugadoresConCartas = 0;
         List<JugadorVO> jugadoresOnline = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
-        System.out.println("jugadoresOnline = " + jugadoresOnline);
         for (JugadorVO jugador : jugadoresOnline) {
             if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && !jugador.getBajara().isEmpty()) {
                 jugadoresConCartas++;
             }
         }
         return jugadoresConCartas;
+    }
+
+    public String getNombreJugadorGanadorPorId(HttpServletRequest request, List<JugadorVO> jugadoresEnLaMismaPartida, String codigoPartida, String idUser) {
+        String nombreJugador = "Desconocido";
+
+        for (JugadorVO jugadorVO : jugadoresEnLaMismaPartida) {
+            if(jugadorVO.getCodigoPartida().equalsIgnoreCase(codigoPartida) && jugadorVO.getIdjugador().equalsIgnoreCase(idUser)){
+                nombreJugador = jugadorVO.getNombre();
+            }
+        }
+        return nombreJugador;
     }
 }
