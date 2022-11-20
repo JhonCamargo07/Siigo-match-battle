@@ -90,7 +90,9 @@ public class JugadorOnlineController extends HttpServlet {
         List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
 
         for (JugadorVO jugador : jugadores) {
-            jugadoresEnLaMismaPartida.add(jugador);
+            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && jugador.getBajara().size() > 0) {
+                jugadoresEnLaMismaPartida.add(jugador);
+            }
         }
 
         return jugadoresEnLaMismaPartida;
@@ -245,14 +247,15 @@ public class JugadorOnlineController extends HttpServlet {
 
     private void cambiarTurnoAlSiguienteJugador(HttpServletRequest request, String codigoPartida) {
         aplicacion = request.getServletContext();
-        
+
         List<PartidaVO> partidas = (List<PartidaVO>) aplicacion.getAttribute("partidas");
 
         for (PartidaVO partida : partidas) {
             if (partida.getCodigo().equalsIgnoreCase(codigoPartida)) {
                 System.out.println("partida = " + partida);
-                
-                if (partida.getTurno() >= partida.getCanditadJugadores() - 1) {
+
+//                if (partida.getTurno() >= partida.getCanditadJugadores() - 1) {
+                if (partida.getTurno() >= this.contarCuantosJugadoresTienenCartasSegunPartida(request, codigoPartida) - 1) {
                     partida.setTurno(-1);
                 }
                 partida.setTurno(partida.getTurno() + 1);
@@ -261,4 +264,15 @@ public class JugadorOnlineController extends HttpServlet {
 
     }
 
+    private int contarCuantosJugadoresTienenCartasSegunPartida(HttpServletRequest request, String codigoPartida) {
+        int jugadoresConCartas = 0;
+        List<JugadorVO> jugadoresOnline = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
+        System.out.println("jugadoresOnline = " + jugadoresOnline);
+        for (JugadorVO jugador : jugadoresOnline) {
+            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && !jugador.getBajara().isEmpty()) {
+                jugadoresConCartas++;
+            }
+        }
+        return jugadoresConCartas;
+    }
 }

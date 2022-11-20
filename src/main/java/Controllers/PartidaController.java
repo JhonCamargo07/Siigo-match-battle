@@ -301,12 +301,12 @@ public class PartidaController extends HttpServlet {
 
     }
 
-    public int contarCuantosJugadoresTienenCartasSegunPartida(HttpServletRequest request, String codigoPartida) {
+    private int contarCuantosJugadoresTienenCartasSegunPartida(HttpServletRequest request, String codigoPartida) {
         int jugadoresConCartas = 0;
         List<JugadorVO> jugadoresOnline = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
 
         for (JugadorVO jugador : jugadoresOnline) {
-            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && jugador.getBajara().size() > 0) {
+            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && !jugador.getBajara().isEmpty()) {
                 jugadoresConCartas++;
             }
         }

@@ -30,7 +30,6 @@
     }
 
     int turno = partidaVoSesion.getTurno();
-    out.print("turno= "+turno);
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -50,8 +49,12 @@
                         for (JugadorVO player : jugadoresEnLaMismaPartida) {
                             List<CartaVO> baraja = player.getBajara();
                             if (baraja.size() <= 0) {
+                                player.setSuTurno(false);
                                 turno++;
                                 contador++;
+                                System.out.println("contador="+contador);
+                                System.out.println("baraja="+baraja.size());
+                                System.out.println("Player="+player.getNombre());
                                 continue;
                             }
                             if (contador == turno) {
@@ -60,13 +63,13 @@
                                 player.setSuTurno(false);
                             }
                             if (contador > turno) {
-                                contador++;
                                 break;
                             } else if (contador < turno) {
                                 contador++;
                                 continue;
                             }
                             contador++;
+                            System.out.println("contador = " + contador);
                             CartaVO primeraCarta = baraja.get(0);
                     %>
 
