@@ -221,7 +221,7 @@ public class PartidaController extends HttpServlet {
 
     private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores, String codigoPartida) throws IOException {
 
-        cambiarEstadoPartida(request, response, codigoPartida);
+        cambiarEstadoYCantidadJugadoresPartida(request, response, codigoPartida, cantidadJugadores);
 
         aplicacion = request.getServletContext();
 
@@ -243,7 +243,7 @@ public class PartidaController extends HttpServlet {
 
     }
 
-    private void cambiarEstadoPartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida) {
+    private void cambiarEstadoYCantidadJugadoresPartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida, int cantidadJugadores) {
 
         aplicacion = request.getServletContext();
 
@@ -254,6 +254,8 @@ public class PartidaController extends HttpServlet {
             PartidaVO partidaVo = partidas.get(i);
             if (partidaVo.getCodigo().equalsIgnoreCase(codigoPartida)) {
                 partidaVo.setEstado("Jugando");
+                partidaVo.setCanditadJugadores(cantidadJugadores);
+//                partidaVo.setCanditadJugadores(this.contarCuantosJugadoresTienenCartasSegunPartida(request, codigoPartida));
             }
             partidasActualizadas.add(partidaVo);
         }
@@ -297,5 +299,17 @@ public class PartidaController extends HttpServlet {
 
         return partidaVo;
 
+    }
+
+    public int contarCuantosJugadoresTienenCartasSegunPartida(HttpServletRequest request, String codigoPartida) {
+        int jugadoresConCartas = 0;
+        List<JugadorVO> jugadoresOnline = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
+
+        for (JugadorVO jugador : jugadoresOnline) {
+            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && jugador.getBajara().size() > 0) {
+                jugadoresConCartas++;
+            }
+        }
+        return jugadoresConCartas;
     }
 }

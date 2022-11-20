@@ -11,9 +11,8 @@ import java.util.Random;
  */
 public class PartidaVO {
 
-    private String codigo;
-    private String tiempo;
-    private String estado;
+    private String codigo, tiempo, estado;
+    private int turno = 0, canditadJugadores = 0;
 
     public PartidaVO() {
     }
@@ -27,11 +26,19 @@ public class PartidaVO {
         this.tiempo = tiempo;
 //        this.estado = "Creada";
     }
-    
+
     public PartidaVO(String codigo, String tiempo, String estado) {
         this.codigo = codigo;
         this.tiempo = tiempo;
         this.estado = estado;
+    }
+
+    public PartidaVO(String codigo, String tiempo, String estado, int turno, int cantidadJugadores) {
+        this.codigo = codigo;
+        this.tiempo = tiempo;
+        this.estado = estado;
+        this.turno = turno;
+        this.canditadJugadores = cantidadJugadores;
     }
 
     public String getCodigo() {
@@ -58,9 +65,25 @@ public class PartidaVO {
         this.estado = estado;
     }
 
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public int getCanditadJugadores() {
+        return canditadJugadores;
+    }
+
+    public void setCanditadJugadores(int canditadJugadores) {
+        this.canditadJugadores = canditadJugadores;
+    }
+
     @Override
     public String toString() {
-        return "PartidaVO{" + "codigo=" + codigo + ", tiempo=" + tiempo + ", estado=" + estado + '}';
+        return "PartidaVO{" + "codigo=" + codigo + ", tiempo=" + tiempo + ", estado=" + estado + ", turno=" + turno + ", canditadJugadores=" + canditadJugadores + '}';
     }
 
     public static String generarCodigoPartida() {

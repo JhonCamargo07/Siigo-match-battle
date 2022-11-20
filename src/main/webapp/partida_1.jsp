@@ -29,9 +29,15 @@
         }
     }
 
+//    for (int i = 0; i < jugadores.size(); i++) {
+//        JugadorVO jugadorVo = jugadores.get(i);
+//        if (jugadorVo.getCodigoPartida().equalsIgnoreCase(partidaVoSesion.getCodigo())) {
+//            jugadoresEnLaMismaPartida.add(jugadorVo);
+//        }
+//    }
     int turno = partidaVoSesion.getTurno();
-    out.print("turno= "+turno);
 %>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>

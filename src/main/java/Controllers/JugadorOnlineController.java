@@ -61,21 +61,24 @@ public class JugadorOnlineController extends HttpServlet {
     }
 
     private void obtenerGanadorRonda(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        sesion = request.getSession();
         String codigoPartida = request.getParameter("codigoPartida");
-        String turno = request.getParameter("turno");
+        int turno = Integer.parseInt(request.getParameter("turno"));
         String atributo = request.getParameter("atributo");
         List<JugadorVO> jugadoresEnLaMismaPartida = this.obtenerLosJugadoresEnLaMismaPartida(request, response);
 
         List<JugadorVO> JugadoresEnMismaPartidaActualizada = this.obtenerGanadorRondaYActualizarListaJugadores(request, response, jugadoresEnLaMismaPartida);
-        
+
         List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
-        
+
         jugadores.addAll(JugadoresEnMismaPartidaActualizada);
-        
+
         aplicacion.setAttribute("jugadoresOnline", jugadores);
-        
+
+        this.cambiarTurnoAlSiguienteJugador(request, codigoPartida);
+
         request.getRequestDispatcher("partida.jsp").forward(request, response);
-        
+
     }
 
     private List<JugadorVO> obtenerLosJugadoresEnLaMismaPartida(HttpServletRequest request, HttpServletResponse response) {
@@ -98,7 +101,9 @@ public class JugadorOnlineController extends HttpServlet {
         List<List<CartaVO>> masoCartas = new ArrayList();
 
         for (JugadorVO jugadorVO : jugadoresEnMismaPartida) {
-            masoCartas.add(jugadorVO.getBajara());
+            if (jugadorVO.getBajara().size() > 0) {
+                masoCartas.add(jugadorVO.getBajara());
+            }
         }
 
         return masoCartas;
@@ -125,9 +130,9 @@ public class JugadorOnlineController extends HttpServlet {
         String valorMaximoDelAtributo = String.valueOf(this.getValorMaximoAtributoDeUnaCarta(primeraCartaDeCadaJugador, atributo));
 
         String codigoJugadorGanador = this.getIdJugadorQueTengaLaCartaConElAtributoMasAlto(jugadoresEnLaMismaPartida, atributo, valorMaximoDelAtributo);
-        
+
         this.eliminarJugadoresConDatosAntiguos(request);
-        
+
         List<JugadorVO> jugadoresEnLaMismaPartidaActualizada = this.agregarCartasDeLosJugadoresPerdedoresAlGanador(request, jugadoresEnLaMismaPartida, primeraCartaDeCadaJugador, codigoJugadorGanador);
 
         return jugadoresEnLaMismaPartidaActualizada;
@@ -210,32 +215,50 @@ public class JugadorOnlineController extends HttpServlet {
 
     private void eliminarJugadoresConDatosAntiguos(HttpServletRequest request) {
         aplicacion = request.getServletContext();
-        
+
         String codigoPartida = request.getParameter("codigoPartida");
-        
+
         List<JugadorVO> jugadoresActualizados = new ArrayList<>();
 
         List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
-        
+
         for (JugadorVO jugador : jugadores) {
-            if(!jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida)){
+            if (!jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida)) {
                 jugadoresActualizados.add(jugador);
             }
         }
-        
+
         aplicacion.setAttribute("jugadoresOnline", jugadoresActualizados);
     }
 
     private List<JugadorVO> agregarCartasDeLosJugadoresPerdedoresAlGanador(HttpServletRequest request, List<JugadorVO> jugadoresEnLaMismaPartida, List<CartaVO> primeraCartaDeCadaJugador, String codigoJugadorGanador) {
-        
+
         for (JugadorVO jugadorVO : jugadoresEnLaMismaPartida) {
             jugadorVO.getBajara().remove(0);
-            if(jugadorVO.getIdjugador().equalsIgnoreCase(codigoJugadorGanador)){
+            if (jugadorVO.getIdjugador().equalsIgnoreCase(codigoJugadorGanador)) {
                 jugadorVO.getBajara().addAll(primeraCartaDeCadaJugador);
             }
         }
-        
+
         return jugadoresEnLaMismaPartida;
+    }
+
+    private void cambiarTurnoAlSiguienteJugador(HttpServletRequest request, String codigoPartida) {
+        aplicacion = request.getServletContext();
+        
+        List<PartidaVO> partidas = (List<PartidaVO>) aplicacion.getAttribute("partidas");
+
+        for (PartidaVO partida : partidas) {
+            if (partida.getCodigo().equalsIgnoreCase(codigoPartida)) {
+                System.out.println("partida = " + partida);
+                
+                if (partida.getTurno() >= partida.getCanditadJugadores() - 1) {
+                    partida.setTurno(-1);
+                }
+                partida.setTurno(partida.getTurno() + 1);
+            }
+        }
+
     }
 
 }
