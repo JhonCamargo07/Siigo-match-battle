@@ -17,6 +17,9 @@
         partidaVoSesion = (PartidaVO) sesion.getAttribute("partidaVoSesion");
     }
 
+    String tiempoPartida = partidaVoSesion.getTiempo().charAt(0) + ":" + partidaVoSesion.getTiempo().substring(1, 3) + 
+            ":" + partidaVoSesion.getTiempo().substring(3, partidaVoSesion.getTiempo().length());
+
     ServletContext aplicacion = request.getServletContext();
     List<JugadorVO> jugadores = new ArrayList();
     if (aplicacion.getAttribute("jugadoresOnline") != null) {
@@ -29,6 +32,7 @@
             jugadoresEnLaMismaPartida.add(jugadorVo);
         }
     }
+
     int turno = partidaVoSesion.getTurno();
 
     List<JugadorVO> jugadoresEliminados = new ArrayList();
@@ -56,7 +60,6 @@
 <html lang="es">
     <head>
         <title>Partida</title>
-        <!--<link rel="stylesheet" href="css/stylecard.css" />-->
         <link rel="stylesheet" href="css/sass.css" />
         <jsp:include page="WEB-INF/paginas/comunes/head.jsp" />
     </head>
@@ -168,7 +171,7 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4 marcador-tiempo shadow-lg">
                     <div class="p-0 py-2">
-                        <h1 class="display-5 mt-1 fw-bold text-center text-white">0:50:35</h1>
+                        <h1 class="display-5 mt-1 fw-bold text-center text-white" id="tiempo"><%= tiempoPartida%></h1>
                         <h5 class="text-center pt-2 pb-3 text-white m-0"><%= jugadoresEnLaMismaPartida.get(turno).getNombre().equalsIgnoreCase(jugadorVoSession.getNombre()) ? "Ahora es tu turno" : "Turno de " + jugadoresEnLaMismaPartida.get(turno).getNombre()%> </h5>
                     </div>
                 </div>
@@ -188,6 +191,7 @@
                                 <img src="img/avatars/<%= player.getImagen()%>" width="250px" class="img-fluid avatar__img" />
                                 <p class="text-center text-white mt-1"><%= player.getNombre()%></p>
                                 <div class="num_elements"><%= player.getBajara().size()%></div>
+                                <input type="hidden" name="codigoPartida" id="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                             </div>
                         </div>
                         <%
@@ -198,6 +202,31 @@
             </div>
         </div>
     </body>
+    <!-- Archivos js -->
+    <jsp:include page="WEB-INF/paginas/comunes/files-js.jsp" />
+
+    <script>
+        actualizarHora();
+        setInterval(() => {
+            actualizarHora();
+        }, 2150);
+
+        function actualizarHora() {
+            var parametro = {
+                "opcion": 2,
+                "codigoPartida": document.getElementById('codigoPartida').value
+            }
+
+            $.ajax({
+                data: parametro,
+                url: 'JugadorOnline',
+                type: 'POST',
+                success: function (response) {
+                    $('#tiempo').html(response);
+                }
+            });
+        }
+    </script>
 
     <script>
         setInterval(() => {

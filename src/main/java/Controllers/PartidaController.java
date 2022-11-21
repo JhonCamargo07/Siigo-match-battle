@@ -91,7 +91,7 @@ public class PartidaController extends HttpServlet {
 
         jugadorVo = new JugadorVO(idJugador, nombreJugador, img_avatars.get(10), codigoPartida, true);
 
-        PartidaVO partidaVo = new PartidaVO(codigoPartida, "1:00:00", "en espera");
+        PartidaVO partidaVo = new PartidaVO(codigoPartida, "10000", "en espera");
 
         sesion = request.getSession();
         sesion.setAttribute("jugadorVoSesion", jugadorVo);
@@ -255,7 +255,6 @@ public class PartidaController extends HttpServlet {
             if (partidaVo.getCodigo().equalsIgnoreCase(codigoPartida)) {
                 partidaVo.setEstado("Jugando");
                 partidaVo.setCanditadJugadores(cantidadJugadores);
-//                partidaVo.setCanditadJugadores(this.contarCuantosJugadoresTienenCartasSegunPartida(request, codigoPartida));
             }
             partidasActualizadas.add(partidaVo);
         }
