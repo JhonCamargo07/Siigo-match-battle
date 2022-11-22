@@ -15,6 +15,9 @@
     if (sesion.getAttribute("partidaVoSesion") != null) {
         partidaVoSesion = (PartidaVO) sesion.getAttribute("partidaVoSesion");
     }
+
+    String titulo = "Todo listo para jugar";
+    String mensaje = "Solo comparte el codigo de la partida (" + partidaVoSesion.getCodigo() + ") para que se conecten mas jugadores";
 %>
 
 <!DOCTYPE html>
@@ -24,7 +27,10 @@
         <jsp:include page="WEB-INF/paginas/comunes/head.jsp" />
     </head>
 
-    <body>
+    <body class="position-relative">
+        <div class="position-absolute div__cod-partida shadow-lg">
+            <p class="mb-0"><%= partidaVoSesion.getCodigo()%></p>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -38,8 +44,8 @@
                                 <input type="hidden" name="codigoPartida" id="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                             </div>
                             <div class="mt-3 text-white">
-                                <h4>${titulo}</h4>
-                                <p>${descripcion}</p>
+                                <h4 class="font_two"><%=titulo%></h4>
+                                <p class="font_two"><%=mensaje%></p>
                             </div>
                             <%
                                 ServletContext aplicacion = request.getServletContext();
@@ -61,7 +67,7 @@
                             <form action="${pageContext.request.contextPath}/Partida" method="POST" class="my-3">
                                 <input type="hidden" name="opcion" value="1" />
                                 <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
-                                <input type="hidden" name="numPlayers" id="numPlayers" value="<%= jugadoresEnLaMismaPartida.size() %>" />
+                                <input type="hidden" name="numPlayers" id="numPlayers" value="<%= jugadoresEnLaMismaPartida.size()%>" />
                                 <button type="submit" class="btn btn-success">Iniciar partida</button>
                             </form>
                             <%
@@ -72,10 +78,10 @@
                                     for (int i = 0; i < jugadoresEnLaMismaPartida.size(); i++) {
                                         JugadorVO player = jugadoresEnLaMismaPartida.get(i);
                                 %>
-                                <div class="bg-warning shadow d-flex justify-content-center align-items-center border border-danger rounded">
+                                <div class="bg-warning shadow d-flex justify-content-center align-items-center rounded">
                                     <img src="img/avatars/<%= player.getImagen()%>" width="50px" alt="alt"/>
                                     <div class="d-flex justify-content-center align-items-center flex-column p-2">
-                                        <p class="mb-1"><%= player.getIdjugador()%></p>
+                                        <p class="mb-1 font_two"><%= player.getIdjugador()%></p>
                                         <p class="mb-1"><%= player.getNombre()%></p>
                                     </div>
                                 </div>
@@ -160,8 +166,8 @@
             List<PartidaVO> partidas = (List<PartidaVO>) app.getAttribute("partidas");
 
             for (PartidaVO partidaVo : partidas) {
-                if ( partidaVo.getCodigo().equalsIgnoreCase(partidaVoSesion.getCodigo()) 
-                    && partidaVo.getEstado().equalsIgnoreCase("Jugando") ) {
+                if (partidaVo.getCodigo().equalsIgnoreCase(partidaVoSesion.getCodigo())
+                        && partidaVo.getEstado().equalsIgnoreCase("Jugando")) {
     %>
     <script>
         location.href = "partida.jsp";

@@ -1,6 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Bowlby+One+SC:regular);
+@import url(https://fonts.googleapis.com/css?family=Righteous:regular);
+@import url(https://fonts.googleapis.com/css?family=Russo+One:regular);
 :root {
 	--font: 'Bowlby One SC', cursive;
+	--font_two: 'Russo One', sans-serif;
 }
 
 * {
@@ -8,6 +11,19 @@
 	padding: 0;
 	font-family: var(--font);
 	font-size: 1rem;
+}
+
+.div__cod-partida {
+	position: absolute;
+	bottom: 10;
+	left: 10;
+	border-radius: 0.3125rem;
+	padding: 0.625rem;
+}
+
+.font_two {
+	font-family: var(--font_two) !important;
+	/*font-weight: bold;*/
 }
 
 .rounded-pill {
@@ -100,43 +116,6 @@ form {
 	/* text-align: center; */
 }
 
-/* h1{
-    font-weight: bold;
-    margin: 0;
-}
-
-p{
-    font-size: 0.875rem;
-    font-weight: 100;
-    line-height: 1.25rem;
-    letter-spacing: 0.0313rem;
-    margin: 15px 0 20px;
-} */
-/* input{
-    background: #eee;
-    padding: 0.75rem 0.9375rem;
-    margin: 0.5rem 0.9375rem;
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-} */
-/* 
-button{
-    color: #fff;
-    background: #ff4b2b;
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 0.75rem 3.4375rem;
-    margin: 20px;
-    border: 0.0625rem solid #ff4b2b;
-    border-radius: 1.25rem;
-    outline: none;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-} */
 button:active {
 	-webkit-transform: scale(0.9);
 	transform: scale(0.9);
@@ -247,11 +226,4 @@ button:active {
 .container.right-panel-active .overlay-right {
 	-webkit-transform: translateX(20%);
 	transform: translateX(20%);
-} /*# sourceMappingURL=sass.css.map */
-
-/* @media screen and (max-width: 30rem) {
-    .container {
-    width: 95% !important;
-    margin-top: 1.25rem !important;
-    }
-} */
+}

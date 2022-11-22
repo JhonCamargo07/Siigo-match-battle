@@ -60,8 +60,8 @@
                                 </div>
                             </div>
                             <div class="mt-3 text-white">
-                                <h4>${titulo}</h4>
-                                <p>${descripcion}</p>
+                                <h4 class="font_two">${titulo}</h4>
+                                <p class="font_two">${descripcion}</p>
                             </div>
                         </main>
                     </div>

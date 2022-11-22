@@ -1,5 +1,10 @@
 $border-color: #ff0000;
 $border-color: #00ff00;
+$color-carta: rgba(0, 0, 0, 0.1);
+$color-identificador: rgba(0, 0, 0, 0.3);
+$color-modal: rgba(0, 0, 0, 0.5);
+$color-shadow: #000;
+$white: #fff;
 // $border-color: transparent;
 
 @mixin grid($cols, $gap) {
@@ -64,10 +69,10 @@ body {
 	font-size: 1.25rem; /* 20px */
 }
 
-.shadow {
-	-webkit-box-shadow: 8px 8px 15px 0px #342e44 !important;
-	box-shadow: 8px 8px 15px 0px #342e44 !important;
-}
+// .shadow {
+// 	-webkit-box-shadow: 8px 8px 15px 0px #342e44 !important;
+// 	box-shadow: 8px 8px 15px 0px #342e44 !important;
+// }
 
 /*!==============================================================*/
 /*!================= Estilos para botones =================*/
@@ -156,11 +161,6 @@ mt-5 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	& .container__jugador-card {
-		& .card-parrafos {
-			display: flex;
-		}
-	}
 	& .avatar {
 		display: flex;
 		justify-content: center;
@@ -176,16 +176,16 @@ mt-5 {
 			padding: 15px;
 		}
 		& .num_elements {
-			color: #fff;
 			position: absolute;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			border-radius: 100%;
+			width: 2.1875rem;
 			top: 0;
 			right: 0;
-			width: 2.5rem;
-			height: 2.5rem;
+			height: 2.1875rem;
+			color: #fff;
 			background-color: rgba(0, 0, 0, 0.2);
 			z-index: 2;
 			font-weight: bold;
@@ -202,12 +202,13 @@ body {
 
 .btn-atribute {
 	min-height: 2.5rem;
+	min-width: 8.75rem;
 }
 
 body.carta-activa {
 	.carta {
-		padding-top: 50px;
-		padding-bottom: 50px;
+		// padding-top: 50px;
+		// padding-bottom: 50px;
 		z-index: 10;
 		width: 100%;
 		height: 100%;
@@ -215,44 +216,97 @@ body.carta-activa {
 		position: absolute;
 		align-items: center;
 		justify-content: center;
-		background-color: rgba(0, 0, 0, 0.6);
+		background-color: $color-modal;
 		& .carta-div {
-			width: 50%;
+			width: 60%;
+			// height: 70%;
+			padding: 30px;
+			display: flex;
+			background: #fff;
+			border-radius: 0.4375rem;
+			justify-content: space-evenly;
 			@include responsive(100rem) {
 				width: 65%;
 			}
 			@include responsive(62.5rem) {
 				width: 70%;
 				flex-wrap: wrap;
-				justify-content: flex-start;
 			}
 			@include responsive() {
 				width: 90%;
 			}
-			padding: 10px;
-			display: flex;
-			background: #fff;
-			border-radius: 0.1875rem;
-			justify-content: space-evenly;
+			& .container__jugador-card {
+				max-width: 300px;
+				border-radius: 0.125rem;
+				background-color: $color-carta;
+				& .container__card-title {
+					// border: 2px solid $color-carta;}
+					border-radius: 0.3125rem;
+					padding: 5px 0.4375rem;
+					& h4 {
+						font-weight: bold;
+					}
+				}
+				& .position-relative {
+					padding: 10px 0;
+					& .card-img-card {
+						position: relative;
+					}
+					& .card-identificador {
+						position: absolute;
+						background-color: $color-identificador;
+						font-weight: bold;
+						padding: 0.3125rem;
+						border-radius: 100%;
+						color: $white;
+						bottom: 50%;
+						left: 50%;
+					}
+				}
+				& .card-body {
+					margin-top: 0;
+					margin-bottom: 0;
+				}
+				& .card-parrafos {
+					display: flex;
+					padding: 10px;
+					font-size: 1.125rem;
+					& p {
+						margin-bottom: 0;
+					}
+				}
+			}
 			& .carta-buttoms {
+				max-width: 500px;
+				text-align: center;
 				@include responsive(62.5rem) {
 					display: flex;
 					flex-flow: row wrap;
-					justify-content: space-evenly;
 				}
-				display: flex;
-				max-width: 18.75rem;
-				align-items: center;
-				flex-direction: column;
-				justify-content: center;
+				@include responsive() {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
 				& form,
 				div {
 					text-align: center;
 					margin: 10px;
 				}
+				& form {
+					display: inline-block;
+				}
 			}
 		}
 	}
+}
+
+.img__card {
+	filter: drop-shadow(0.625rem 0.4375rem 0.625rem $color-shadow);
+}
+
+.border {
+	border-radius: 0.3125rem;
 }
 
 .marcador-tiempo {

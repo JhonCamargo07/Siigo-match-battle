@@ -17,8 +17,8 @@
         partidaVoSesion = (PartidaVO) sesion.getAttribute("partidaVoSesion");
     }
 
-    String tiempoPartida = partidaVoSesion.getTiempo().charAt(0) + ":" + partidaVoSesion.getTiempo().substring(1, 3) + 
-            ":" + partidaVoSesion.getTiempo().substring(3, partidaVoSesion.getTiempo().length());
+    String tiempoPartida = partidaVoSesion.getTiempo().charAt(0) + ":" + partidaVoSesion.getTiempo().substring(1, 3)
+            + ":" + partidaVoSesion.getTiempo().substring(3, partidaVoSesion.getTiempo().length());
 
     ServletContext aplicacion = request.getServletContext();
     List<JugadorVO> jugadores = new ArrayList();
@@ -66,8 +66,8 @@
 
     <body class="">
         <div class="carta">
-            <div class="carta-div shadow-lg">
-                <div class="container__jugador-card bg-light p-3">
+            <div class="carta-div">
+                <div class="container__jugador-card p-3 shadow">
                     <%                        int contador = 0;
                         for (JugadorVO player : jugadoresEnLaMismaPartida) {
                             List<CartaVO> baraja = player.getBajara();
@@ -105,28 +105,29 @@
                     </script>
                     <%                        }
                     %>
-
-                    <h5 class="card-title text-center titulo3"><%= primeraCarta.getIdentificador()%></h5>
-                    <img src="img/computers/<%= primeraCarta.getImgComputador()%>" width="150px" class="" alt="" />
-                    <div class="px-0 card-body">
-                        <h5 class="card-title titulo3 text-center"><%= primeraCarta.getTitulo()%></h5>
-                        <div class="card-parrafos">
+                    <div class="container__card-title shadow-sm border mb-1">
+                        <h4 class="card-title text-center my-1"><%= primeraCarta.getTitulo()%></h4>
+                    </div>
+                    <div class="position-relative">
+                        <img src="img/computers/<%= primeraCarta.getImgComputador()%>" width="150px" class="card-img-top img__card" alt="<%= primeraCarta.getIdentificador()%>" />
+                        <div class="card-identificador text-center shadow-lg"></div>
+                    </div>
+                    <div class="p-0 m-0 card-body my-2">
+                        <div class="card-parrafos shadow-sm border">
                             <div class="">
-                                <p>Procesador: <%= primeraCarta.getProcesador().charAt(0)%> <%= primeraCarta.getProcesador().substring(1, primeraCarta.getProcesador().length())%></p>
-                                <p>Pantalla: <%= primeraCarta.getPantalla()%> pul</p>
-                                <p>RAM: <%= primeraCarta.getRam()%> GB</p>
-                                <p>Disco duro: <%= primeraCarta.getDiscoDuro()%> GB</p>
-                                <p>MotherBoard: <%= primeraCarta.getMotherBoard()%></p>
+                                <p class="font_two">
+                                    Portatil pavicom intel core i<%= primeraCarta.getProcesador().charAt(0)%> <%= primeraCarta.getProcesador().substring(1, primeraCarta.getProcesador().length())%> con <%= primeraCarta.getRam()%>GB de memoria RAM, <%= primeraCarta.getDiscoDuro()%>GB SSD, pantalla de <%= primeraCarta.getPantalla()%> pul FUll HD y Mother board Asus <%= primeraCarta.getMotherBoard()%>K plus.
+                                </p>
                             </div>
                         </div>
-                    </div>
-                    <%
-                        }
+                        <%
+                            }
 
-                    %>
+                        %>
+                    </div>
                 </div>
                 <div class="carta-buttoms">
-                    <div><h3>&#191;Cu&#225;l crees que es el atributo ganador?</h3></div>
+                    <div><h3 class="font_two">&#191;Cu&#225;l crees que es el atributo ganador?</h3></div>
                     <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
                         <input type="hidden" name="opcion" value="1" />
                         <input type="hidden" name="turno" value="<%= turno%>" />

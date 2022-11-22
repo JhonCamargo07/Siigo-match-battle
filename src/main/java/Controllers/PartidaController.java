@@ -207,10 +207,10 @@ public class PartidaController extends HttpServlet {
 
         try ( PrintWriter out = response.getWriter()) {
             for (JugadorVO jugadore : jugadoresEnLaMismaPartida) {
-                out.print("<div class=\"bg-warning shadow d-flex justify-content-center align-items-center border border-danger rounded\">");
+                out.print("<div class=\"bg-warning shadow d-flex justify-content-center align-items-center rounded\">");
                 out.print("<img src=\"img/avatars/" + jugadore.getImagen() + "\" width=\"50px\" alt=\"alt\"/>");
                 out.print("<div class=\"d-flex justify-content-center align-items-center flex-column p-2\">");
-                out.print("<p class=\"mb-1\">" + jugadore.getIdjugador() + "</p>");
+                out.print("<p class=\"mb-1 font_two\">" + jugadore.getIdjugador() + "</p>");
                 out.print("<p class=\"mb-1\">" + jugadore.getNombre() + "</p>");
                 out.print("</div>");
                 out.print("</div>");

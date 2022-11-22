@@ -29,11 +29,6 @@ body {
   font-size: 1.25rem; /* 20px */
 }
 
-.shadow {
-  -webkit-box-shadow: 8px 8px 15px 0px #342e44 !important;
-  box-shadow: 8px 8px 15px 0px #342e44 !important;
-}
-
 /*!==============================================================*/
 /*!================= Estilos para botones =================*/
 /*!==============================================================*/
@@ -143,11 +138,6 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
-.container__jugador .container__jugador-card .card-parrafos {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
 .container__jugador .avatar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -173,7 +163,6 @@ body {
   padding: 15px;
 }
 .container__jugador .avatar .num_elements {
-  color: #fff;
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -185,10 +174,11 @@ body {
       -ms-flex-align: center;
           align-items: center;
   border-radius: 100%;
+  width: 2.1875rem;
   top: 0;
   right: 0;
-  width: 2.5rem;
-  height: 2.5rem;
+  height: 2.1875rem;
+  color: #fff;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 2;
   font-weight: bold;
@@ -201,11 +191,10 @@ body .carta {
 
 .btn-atribute {
   min-height: 2.5rem;
+  min-width: 8.75rem;
 }
 
 body.carta-activa .carta {
-  padding-top: 50px;
-  padding-bottom: 50px;
   z-index: 10;
   width: 100%;
   height: 100%;
@@ -219,16 +208,16 @@ body.carta-activa .carta {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 body.carta-activa .carta .carta-div {
-  width: 50%;
-  padding: 10px;
+  width: 60%;
+  padding: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   background: #fff;
-  border-radius: 0.1875rem;
+  border-radius: 0.4375rem;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -243,9 +232,6 @@ body.carta-activa .carta .carta-div {
     width: 70%;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
   }
 }
 @media screen and (max-width: 480px) {
@@ -253,21 +239,51 @@ body.carta-activa .carta .carta-div {
     width: 90%;
   }
 }
-body.carta-activa .carta .carta-div .carta-buttoms {
+body.carta-activa .carta .carta-div .container__jugador-card {
+  max-width: 300px;
+  border-radius: 0.125rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+body.carta-activa .carta .carta-div .container__jugador-card .container__card-title {
+  border-radius: 0.3125rem;
+  padding: 5px 0.4375rem;
+}
+body.carta-activa .carta .carta-div .container__jugador-card .container__card-title h4 {
+  font-weight: bold;
+}
+body.carta-activa .carta .carta-div .container__jugador-card .position-relative {
+  padding: 10px 0;
+}
+body.carta-activa .carta .carta-div .container__jugador-card .position-relative .card-img-card {
+  position: relative;
+}
+body.carta-activa .carta .carta-div .container__jugador-card .position-relative .card-identificador {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  padding: 0.3125rem;
+  border-radius: 100%;
+  color: #fff;
+  bottom: 50%;
+  left: 50%;
+}
+body.carta-activa .carta .carta-div .container__jugador-card .card-body {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+body.carta-activa .carta .carta-div .container__jugador-card .card-parrafos {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: 18.75rem;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  padding: 10px;
+  font-size: 1.125rem;
+}
+body.carta-activa .carta .carta-div .container__jugador-card .card-parrafos p {
+  margin-bottom: 0;
+}
+body.carta-activa .carta .carta-div .carta-buttoms {
+  max-width: 500px;
+  text-align: center;
 }
 @media screen and (max-width: 62.5rem) {
   body.carta-activa .carta .carta-div .carta-buttoms {
@@ -278,15 +294,37 @@ body.carta-activa .carta .carta-div .carta-buttoms {
     -webkit-box-direction: normal;
         -ms-flex-flow: row wrap;
             flex-flow: row wrap;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
+  }
+}
+@media screen and (max-width: 480px) {
+  body.carta-activa .carta .carta-div .carta-buttoms {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 body.carta-activa .carta .carta-div .carta-buttoms form,
 body.carta-activa .carta .carta-div .carta-buttoms div {
   text-align: center;
   margin: 10px;
+}
+body.carta-activa .carta .carta-div .carta-buttoms form {
+  display: inline-block;
+}
+
+.img__card {
+  -webkit-filter: drop-shadow(0.625rem 0.4375rem 0.625rem #000);
+          filter: drop-shadow(0.625rem 0.4375rem 0.625rem #000);
+}
+
+.border {
+  border-radius: 0.3125rem;
 }
 
 .marcador-tiempo {
