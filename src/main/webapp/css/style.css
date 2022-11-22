@@ -73,12 +73,17 @@ body {
 }
 
 .cuadro {
-  margin-top: 45px;
+  margin-top: 2.8125rem;
+  min-height: 31.25rem;
+}
+
+.btn-iniciar {
+  background-color: #52FF3B;
 }
 
 .box {
-  -webkit-box-shadow: 8px 8px 10px 0px #342e44 !important;
-          box-shadow: 8px 8px 10px 0px #342e44 !important;
+  -webkit-box-shadow: 0.5rem 0.5rem 0.625rem 0rem #342e44 !important;
+          box-shadow: 0.5rem 0.5rem 0.625rem 0rem #342e44 !important;
 }
 
 .fa-play-circle {

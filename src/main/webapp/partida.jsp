@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="Controllers.JugadorOnlineController"%>
 <%@page import="ModelVO.CartaVO"%>
 <%@page import="java.util.ArrayList"%>
@@ -12,6 +13,8 @@
 
     if (sesion.getAttribute("jugadorVoSesion") != null) {
         jugadorVoSession = (JugadorVO) sesion.getAttribute("jugadorVoSesion");
+    } else {
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
     if (sesion.getAttribute("partidaVoSesion") != null) {
         partidaVoSesion = (PartidaVO) sesion.getAttribute("partidaVoSesion");
@@ -32,6 +35,9 @@
             jugadoresEnLaMismaPartida.add(jugadorVo);
         }
     }
+
+    String patron = "#,###.##";
+    DecimalFormat formato = new DecimalFormat(patron);
 
     int turno = partidaVoSesion.getTurno();
 
@@ -116,7 +122,7 @@
                         <div class="card-parrafos shadow-sm border">
                             <div class="">
                                 <p class="font_two">
-                                    Portatil pavicom intel core i<%= primeraCarta.getProcesador().charAt(0)%> <%= primeraCarta.getProcesador().substring(1, primeraCarta.getProcesador().length())%> con <%= primeraCarta.getRam()%>GB de memoria RAM, <%= primeraCarta.getDiscoDuro()%>GB SSD, pantalla de <%= primeraCarta.getPantalla()%> pul FUll HD y Mother board Asus <%= primeraCarta.getMotherBoard()%>K plus.
+                                    Portatil pavicom intel core i<%= primeraCarta.getProcesador().charAt(0)%> <%= primeraCarta.getProcesador().substring(1, primeraCarta.getProcesador().length())%> con <%= primeraCarta.getRam()%>GB de memoria RAM, <%= formato.format(Integer.parseInt(primeraCarta.getDiscoDuro()))%>GB SSD, pantalla de <%= primeraCarta.getPantalla()%> pul FUll HD y Mother board Asus <%= primeraCarta.getMotherBoard()%>K plus.
                                 </p>
                             </div>
                         </div>

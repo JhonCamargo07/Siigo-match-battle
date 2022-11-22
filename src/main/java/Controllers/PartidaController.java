@@ -131,7 +131,7 @@ public class PartidaController extends HttpServlet {
             aplicacion.setAttribute("jugadoresOnline", jugadores);
         }
 
-        this.generarMensage(request, response, "Todo listo para jugar", "Solo comparte el codigo de la partida (" + codigoPartida + ") para que se conecten mas jugadores", "saladeespera.jsp");
+        this.generarMensage(request, response, "Todo listo para jugar", "Solo comparte el codigo de la partida para que se conecten mas jugadores", "saladeespera.jsp");
 
     }
 
@@ -161,6 +161,7 @@ public class PartidaController extends HttpServlet {
         sesion.setAttribute("partidaVoSesion", obtenerVoDePartida(request, response, codigoPartida));
         sesion.setAttribute("jugadorVoSesion", jugadorVo);
 
+        request.setAttribute("nombreJugador", nombreJugador);
         request.setAttribute("codigoPartida", codigoPartida);
         if (aplicacion.getAttribute("jugadoresOnline") != null) {
             List<JugadorVO> jugadoresOnline = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
@@ -180,16 +181,16 @@ public class PartidaController extends HttpServlet {
             if (isPartidaExiste) {
                 jugadores.addAll(jugadoresOnline);
                 aplicacion.setAttribute("jugadoresOnline", jugadores);
-                this.generarMensage(request, response, "Todo listo para jugar", "Solo comparte el codigo de la partida (" + codigoPartida + ") para que se conecten mas jugadores", "saladeespera.jsp");
+                this.generarMensage(request, response, "Todo listo para jugar", "Solo comparte el c\u00f3digo de la partida para que se conecten m\u00e1s jugadores", "saladeespera.jsp");
             } else {
-                this.generarMensage(request, response, "No se encontro ninguna partida con ese codigo", "No hay un paritda que coincida con ese coodigo, por favor intentaloNuevamente", "ingresarPartida.jsp");
+                this.generarMensage(request, response, "No se encontr\u00f3 ninguna partida con ese c\u00f3digo", "No hay un partida que coincida con ese c\u00f3digo, por favor intentalo nuevamente", "ingresarPartida.jsp");
                 return;
             }
 
         } else {
             System.out.println("Jugadores en la misma partida son 0");
             request.setAttribute("codigoPartida", codigoPartida);
-            this.generarMensage(request, response, "No se encontro ninguna partida con ese codigo, tampoco jugador", "No hay un paritda que coincida con ese coodigo, por favor intentaloNuevamente", "ingresarPartida.jsp");
+            this.generarMensage(request, response, "No se encontr\u00f3 ninguna partida con ese c\u00f3digo", "No hay un partida que coincida con ese c\u00f3digo, por favor intentalo nuevamente", "ingresarPartida.jsp");
             return;
         }
 

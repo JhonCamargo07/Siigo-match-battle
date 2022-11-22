@@ -11,13 +11,15 @@
 
     if (sesion.getAttribute("jugadorVoSesion") != null) {
         jugadorVoSession = (JugadorVO) sesion.getAttribute("jugadorVoSesion");
+    } else {
+        response.sendRedirect("index.jsp");
     }
     if (sesion.getAttribute("partidaVoSesion") != null) {
         partidaVoSesion = (PartidaVO) sesion.getAttribute("partidaVoSesion");
     }
 
     String titulo = "Todo listo para jugar";
-    String mensaje = "Solo comparte el codigo de la partida (" + partidaVoSesion.getCodigo() + ") para que se conecten mas jugadores";
+    String mensaje = "Solo comparte el c\u00f3digo de la partida para que se conecten m\u00e1s jugadores";
 %>
 
 <!DOCTYPE html>
@@ -28,18 +30,17 @@
     </head>
 
     <body class="position-relative">
-        <div class="position-absolute div__cod-partida shadow-lg">
-            <p class="mb-0"><%= partidaVoSesion.getCodigo()%></p>
-        </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class=" justify-content-center align-items-center">
+                    <div class="justify-content-center align-items-center my-lg-5 my-3 my-md-4">
                         <main class="p-5 mt-5">
                             <h1 class="text-center display-1 py-3 text-white title">Siigo Match Battle</h1>
                             <div class="text-center d-flex flex-wrap justify-content-evenly align-items-center pt-3">
                                 <div class="text-center">
-                                    <!-- <img src="img/reloj1.png" width="350px" class="img-fluid" /> -->
+                                    <h5 class="text-white font_two">C&#243;digo de la partida</h5>
+                                    <h4 class="mb-0 font_two text-uppercase text-white "><%= partidaVoSesion.getCodigo()%></h4>
                                 </div>
                                 <input type="hidden" name="codigoPartida" id="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                             </div>
@@ -68,7 +69,7 @@
                                 <input type="hidden" name="opcion" value="1" />
                                 <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
                                 <input type="hidden" name="numPlayers" id="numPlayers" value="<%= jugadoresEnLaMismaPartida.size()%>" />
-                                <button type="submit" class="btn btn-success">Iniciar partida</button>
+                                <button type="submit" class="btn btn-success btn-iniciar">Iniciar partida</button>
                             </form>
                             <%
                                 }
@@ -79,7 +80,7 @@
                                         JugadorVO player = jugadoresEnLaMismaPartida.get(i);
                                 %>
                                 <div class="bg-warning shadow d-flex justify-content-center align-items-center rounded">
-                                    <img src="img/avatars/<%= player.getImagen()%>" width="50px" alt="alt"/>
+                                    <img src="img/avatars/<%= player.getImagen()%>" width="50px" alt="alt" loading="lazy"/>
                                     <div class="d-flex justify-content-center align-items-center flex-column p-2">
                                         <p class="mb-1 font_two"><%= player.getIdjugador()%></p>
                                         <p class="mb-1"><%= player.getNombre()%></p>

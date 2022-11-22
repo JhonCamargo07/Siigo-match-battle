@@ -4,6 +4,7 @@ $color-carta: rgba(0, 0, 0, 0.1);
 $color-identificador: rgba(0, 0, 0, 0.3);
 $color-modal: rgba(0, 0, 0, 0.5);
 $color-shadow: #000;
+$color-boton: #52ff3b;
 $white: #fff;
 // $border-color: transparent;
 
@@ -120,11 +121,16 @@ body {
 }
 
 .cuadro {
-	margin-top: 45px;
+	margin-top: 2.8125rem;
+	min-height: 31.25rem;
+}
+
+.btn-iniciar {
+	background-color: $color-boton;
 }
 
 .box {
-	box-shadow: 8px 8px 10px 0px #342e44 !important;
+	box-shadow: 0.5rem 0.5rem 0.625rem 0rem #342e44 !important;
 }
 
 .fa-play-circle {

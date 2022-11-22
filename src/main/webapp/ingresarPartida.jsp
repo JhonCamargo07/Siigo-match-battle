@@ -1,5 +1,4 @@
-<%@page import="util.Files"%>
-<%@page import="ModelDAO.JugadorDAO"%> <%@page import="ModelVO.PartidaVO"%>
+<%@page import="util.Files"%> <%@page import="ModelDAO.JugadorDAO"%> <%@page import="ModelVO.PartidaVO"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -22,25 +21,35 @@
                                     <img src="img/avatars/<%= Files.getNameImgRandom()%>" width="170px" class="img-fluid" />
                                 </div>
                                 <div class="mx-2">
-                                    <form action="${pageContext.request.contextPath}/Partida" method="POST">
+                                    <form
+                                        action="${pageContext.request.contextPath}/Partida"
+                                        method="POST"
+                                        novalidate
+                                        class="needs-validation">
                                         <div class="my-3">
-                                            <label class="form-label text-white my-3">Nombre o apodo</label>
+                                            <label class="form-label text-white mt-3">Nombre o apodo</label>
                                             <input
                                                 type="text"
                                                 name="nombreJugador"
                                                 class="form-control w-100"
                                                 placeholder="Adriana_Velez"
                                                 autofocus
+                                                required
+                                                value="${nombreJugador}"
                                                 style="min-height: 55px" />
-                                            <label for="codigo" class="form-label text-white my-3">Codigo partida</label>
+                                            <div class="valid-feedback"></div>
+                                            <div class="invalid-feedback">Escriba su nombre</div>
+                                            <label for="codigo" class="form-label text-white mt-3">Codigo partida</label>
                                             <input
                                                 type="text"
                                                 name="codigoPartida"
                                                 id="codigo"
                                                 value="${codigoPartida}"
-                                                autofocus
+                                                required
                                                 class="form-control w-100"
                                                 style="min-height: 55px" />
+                                            <div class="valid-feedback"></div>
+                                            <div class="invalid-feedback">Escriba un c&#243;digo</div>
                                             <input
                                                 type="hidden"
                                                 name="idJugador"

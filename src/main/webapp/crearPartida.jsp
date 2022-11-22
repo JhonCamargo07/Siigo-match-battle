@@ -1,12 +1,8 @@
-<%@page import="util.Files"%>
-<%@page import="ModelVO.PartidaVO"%>
-<%@page import="ModelDAO.JugadorDAO"%> 
-<%
-    String codigoPartida = "";
+<%@page import="util.Files"%> <%@page import="ModelVO.PartidaVO"%> <%@page import="ModelDAO.JugadorDAO"%> <% String codigoPartida
+            = "";
     if (request.getAttribute("codigoPartida") != null) {
         codigoPartida = (String) request.getAttribute("codigoPartida");
-    }
-%>
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -18,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+                    <div class="d-flex justify-content-center align-items-center my-lg-5 my-3 my-md-4">
                         <main class="p-5 my-5">
                             <a href="index.jsp" class="text-white">
                                 <i class="fas fa-undo"></i>
@@ -29,7 +25,7 @@
                                     <img src="img/avatars/<%= Files.getNameImgRandom()%>" width="170px" class="img-fluid" />
                                 </div>
                                 <div class="mx-2">
-                                    <form action="${pageContext.request.contextPath}/Partida" method="POST">
+                                    <form action="${pageContext.request.contextPath}/Partida" method="POST" novalidate class="needs-validation">
                                         <div class="my-3">
                                             <label class="form-label text-white my-3">Nombre o apodo</label>
                                             <input
@@ -38,7 +34,10 @@
                                                 class="form-control w-100"
                                                 placeholder="Adriana_Velez"
                                                 autofocus
+                                                required
                                                 style="min-height: 55px" />
+                                            <div class="valid-feedback"></div>
+                                            <div class="invalid-feedback">Escriba su nombre</div>
                                             <input
                                                 type="hidden"
                                                 name="idJugador"
