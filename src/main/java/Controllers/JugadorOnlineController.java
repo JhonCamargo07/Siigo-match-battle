@@ -58,6 +58,9 @@ public class JugadorOnlineController extends HttpServlet {
             case 2:
                 this.actualizarHora(request, response);
                 break;
+            case 3:
+                this.verHora(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -303,7 +306,7 @@ public class JugadorOnlineController extends HttpServlet {
 
                 if (hour == 0 && min == 0 && seg == 0) {
                     try ( PrintWriter out = response.getWriter()) {
-                        out.print("<script>alert('000000')</script>");
+                        out.print("<script>alert('La partida finalizo');location.href=\"index.jsp\"</script>");
                     } catch (IOException ex) {
                         Logger.getLogger(JugadorOnlineController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -333,6 +336,30 @@ public class JugadorOnlineController extends HttpServlet {
         }
 
         aplicacion.setAttribute("partidas", partidas);
+    }
+
+    private void verHora(HttpServletRequest request, HttpServletResponse response) {
+        String codigoPartida = request.getParameter("codigoPartida");
+
+        aplicacion = request.getServletContext();
+        sesion = request.getSession();
+
+        List<PartidaVO> partidas = (List<PartidaVO>) aplicacion.getAttribute("partidas");
+
+        for (PartidaVO partida : partidas) {
+            if (partida.getCodigo().equalsIgnoreCase(codigoPartida)) {
+                String tiempo = partida.getTiempo();
+                int hour = Integer.parseInt(String.valueOf(tiempo.charAt(0)));
+                int min = Integer.parseInt(tiempo.substring(1, 3));
+                int seg = Integer.parseInt(tiempo.substring(3, tiempo.length()));
+
+                try ( PrintWriter out = response.getWriter()) {
+                    out.print(hour + ":" + (min <= 9 ? "0" : "") + min + ":" + (seg <= 9 ? "0" : "") + seg);
+                } catch (IOException ex) {
+                    Logger.getLogger(JugadorOnlineController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
 }

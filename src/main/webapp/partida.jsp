@@ -213,11 +213,13 @@
     <!-- Archivos js -->
     <jsp:include page="WEB-INF/paginas/comunes/files-js.jsp" />
 
+    <%
+        if (jugadorVoSession.isCreadorDeLaPartida()) {
+    %>
     <script>
-        actualizarHora();
         setInterval(() => {
             actualizarHora();
-        }, 2150);
+        }, 1000);
 
         function actualizarHora() {
             var parametro = {
@@ -235,6 +237,36 @@
             });
         }
     </script>
+    <%
+    } else {
+    %>
+    <script>
+        verHora();
+        setInterval(() => {
+            verHora();
+        }, 1000);
+
+        function verHora() {
+            var parametro = {
+                "opcion": 3,
+                "codigoPartida": document.getElementById('codigoPartida').value
+            }
+
+            $.ajax({
+                data: parametro,
+                url: 'JugadorOnline',
+                type: 'POST',
+                success: function (response) {
+                    $('#tiempo').html(response);
+                }
+            });
+        }
+    </script>
+
+    <%
+        }
+    %>
+
 
     <script>
         setInterval(() => {
