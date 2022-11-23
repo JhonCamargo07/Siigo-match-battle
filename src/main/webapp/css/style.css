@@ -41,15 +41,6 @@ body {
   box-shadow: 5px 5px 14px -4px #000000;
 }
 
-/* 
-.boton1 {
-	float: left;
-	margin-left: -80px;
-} */
-/* .boton2 {
-	float: right;
-	margin-right: -80px;
-} */
 .btn-login:active {
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
@@ -78,7 +69,10 @@ body {
 }
 
 .btn-iniciar {
-  background-color: #52FF3B;
+  background: #108920;
+}
+.btn-iniciar:hover {
+    background: #108a10;
 }
 
 .box {
@@ -245,7 +239,7 @@ body.carta-activa .carta .carta-div {
   }
 }
 body.carta-activa .carta .carta-div .container__jugador-card {
-  max-width: 300px;
+  max-width: 330px;
   border-radius: 0.125rem;
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -289,38 +283,6 @@ body.carta-activa .carta .carta-div .container__jugador-card .card-parrafos p {
 body.carta-activa .carta .carta-div .carta-buttoms {
   max-width: 500px;
   text-align: center;
-}
-@media screen and (max-width: 62.5rem) {
-  body.carta-activa .carta .carta-div .carta-buttoms {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-            flex-flow: row wrap;
-  }
-}
-@media screen and (max-width: 480px) {
-  body.carta-activa .carta .carta-div .carta-buttoms {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-}
-body.carta-activa .carta .carta-div .carta-buttoms form,
-body.carta-activa .carta .carta-div .carta-buttoms div {
-  text-align: center;
-  margin: 10px;
-}
-body.carta-activa .carta .carta-div .carta-buttoms form {
-  display: inline-block;
 }
 
 .img__card {

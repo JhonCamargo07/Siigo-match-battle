@@ -1,4 +1,7 @@
-<%@page import="util.Files"%> <%@page import="ModelDAO.JugadorDAO"%> <%@page import="ModelVO.PartidaVO"%>
+<%@page import="util.Files"%> 
+<%@page import="ModelDAO.JugadorDAO"%> 
+<%@page import="ModelVO.PartidaVO"%>
+<jsp:include page="./cache.jsp" />
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -38,7 +41,7 @@
                                                 value="${nombreJugador}"
                                                 style="min-height: 55px" />
                                             <div class="valid-feedback"></div>
-                                            <div class="invalid-feedback">Escriba su nombre</div>
+                                            <div class="invalid-feedback text-light">Escriba su nombre</div>
                                             <label for="codigo" class="form-label text-white mt-3">Codigo partida</label>
                                             <input
                                                 type="text"
@@ -49,7 +52,7 @@
                                                 class="form-control w-100"
                                                 style="min-height: 55px" />
                                             <div class="valid-feedback"></div>
-                                            <div class="invalid-feedback">Escriba un c&#243;digo</div>
+                                            <div class="invalid-feedback text-light">Escriba un c&#243;digo</div>
                                             <input
                                                 type="hidden"
                                                 name="idJugador"

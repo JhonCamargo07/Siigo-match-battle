@@ -1,8 +1,8 @@
-<%@page import="ModelVO.PartidaVO"%>
+<%@page import="ModelVO.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ModelVO.JugadorVO"%>
 <%@page import="java.util.List"%>
-
+<jsp:include page="./cache.jsp" />
 <%
     HttpSession sesion = request.getSession();
 

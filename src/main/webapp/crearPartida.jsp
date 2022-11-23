@@ -1,8 +1,14 @@
-<%@page import="util.Files"%> <%@page import="ModelVO.PartidaVO"%> <%@page import="ModelDAO.JugadorDAO"%> <% String codigoPartida
+<%@page import="util.Files"%>
+<%@page import="ModelVO.PartidaVO"%>
+<%@page import="ModelDAO.JugadorDAO"%>
+<jsp:include page="./cache.jsp" />
+<%
+    String codigoPartida
             = "";
     if (request.getAttribute("codigoPartida") != null) {
         codigoPartida = (String) request.getAttribute("codigoPartida");
-    }%>
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -37,7 +43,7 @@
                                                 required
                                                 style="min-height: 55px" />
                                             <div class="valid-feedback"></div>
-                                            <div class="invalid-feedback">Escriba su nombre</div>
+                                            <div class="invalid-feedback text-light">Escriba su nombre</div>
                                             <input
                                                 type="hidden"
                                                 name="idJugador"

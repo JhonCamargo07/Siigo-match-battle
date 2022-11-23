@@ -22,14 +22,15 @@ public class PartidaController extends HttpServlet {
 
     private List<String> img_avatars;
 
+    @Override
     public void init() {
         img_avatars = new ArrayList();
         File carpeta = new File(URL_IMGS);
         File[] lista = carpeta.listFiles();
 
-        for (int i = 0; i < lista.length; i++) {
-            if (lista[i].isFile()) {
-                img_avatars.add(lista[i].getName());
+        for (File lista1 : lista) {
+            if (lista1.isFile()) {
+                img_avatars.add(lista1.getName());
             }
         }
         Collections.shuffle(img_avatars);
@@ -111,11 +112,11 @@ public class PartidaController extends HttpServlet {
         sesion = request.getSession();
         sesion.setAttribute("codigoPartida", codigoPartida);
 
-        this.irASalaDeEspera(request, response, jugadorVo, codigoPartida);
+        this.irASalaDeEspera(request, response, jugadorVo);
 
     }
 
-    private void irASalaDeEspera(HttpServletRequest request, HttpServletResponse response, JugadorVO jugadorVo, String codigoPartida) throws ServletException, IOException {
+    private void irASalaDeEspera(HttpServletRequest request, HttpServletResponse response, JugadorVO jugadorVo) throws ServletException, IOException {
 
         aplicacion = request.getServletContext();
 
@@ -158,7 +159,7 @@ public class PartidaController extends HttpServlet {
         jugadores.add(jugadorVo);
 
         sesion = request.getSession();
-        sesion.setAttribute("partidaVoSesion", obtenerVoDePartida(request, response, codigoPartida));
+        sesion.setAttribute("partidaVoSesion", obtenerVoDePartida(request, codigoPartida));
         sesion.setAttribute("jugadorVoSesion", jugadorVo);
 
         request.setAttribute("nombreJugador", nombreJugador);
@@ -184,27 +185,22 @@ public class PartidaController extends HttpServlet {
                 this.generarMensage(request, response, "Todo listo para jugar", "Solo comparte el c\u00f3digo de la partida para que se conecten m\u00e1s jugadores", "saladeespera.jsp");
             } else {
                 this.generarMensage(request, response, "No se encontr\u00f3 ninguna partida con ese c\u00f3digo", "No hay un partida que coincida con ese c\u00f3digo, por favor intentalo nuevamente", "ingresarPartida.jsp");
-                return;
             }
 
         } else {
             System.out.println("Jugadores en la misma partida son 0");
             request.setAttribute("codigoPartida", codigoPartida);
             this.generarMensage(request, response, "No se encontr\u00f3 ninguna partida con ese c\u00f3digo", "No hay un partida que coincida con ese c\u00f3digo, por favor intentalo nuevamente", "ingresarPartida.jsp");
-            return;
         }
 
     }
 
     private void usuariosEnPartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida) throws IOException, ServletException {
-
         aplicacion = request.getServletContext();
 
         request.setAttribute("codigoPartida", codigoPartida);
 
-        List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
-
-        List<JugadorVO> jugadoresEnLaMismaPartida = obtenerJugadoresEnMismaPartida(request, response, codigoPartida);
+        List<JugadorVO> jugadoresEnLaMismaPartida = obtenerJugadoresEnMismaPartida(request, codigoPartida);
 
         try ( PrintWriter out = response.getWriter()) {
             for (JugadorVO jugadore : jugadoresEnLaMismaPartida) {
@@ -217,16 +213,15 @@ public class PartidaController extends HttpServlet {
                 out.print("</div>");
             }
         }
-
     }
 
     private void iniciarPartida(HttpServletRequest request, HttpServletResponse response, int cantidadJugadores, String codigoPartida) throws IOException {
 
-        cambiarEstadoYCantidadJugadoresPartida(request, response, codigoPartida, cantidadJugadores);
+        cambiarEstadoYCantidadJugadoresPartida(request, codigoPartida, cantidadJugadores);
 
         aplicacion = request.getServletContext();
 
-        List<JugadorVO> jugadoresEnLaMismaPartida = obtenerJugadoresEnMismaPartida(request, response, codigoPartida);
+        List<JugadorVO> jugadoresEnLaMismaPartida = obtenerJugadoresEnMismaPartida(request, codigoPartida);
 
         CartaDAO cartasDao = new CartaDAO();
 
@@ -244,7 +239,7 @@ public class PartidaController extends HttpServlet {
 
     }
 
-    private void cambiarEstadoYCantidadJugadoresPartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida, int cantidadJugadores) {
+    private void cambiarEstadoYCantidadJugadoresPartida(HttpServletRequest request, String codigoPartida, int cantidadJugadores) {
 
         aplicacion = request.getServletContext();
 
@@ -264,7 +259,7 @@ public class PartidaController extends HttpServlet {
 
     }
 
-    private List<JugadorVO> obtenerJugadoresEnMismaPartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida) {
+    private List<JugadorVO> obtenerJugadoresEnMismaPartida(HttpServletRequest request, String codigoPartida) {
         aplicacion = request.getServletContext();
 
         List<JugadorVO> jugadores = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
@@ -282,7 +277,7 @@ public class PartidaController extends HttpServlet {
 
     }
 
-    private PartidaVO obtenerVoDePartida(HttpServletRequest request, HttpServletResponse response, String codigoPartida) {
+    private PartidaVO obtenerVoDePartida(HttpServletRequest request, String codigoPartida) {
 
         PartidaVO partidaVo = new PartidaVO();
 
@@ -296,20 +291,7 @@ public class PartidaController extends HttpServlet {
                 }
             }
         }
-
         return partidaVo;
-
     }
 
-    private int contarCuantosJugadoresTienenCartasSegunPartida(HttpServletRequest request, String codigoPartida) {
-        int jugadoresConCartas = 0;
-        List<JugadorVO> jugadoresOnline = (List<JugadorVO>) aplicacion.getAttribute("jugadoresOnline");
-
-        for (JugadorVO jugador : jugadoresOnline) {
-            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida) && !jugador.getBajara().isEmpty()) {
-                jugadoresConCartas++;
-            }
-        }
-        return jugadoresConCartas;
-    }
 }

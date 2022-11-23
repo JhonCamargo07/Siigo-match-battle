@@ -13,6 +13,10 @@
 	font-size: 1rem;
 }
 
+.text-purple{
+    color: #6b2a54 !important;
+}
+
 .div__cod-partida {
 	position: absolute;
 	bottom: 10;

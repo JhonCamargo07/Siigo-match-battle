@@ -10,7 +10,7 @@ import java.util.List;
  * @author Karen
  * @version 1.0
  */
-public class JugadorDAO implements IJugador {
+public class JugadorDAO {
 
     /**
      * Declarar variables e inicializarlas
@@ -36,16 +36,6 @@ public class JugadorDAO implements IJugador {
         Nombre = jugadorVO.getNombre();
         List<String> listaNumeros = null;
         Imagen = jugadorVO.getIdjugador();
-    }
-
-    @Override
-    public boolean ingresarPartida(String codigoMesa) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<String> escogerCaracteristica() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public static String generarCodigoJugador() {

@@ -1,10 +1,8 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="Controllers.JugadorOnlineController"%>
-<%@page import="ModelVO.CartaVO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="ModelVO.PartidaVO"%>
-<%@page import="ModelVO.JugadorVO"%>
+<%@page import="java.util.*"%>
+<%@page import="ModelVO.*"%>
+<jsp:include page="./cache.jsp" />
 <%
     HttpSession sesion = request.getSession();
 
@@ -111,64 +109,67 @@
                     </script>
                     <%                        }
                     %>
-                    <div class="container__card-title shadow-sm border mb-1">
-                        <h4 class="card-title text-center my-1"><%= primeraCarta.getTitulo()%></h4>
+                    <div class="">
+                        <h4 class="card-title text-center my-1 text-purple"><%= primeraCarta.getTitulo()%></h4>
                     </div>
                     <div class="position-relative">
                         <img src="img/computers/<%= primeraCarta.getImgComputador()%>" width="150px" class="card-img-top img__card" alt="<%= primeraCarta.getIdentificador()%>" />
                         <div class="card-identificador text-center shadow-lg"></div>
                     </div>
                     <div class="p-0 m-0 card-body my-2">
-                        <div class="card-parrafos shadow-sm border">
-                            <div class="">
-                                <p class="font_two">
-                                    Portatil pavicom intel core i<%= primeraCarta.getProcesador().charAt(0)%> <%= primeraCarta.getProcesador().substring(1, primeraCarta.getProcesador().length())%> con <%= primeraCarta.getRam()%>GB de memoria RAM, <%= formato.format(Integer.parseInt(primeraCarta.getDiscoDuro()))%>GB SSD, pantalla de <%= primeraCarta.getPantalla()%> pul FUll HD y Mother board Asus <%= primeraCarta.getMotherBoard()%>K plus.
-                                </p>
-                            </div>
+                        <div class="card-parrafos shadow-sm border bg-light">
+                            <ul class="list-group">
+                                <li class="font_two list-group-item list-group-item-action">Intel core i<%= primeraCarta.getProcesador().charAt(0)%> <%= primeraCarta.getProcesador().substring(1, primeraCarta.getProcesador().length())%></li>
+                                <li class="font_two list-group-item list-group-item-action"><%= primeraCarta.getRam()%>GB de memoria RAM</li>
+                                <li class="font_two list-group-item list-group-item-action">Pantalla de <%= primeraCarta.getPantalla()%> pulgadas</li>
+                                <li class="font_two list-group-item list-group-item-action"><%= formato.format(Integer.parseInt(primeraCarta.getDiscoDuro()))%>GB disco s&#243;lido</li>
+                                <li class="font_two list-group-item list-group-item-action">Mother board Asus <%= primeraCarta.getMotherBoard()%>K plus</li>
+                            </ul>
                         </div>
                         <%
                             }
-
                         %>
                     </div>
                 </div>
-                <div class="carta-buttoms">
-                    <div><h3 class="font_two">&#191;Cu&#225;l crees que es el atributo ganador?</h3></div>
-                    <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
-                        <input type="hidden" name="opcion" value="1" />
-                        <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="atributo" value="procesador" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
-                        <button class="btn btn-danger btn-atribute px-3 py-2">Procesador</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
-                        <input type="hidden" name="opcion" value="1" />
-                        <input type="hidden" name="atributo" value="pantalla" />
-                        <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
-                        <button class="btn btn-danger btn-atribute px-3 py-2">Pantalla</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
-                        <input type="hidden" name="opcion" value="1" />
-                        <input type="hidden" name="atributo" value="ram" />
-                        <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
-                        <button class="btn btn-danger btn-atribute px-3 py-2">RAM</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
-                        <input type="hidden" name="opcion" value="1" />
-                        <input type="hidden" name="atributo" value="disco" />
-                        <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
-                        <button class="btn btn-danger btn-atribute px-3 py-2">Disco Duro</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
-                        <input type="hidden" name="opcion" value="1" />
-                        <input type="hidden" name="atributo" value="board" />
-                        <input type="hidden" name="turno" value="<%= turno%>" />
-                        <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
-                        <button class="btn btn-danger btn-atribute px-3 py-2">Mother Board</button>
-                    </form>
+                <div class="carta-buttoms d-flex justify-content-center flex-column">
+                    <div><h3 class="font_two fw-bold mt-3">&#191;Cu&#225;l crees que es el atributo ganador?</h3></div>
+                    <div class="d-flex justify-content-evenly align-items-center flex-wrap flex-row mb-5">
+                        <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
+                            <input type="hidden" name="opcion" value="1" />
+                            <input type="hidden" name="turno" value="<%= turno%>" />
+                            <input type="hidden" name="atributo" value="procesador" />
+                            <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
+                            <button class="btn btn-danger btn-atribute px-3 py-2">Procesador</button>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
+                            <input type="hidden" name="opcion" value="1" />
+                            <input type="hidden" name="atributo" value="pantalla" />
+                            <input type="hidden" name="turno" value="<%= turno%>" />
+                            <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
+                            <button class="btn btn-danger btn-atribute px-3 py-2">Pantalla</button>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
+                            <input type="hidden" name="opcion" value="1" />
+                            <input type="hidden" name="atributo" value="ram" />
+                            <input type="hidden" name="turno" value="<%= turno%>" />
+                            <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
+                            <button class="btn btn-danger btn-atribute px-3 py-2">RAM</button>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
+                            <input type="hidden" name="opcion" value="1" />
+                            <input type="hidden" name="atributo" value="disco" />
+                            <input type="hidden" name="turno" value="<%= turno%>" />
+                            <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
+                            <button class="btn btn-danger btn-atribute px-3 py-2">Disco s&#243;lido</button>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/JugadorOnline" method="POST">
+                            <input type="hidden" name="opcion" value="1" />
+                            <input type="hidden" name="atributo" value="board" />
+                            <input type="hidden" name="turno" value="<%= turno%>" />
+                            <input type="hidden" name="codigoPartida" value="<%= partidaVoSesion.getCodigo()%>" />
+                            <button class="btn btn-danger btn-atribute px-3 py-2">Mother Board</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
