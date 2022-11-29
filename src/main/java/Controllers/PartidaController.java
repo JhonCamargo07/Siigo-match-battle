@@ -173,8 +173,6 @@ public class PartidaController extends HttpServlet {
                 JugadorVO jugador = jugadoresOnline.get(i);
                 if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida)) {
                     isPartidaExiste = true;
-                }
-                if (isPartidaExiste) {
                     break;
                 }
             }
@@ -246,8 +244,7 @@ public class PartidaController extends HttpServlet {
         List<PartidaVO> partidas = (List<PartidaVO>) aplicacion.getAttribute("partidas");
         List<PartidaVO> partidasActualizadas = new ArrayList();
 
-        for (int i = 0; i < partidas.size(); i++) {
-            PartidaVO partidaVo = partidas.get(i);
+        for (PartidaVO partidaVo : partidas) {
             if (partidaVo.getCodigo().equalsIgnoreCase(codigoPartida)) {
                 partidaVo.setEstado("Jugando");
                 partidaVo.setCanditadJugadores(cantidadJugadores);
@@ -266,10 +263,9 @@ public class PartidaController extends HttpServlet {
 
         List<JugadorVO> jugadoresEnLaMismaPartida = new ArrayList();
 
-        for (int i = 0; i < jugadores.size(); i++) {
-            JugadorVO jugadorVo = jugadores.get(i);
-            if (jugadorVo.getCodigoPartida().equalsIgnoreCase(codigoPartida)) {
-                jugadoresEnLaMismaPartida.add(jugadorVo);
+        for (JugadorVO jugador : jugadores) {
+            if (jugador.getCodigoPartida().equalsIgnoreCase(codigoPartida)) {
+                jugadoresEnLaMismaPartida.add(jugador);
             }
         }
 
@@ -288,6 +284,7 @@ public class PartidaController extends HttpServlet {
             for (PartidaVO partida : partidasActuales) {
                 if (partida.getCodigo().equalsIgnoreCase(codigoPartida)) {
                     partidaVo = partida;
+                    break;
                 }
             }
         }

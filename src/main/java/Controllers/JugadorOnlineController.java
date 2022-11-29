@@ -108,7 +108,7 @@ public class JugadorOnlineController extends HttpServlet {
         List<List<CartaVO>> masoCartas = new ArrayList();
 
         for (JugadorVO jugadorVO : jugadoresEnMismaPartida) {
-            if (jugadorVO.getBajara().size() > 0) {
+            if (!jugadorVO.getBajara().isEmpty()) {
                 masoCartas.add(jugadorVO.getBajara());
             }
         }
@@ -140,7 +140,7 @@ public class JugadorOnlineController extends HttpServlet {
 
         this.eliminarJugadoresConDatosAntiguos(request);
 
-        List<JugadorVO> jugadoresEnLaMismaPartidaActualizada = this.agregarCartasDeLosJugadoresPerdedoresAlGanador(request, jugadoresEnLaMismaPartida, primeraCartaDeCadaJugador, codigoJugadorGanador);
+        List<JugadorVO> jugadoresEnLaMismaPartidaActualizada = this.agregarCartasDeLosJugadoresPerdedoresAlGanador(jugadoresEnLaMismaPartida, primeraCartaDeCadaJugador, codigoJugadorGanador);
 
         request.setAttribute("nombreJugador", this.getNombreJugadorGanadorPorId(request, jugadoresEnLaMismaPartidaActualizada, request.getParameter("codigoPartida"), codigoJugadorGanador));
 
@@ -239,7 +239,7 @@ public class JugadorOnlineController extends HttpServlet {
         aplicacion.setAttribute("jugadoresOnline", jugadoresActualizados);
     }
 
-    private List<JugadorVO> agregarCartasDeLosJugadoresPerdedoresAlGanador(HttpServletRequest request, List<JugadorVO> jugadoresEnLaMismaPartida, List<CartaVO> primeraCartaDeCadaJugador, String codigoJugadorGanador) {
+    private List<JugadorVO> agregarCartasDeLosJugadoresPerdedoresAlGanador(List<JugadorVO> jugadoresEnLaMismaPartida, List<CartaVO> primeraCartaDeCadaJugador, String codigoJugadorGanador) {
 
         for (JugadorVO jugadorVO : jugadoresEnLaMismaPartida) {
             jugadorVO.getBajara().remove(0);

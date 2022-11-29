@@ -39,6 +39,7 @@
                                                 autofocus
                                                 required
                                                 value="${nombreJugador}"
+                                                pattern="[a-zA-Z0-9_.-@-]{1,15}"
                                                 style="min-height: 55px" />
                                             <div class="valid-feedback"></div>
                                             <div class="invalid-feedback text-light">Escriba su nombre</div>
@@ -49,6 +50,7 @@
                                                 id="codigo"
                                                 value="${codigoPartida}"
                                                 required
+                                                pattern="[a-zA-Z0-9]{1,10}"
                                                 class="form-control w-100"
                                                 style="min-height: 55px" />
                                             <div class="valid-feedback"></div>
